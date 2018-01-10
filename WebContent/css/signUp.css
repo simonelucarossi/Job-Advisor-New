@@ -1,0 +1,30 @@
+@charset "ISO-8859-1";
+
+@media ( min-width : 400px) {
+	body {
+		background-image: url(../img/header.jpg);
+		background-position: center center;
+	}
+}
+
+@media ( min-width : 800px) {
+	body {
+		background-image: url(../img/header.jpg);
+		background-position: center center;
+	}
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+label{
+	color:white;
+}
+
+h1,h2,p{
+	color:white;
+	margin-left: 16px
+}

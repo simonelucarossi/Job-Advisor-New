@@ -11,6 +11,7 @@ import com.jobadvisor.model.Annuncio;
 import com.jobadvisor.model.Recensione;
 import com.jobadvisor.model.Utente;
 
+
 public class UtenteProxy extends Utente {
 	private DataSource dataSource;
 

@@ -7,13 +7,13 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.jobadvisor.model.Annuncio;
+import com.jobadvisor.model.Recensione;
+import com.jobadvisor.model.Utente;
 import com.jobadvisor.persistence.dao.AnnuncioDao;
 import com.jobadvisor.persistence.dao.RecensioneDao;
 import com.jobadvisor.persistence.dao.UtenteDao;
 
-import com.jobadvisor.model.Annuncio;
-import com.jobadvisor.model.Recensione;
-import com.jobadvisor.model.Utente;
 
 public class UtenteDaoJDBC implements UtenteDao {
 
@@ -249,8 +249,8 @@ public class UtenteDaoJDBC implements UtenteDao {
 		if (utente != null) {
 			utenteCred = new UtenteCredenziali(dataSource);
 			utenteCred.setUsername(utente.getUsername());
-			utenteCred.setCognome(utente.getCognome());
 			utenteCred.setNome(utente.getNome());
+			utenteCred.setCognome(utente.getCognome());
 			utenteCred.setSesso(utente.getSesso());
 			utenteCred.setDataNascita(utente.getDataNascita());
 			utenteCred.setTipo(utente.getTipo());

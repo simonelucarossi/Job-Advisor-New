@@ -28,6 +28,6 @@ public abstract class DAOFactory {
 	
 	public abstract RecensioneDao getRecensioneDAO();
 
-	public abstract com.jobadvisor.persistence.UtilDao getUtilDAO();
+	public abstract UtilDao getUtilDAO();
 
 }

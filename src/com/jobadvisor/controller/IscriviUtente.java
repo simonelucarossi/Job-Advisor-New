@@ -9,6 +9,7 @@ import java.util.Locale;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +19,7 @@ import com.jobadvisor.persistence.dao.UtenteDao;
 import com.jobadvisor.model.Utente;
 import com.jobadvisor.persistence.DatabaseManager;
 
+@WebServlet("/views/subscribe")
 public class IscriviUtente extends HttpServlet {
 
 	/**
@@ -27,7 +29,7 @@ public class IscriviUtente extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher dispacher = req.getRequestDispatcher("iscriviUtente.jsp");
+		RequestDispatcher dispacher = req.getRequestDispatcher("subscribe.jsp");
 		dispacher.forward(req, resp);
 	}
 
@@ -41,36 +43,21 @@ public class IscriviUtente extends HttpServlet {
 		String password = req.getParameter("password");
 		String tipo = req.getParameter("tipo");
 
-		DateFormat format = new SimpleDateFormat("yyyy-mm-dd", Locale.ITALIAN);
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ITALIAN);
 		Date date;
 		try {
 			date = format.parse(dataNascita);
-			Utente cliente= new Utente(username,nome, cognome,sesso,date,tipo);
+			Utente utente= new Utente(username,nome, cognome,sesso,date,tipo);
 
-			UtenteDao clienteDao = DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
-			clienteDao.save(cliente);
-			clienteDao.setPassword(cliente , password);
+			UtenteDao utenteDao = DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
+			utenteDao.save(utente);
+			utenteDao.setPassword(utente, password);
 
-			req.setAttribute("cliente", cliente);
+			req.setAttribute("utente", utente);
 
-			RequestDispatcher dispacher = req.getRequestDispatcher("iscriviUtente.jsp");
+			RequestDispatcher dispacher = req.getRequestDispatcher("subscribe.jsp");
 			dispacher.forward(req, resp);
 
-			// resp.setContentType("text/html");
-
-			// PrintWriter out = resp.getWriter();
-			// out.println("<html>");
-			// out.println("<head><title>Iscrizione studente</title></head>");
-			// out.println("<body>");
-			// out.println("<h1>Abbiamo iscritto il seguente studente:</h1>");
-			// out.println(matricola);
-			// out.println(nome);
-			// out.println(cognome);
-			// out.println(dataNascita);
-			// out.println(password);
-			// out.println(indirizzo);
-			// out.println("</body>");
-			// out.println("</html>");
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

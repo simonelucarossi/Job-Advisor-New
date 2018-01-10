@@ -45,7 +45,7 @@ public class UtilDao {
 					+ "create table utente(\"username\" VARCHAR(255) primary key,nome VARCHAR(255),cognome VARCHAR(255),"
 					+ "sesso VARCHAR(1),data_nascita DATE,password VARCHAR(255),tipo VARCHAR(255));"
 					+ "create table annuncio(\"id\" VARCHAR(255) primary key,categoria VARCHAR(255),data_pubblicazione DATE,"
-					+ " creatore VARCHAR(255) REFERENCES utente(\"username\"));"
+					+ " creatore VARCHAR(255) REFERENCES utente(\"username\"),latitudine DECIMAL,longitudine DECIMAL);"
 					+ "create table recensione(\"id\" VARCHAR(255) primary key,data_creazione DATE,"
 					+ " creatore VARCHAR(255) REFERENCES utente(\"username\"),destinatario VARCHAR(255) REFERENCES utente(\"username\"));";
 

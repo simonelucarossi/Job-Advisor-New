@@ -12,19 +12,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jobadvisor.model.Annuncio;
 import com.jobadvisor.persistence.DAOFactory;
-import com.jobadvisor.persistence.UtilDao;
+
 
 /**
  * Servlet implementation class DammiAds
  */
 @WebServlet("/ads")
-public class DammiAds extends HttpServlet {
+public class DammiAdsRicerca extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public DammiAds() {
+	public DammiAdsRicerca() {
 		super();
 	}
 
@@ -32,9 +32,9 @@ public class DammiAds extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Annuncio> annunci = DAOFactory.getDAOFactory(DAOFactory.POSTGRESQL).getAnnuncioDAO().findAll();
+		String category=request.getParameter("category");
+		List<Annuncio> annunci = DAOFactory.getDAOFactory(DAOFactory.POSTGRESQL).getAnnuncioDAO().findAllByCategory(category);
 		request.setAttribute("annunci", annunci);
-		
 		RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/views/ads.jsp");
 		dispatcher.forward(request, response);
 	}

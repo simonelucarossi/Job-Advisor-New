@@ -7,9 +7,9 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.jobadvisor.model.Recensione;
 import com.jobadvisor.persistence.dao.RecensioneDao;
 
-import com.jobadvisor.model.Recensione;
 
 public class RecensioneDaoJDBC implements RecensioneDao {
 

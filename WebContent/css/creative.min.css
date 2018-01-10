@@ -769,7 +769,7 @@ input[type="password"] {
 #login-button-submit {
 	background-color: #ae0008;
 	margin-top: 25px;
-	margin-bottom: -30px;
+	margin-bottom: 25px;
 }
 
 #sign-up-button {

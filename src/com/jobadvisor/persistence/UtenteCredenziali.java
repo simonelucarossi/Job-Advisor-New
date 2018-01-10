@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import com.jobadvisor.model.Utente;
 
+
 public class UtenteCredenziali extends Utente{
 	private DataSource dataSource;
 

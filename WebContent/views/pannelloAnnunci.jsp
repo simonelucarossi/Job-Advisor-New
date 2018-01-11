@@ -15,12 +15,18 @@
 				<strong id="site-title">JOB ADVISOR</strong>
 			</a> 
 			<span onclick="appearLogin()" id="login-img" class="fa fa-user"></span>
-			<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span id="cong-funz" class="glyphicon glyphicon-cog"></span></button>
-			<div class="dropdown-menu dropdown-menu-right">
-			    <button class="dropdown-item" type="button">Action</button>
-			    <button class="dropdown-item" type="button">Another action</button>
-			    <button class="dropdown-item" type="button">Something else here</button>
-		  	</div>
+			<div class="btn-group">
+				  <button id="cong-funz" type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				   <span class="glyphicon glyphicon-cog"></span>
+				  </button>
+				  <div class="dropdown-menu">
+				    <a class="dropdown-item" href="#">Action</a>
+				    <a class="dropdown-item" href="#">Another action</a>
+				    <a class="dropdown-item" href="#">Something else here</a>
+				    <div class="dropdown-divider"></div>
+				    <a class="dropdown-item" href="#">Separated link</a>
+				  </div>
+			</div>
 		</div>
 	</nav>
 

@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.jobadvisor.model.Annuncio;
 import com.jobadvisor.persistence.DAOFactory;
 
-
 /**
  * Servlet implementation class DammiAds
  */

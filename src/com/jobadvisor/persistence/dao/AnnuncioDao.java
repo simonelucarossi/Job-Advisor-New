@@ -7,7 +7,7 @@ import com.jobadvisor.model.Annuncio;
 public interface AnnuncioDao {
 	public void save(Annuncio annuncio); // Create
 
-	public Annuncio findByPrimaryKey(String id); // Retrieve
+	public Annuncio findByPrimaryKey(Long id); // Retrieve
 
 	public List<Annuncio> findAll();
 

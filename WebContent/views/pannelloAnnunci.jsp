@@ -16,15 +16,13 @@
 			</a> 
 			<span onclick="appearLogin()" id="login-img" class="fa fa-user"></span>
 			<div class="btn-group">
-				  <button id="cong-funz" type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				  <a id="cong-funz"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				   <span class="glyphicon glyphicon-cog"></span>
-				  </button>
-				  <div class="dropdown-menu">
-				    <a class="dropdown-item" href="#">Action</a>
-				    <a class="dropdown-item" href="#">Another action</a>
-				    <a class="dropdown-item" href="#">Something else here</a>
-				    <div class="dropdown-divider"></div>
-				    <a class="dropdown-item" href="#">Separated link</a>
+				  </a>
+				  <div style="font-size: 18px;" class="dropdown-menu">
+				    <a class="dropdown-item" href="views/creaAnnuncio.jsp"><strong>Create new Ad</strong></a>
+				    <a class="dropdown-item" href="#"><strong>Delete Ad</strong></a>
+				    <a class="dropdown-item" href="#"><strong>Modify Ad</strong></a>
 				  </div>
 			</div>
 		</div>

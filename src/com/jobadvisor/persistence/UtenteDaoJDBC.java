@@ -81,7 +81,7 @@ public class UtenteDaoJDBC implements UtenteDao {
 			String update = "update annuncio SET creatore = ? WHERE id = ?";
 			PreparedStatement statement = connection.prepareStatement(update);
 			statement.setString(1, utente.getUsername());
-			statement.setString(2, annuncio.getId());
+			statement.setLong(2, annuncio.getId());
 			statement.executeUpdate();
 		}
 

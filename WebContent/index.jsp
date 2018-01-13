@@ -106,6 +106,8 @@ if (navigator.geolocation) {
 
 					<form id="form-search" style="visibility: hidden; margin-top: -30px;" action="ads" method="post">
 						<div class="input-group">
+							<input name="lat" type="hidden" id="my-lat">
+							<input name="lon" type="hidden" id="my-lon">
 							<input name="category" type="text" class="form-control" placeholder="Search your Pro's category...">
 							<div class="input-group-btn">
 								<button class="btn btn-default" type="submit">

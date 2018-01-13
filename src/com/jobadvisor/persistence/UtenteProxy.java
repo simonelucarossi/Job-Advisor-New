@@ -30,7 +30,7 @@ public class UtenteProxy extends Utente {
 			ResultSet result = statement.executeQuery();
 			while (result.next()) {
 				Annuncio annuncio = new Annuncio();
-				annuncio.setId(result.getString("id"));
+				annuncio.setId(result.getLong("id"));
 				long secs1 = result.getDate("data").getTime();
 				annuncio.setData(new java.util.Date(secs1));
 				long secs2 = result.getDate("ora").getTime();

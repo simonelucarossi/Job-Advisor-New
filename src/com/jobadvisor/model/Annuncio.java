@@ -5,16 +5,19 @@ import java.util.Date;
 
 public class Annuncio {
 
-	private String id;
+	private Long id;
 	private String categoria;
 	private Date data;
+	private String descrizione;
+	private Double prezzo;
 	private Double latitudine;
 	private Double longitudine;
 
-	public Annuncio(String id, String cat, Date d ,Double lat,Double lon) {
-		this.id = id;
+	public Annuncio(String cat, Date d,String descr,Double prezzo,Double lat,Double lon) {
 		this.categoria = cat;
 		this.data = d;
+		this.descrizione=descr;
+		this.prezzo=prezzo;
 		this.latitudine=lat;
 		this.longitudine=lon;
 	}
@@ -22,11 +25,11 @@ public class Annuncio {
 	public Annuncio() {
 	}
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -65,5 +68,21 @@ public class Annuncio {
 
 	public void setLongitudine(Double longitudine) {
 		this.longitudine = longitudine;
+	}
+
+	public Double getPrezzo() {
+		return prezzo;
+	}
+
+	public void setPrezzo(Double prezzo) {
+		this.prezzo = prezzo;
+	}
+
+	public String getDescrizione() {
+		return descrizione;
+	}
+
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
 	}
 }

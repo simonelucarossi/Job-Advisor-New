@@ -14,12 +14,11 @@ body{
 
 #inputDescription{
 	height: 10em;
-	margin-left: 15px;
+}
+#inputPrice,#inputCategory,#categoryLabel,#priceLabel{
+	margin-left: -15px;
 }
 
-#descrip-label{
-	margin-left: 15px;
-}
 
 #map {
 	height: 400px;

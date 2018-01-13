@@ -1,3 +1,12 @@
+function checkPrice() {
+	var value=$("#inputPrice").val();
+	console.log(value);
+	if (!isNaN(value) && value.toString().indexOf('.') != -1){
+		return true;
+	}
+	alert("Please enter a correct value of price..(ex: 25,00)");
+	return false;
+}
 
 function setDate(){
     var today = new Date();
@@ -10,20 +19,19 @@ function setDate(){
     today = yyyy+'-'+mm+'-'+dd;     
 
     $("#date").val(today);
+    return checkPrice();
 }
 
 var map;
 
 function initMap() {
-
     var mapOptions = {
         center: new google.maps.LatLng(10, 10),
-        zoom: 5
+        zoom: 8
     };
 
     map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-    // Create the DIV to hold the control and call the constructor passing in this DIV
     var geolocationDiv = document.createElement('div');
     var geolocationControl = new GeolocationControl(geolocationDiv, map);
 
@@ -32,7 +40,6 @@ function initMap() {
 
 function GeolocationControl(controlDiv, map) {
 
-    // Set CSS for the control button
     var controlUI = document.createElement('div');
     controlUI.style.backgroundColor = '#444';
     controlUI.style.borderStyle = 'solid';
@@ -45,7 +52,6 @@ function GeolocationControl(controlDiv, map) {
     controlUI.title = 'Click to center map on your location';
     controlDiv.appendChild(controlUI);
 
-    // Set CSS for the control text
     var controlText = document.createElement('div');
     controlText.style.fontFamily = 'Arial,sans-serif';
     controlText.style.fontSize = '10px';

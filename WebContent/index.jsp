@@ -9,6 +9,12 @@ prefix="c" %>
 <html lang="en">
 <head>
 
+<style type="text/css">
+#logout,#ads_panel{
+color: rgba(255, 255, 255, 0.7);
+}
+</style>
+
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -59,29 +65,36 @@ prefix="c" %>
 	}
 </script>
 
-<script>
-if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function (position) {
-    document.getElementById("my-lat").value=position.coords.latitude;
-    document.getElementById("my-lon").value=position.coords.longitude;
-      }
-    );
-}
-</script>
-
 </head>
 
 <body id="page-top">
 
 	<!-- Navigation -->
-	<nav id="nav-bar-mobile"
-		class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+	<nav id="nav-bar-mobile" class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
 		<div class="container">
 			<a id="brand-site" class="navbar-brand js-scroll-trigger"
 				href="#page-top"> <img id="logo-site" src="img/gps.png"> <strong
 				id="site-title">JOB ADVISOR</strong>
 			</a> 
-			<span onclick="appearLogin()" id="login-img" class="fa fa-user"> </span>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+	          <ul class="navbar-nav ml-auto">
+	            <li class="nav-item">
+				<c:if test="${utente.tipo=='Professionista'}">
+					<a id="ads_panel" class="nav-link js-scroll-trigger" href="adsPanel?username=${utente.username}">Ads Panel</a>
+				</c:if>	
+				</li>
+				<li>
+					<c:if test="${utente == null}">
+					<span onclick="appearLogin()" id="login-img" class="fa fa-user"> </span>
+					</c:if>
+				</li>
+				<li>
+	            <c:if test="${utente != null }">
+				 	<a id="logout" class="nav-link js-scroll-trigger" href="logout">Logout</a>
+				</c:if>
+	            </li>
+	          </ul>
+	        </div>
 		</div>
 	</nav>
 
@@ -140,7 +153,6 @@ if (navigator.geolocation) {
 	</div>
 	<div id="login-box" class="wrapper" style="visibility: hidden;">
 		<form class="form-signin" action="login" method="post" >
-			<c:if test="${utente == null}">	
 				<!-- LOGIN -->
 				<h2 id="login-title" class="form-signin-heading">LOGIN</h2>
 				<a onclick="disappearLogin()"><h2 id="exit-button">x</h2></a> 
@@ -157,14 +169,6 @@ if (navigator.geolocation) {
 				</button>
 				<div class="dropdown-divider"></div>
 				  <a class="dropdown-item" href="views/subscribe">New around here? Sign up</a>
-			</c:if>
-			<c:if test="${utente != null }">
-			<a onclick="disappearLogin()"><h2 id="exit-button">x</h2></a> 
-				<a href="logout"><button id="logout-button-submit" class="btn btn-lg btn-primary" type="button">Logout</button></a>
-				<c:if test="${utente.tipo=='Professionista'}">
-					<a href="adsPanel?username=${utente.username}"><button id="ads-panel-link" class="btn btn-lg btn-primary" type="button">Ads Panel</button></a>
-				</c:if>
-			</c:if>
 		</form>
 	</div>
 	<!-- END LOGIN HTML -->

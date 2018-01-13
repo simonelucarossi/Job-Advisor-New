@@ -5,6 +5,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.Locale;
 
 import javax.servlet.RequestDispatcher;
@@ -37,17 +38,20 @@ public class CreaAnnuncio extends HttpServlet{
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		String categoria = request.getParameter("category");
 		String descrizione = request.getParameter("description");
 		Double prezzo= Double.parseDouble(request.getParameter("price"));
 		String data= request.getParameter("date");
 		Double latitudine= Double.parseDouble(request.getParameter("lat"));
 		Double longitudine= Double.parseDouble(request.getParameter("lon"));
+		String creatore= request.getParameter("creator");
+		System.out.println(creatore);
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ITALIAN);
 		Date date;
 		try {
 			date = format.parse(data);
-			Annuncio annuncio= new Annuncio(categoria,date,descrizione,prezzo,latitudine,longitudine);
+			Annuncio annuncio= new Annuncio(categoria,date,descrizione,prezzo,latitudine,longitudine,creatore);
 
 			AnnuncioDao annuncioDao = DatabaseManager.getInstance().getDaoFactory().getAnnuncioDAO();
 			annuncioDao.save(annuncio);

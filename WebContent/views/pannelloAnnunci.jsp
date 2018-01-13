@@ -3,9 +3,8 @@
 <!DOCTYPE html>
 <jsp:include page="_head.jsp"></jsp:include>
 
-<body>
+<body style="background-color: #4e4a4a;">
 	<jsp:include page="_header.jsp"></jsp:include>
-
 	<main id="container-box"> <!-- Navigation -->
 	<nav id="nav-bar-mobile"
 		class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">

@@ -24,7 +24,7 @@ public class AnnuncioDaoJDBC implements AnnuncioDao {
 	public void save(Annuncio annuncio) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			String insert = "insert into annuncio(id, categoria, data_pubblicazione, descrizione, prezzo, latitudine, longitudine) values (?,?,?,?,?,?,?)";
+			String insert = "insert into annuncio(id, categoria, data_pubblicazione, descrizione, prezzo, latitudine, longitudine, creatore) values (?,?,?,?,?,?,?,?)";
 			PreparedStatement statement = connection.prepareStatement(insert);
 			Long id = IdBroker.getId(connection);
 			annuncio.setId(id); 
@@ -36,6 +36,7 @@ public class AnnuncioDaoJDBC implements AnnuncioDao {
 			statement.setDouble(5, annuncio.getPrezzo());
 			statement.setDouble(6, annuncio.getLatitudine());
 			statement.setDouble(7, annuncio.getLongitudine());
+			statement.setString(8, annuncio.getCreatore());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -68,6 +69,7 @@ public class AnnuncioDaoJDBC implements AnnuncioDao {
 				annuncio.setPrezzo(result.getDouble("prezzo"));
 				annuncio.setLatitudine(result.getDouble("latitudine"));
 				annuncio.setLongitudine(result.getDouble("longitudine"));
+				annuncio.setCreatore(result.getString("creatore"));
 			}
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -101,6 +103,7 @@ public class AnnuncioDaoJDBC implements AnnuncioDao {
 				annuncio.setPrezzo(result.getDouble("prezzo"));
 				annuncio.setLatitudine(result.getDouble("latitudine"));
 				annuncio.setLongitudine(result.getDouble("longitudine"));
+				annuncio.setCreatore(result.getString("creatore"));
 
 				annunci.add(annuncio);
 			}
@@ -120,7 +123,7 @@ public class AnnuncioDaoJDBC implements AnnuncioDao {
 	public void update(Annuncio annuncio) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			String update = "update annuncio SET categoria = ?, data_pubblicazione  = ?, descrizione = ?, prezzo = ?, latitudine = ?, longitudine = ? WHERE id=?";
+			String update = "update annuncio SET categoria = ?, data_pubblicazione  = ?, descrizione = ?, prezzo = ?, latitudine = ?, longitudine = ?, creatore = ? WHERE id=?";
 			PreparedStatement statement = connection.prepareStatement(update);
 			statement.setString(1, annuncio.getCategoria());
 			long secs = annuncio.getData().getTime();
@@ -129,7 +132,8 @@ public class AnnuncioDaoJDBC implements AnnuncioDao {
 			statement.setDouble(4, annuncio.getPrezzo());
 			statement.setDouble(5, annuncio.getLatitudine());
 			statement.setDouble(6, annuncio.getLongitudine());
-			statement.setLong(7, annuncio.getId());
+			statement.setString(7, annuncio.getCreatore());
+			statement.setLong(8, annuncio.getId());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -186,6 +190,8 @@ public class AnnuncioDaoJDBC implements AnnuncioDao {
 				annuncio.setPrezzo(result.getDouble("prezzo"));
 				annuncio.setLatitudine(result.getDouble("latitudine"));
 				annuncio.setLongitudine(result.getDouble("longitudine"));
+				annuncio.setCreatore(result.getString("creatore"));
+				
 				annunci.add(annuncio);
 				
 			}
@@ -222,6 +228,8 @@ public class AnnuncioDaoJDBC implements AnnuncioDao {
 				annuncio.setPrezzo(result.getDouble("prezzo"));
 				annuncio.setLatitudine(result.getDouble("latitudine"));
 				annuncio.setLongitudine(result.getDouble("longitudine"));
+				annuncio.setCreatore(result.getString("creatore"));
+				
 				annunci.add(annuncio);
 			}
 		} catch (SQLException e) {
@@ -257,6 +265,8 @@ public class AnnuncioDaoJDBC implements AnnuncioDao {
 				annuncio.setPrezzo(result.getDouble("prezzo"));
 				annuncio.setLatitudine(result.getDouble("latitudine"));
 				annuncio.setLongitudine(result.getDouble("longitudine"));
+				annuncio.setCreatore(result.getString("creatore"));
+				
 				annunci.add(annuncio);
 			}
 		} catch (SQLException e) {

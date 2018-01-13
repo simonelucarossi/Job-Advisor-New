@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -32,22 +32,22 @@
 </head>
 <body>
 	<h2><strong>Create your own Ad</strong></h2>
-	<form action="createAd" method="post" id="ads_creation_form" onsubmit="setDate()">
-
+	<form action="createAd" method="post" id="ads_creation_form" onsubmit="return setDate()">
 		<div class="form-group col-md-6">
-			<label for="inputCategory">Category</label>
-			<input name="category" type="text" class="form-control" id="inputcategory" placeholder="Category...">
+			<label id="categoryLabel" for="inputCategory">Category</label>
+			<input name="category" type="text" class="form-control" id="inputCategory" placeholder="Category..." required>
 			<input name="lat" type="hidden" id="my-lat"> 
 			<input name="lon" type="hidden" id="my-lon">
+			<input name="creator" value="${utente.username}" type="hidden" id="creator">
 		</div>
 
 		<div class="form-group">
 			<label id="descrip-label" for="inputDescription">Description</label>
-			<textarea name="description" class="form-control" id="inputDescription">Insert a description...</textarea>
+			<textarea rows="20" cols="10" name="description" class="form-control" id="inputDescription" required>Insert a description...</textarea>
 		</div>
 		<div class="form-group col-md-6">
-			<label for="inputPrice">Job-price</label> 
-			<input name="price" type="text" class="form-control" id="inputTitle" placeholder="Insert a price...">
+			<label id="priceLabel" for="inputPrice">Job-price</label> 
+			<input name="price" type="number" step="0.01" min="5" class="form-control" id="inputPrice" placeholder="Insert a price..." required>
 		</div>
 		<div id="map">
 		</div>

@@ -33,11 +33,15 @@ public class Login extends HttpServlet {
 		UtenteDao dao = DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
 
 		UtenteCredenziali utente = dao.findByPrimaryKeyCredential(username);
+		boolean logged=false;
 		if (utente!= null) {
 			if (password.equals(utente.getPassword())) {
+				logged=true;
 				session.setAttribute("username", username);
 				session.setAttribute("utente", utente);
 			}
+		}else {
+			session.setAttribute("logged",logged);
 		}
 
 		RequestDispatcher dispacher = req.getRequestDispatcher("index.jsp");

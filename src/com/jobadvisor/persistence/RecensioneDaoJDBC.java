@@ -23,11 +23,15 @@ public class RecensioneDaoJDBC implements RecensioneDao {
 	public void save(Recensione recensione) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			String insert = "insert into recensione(id , data_creazione) values (?,?)";
+			Long id = IdBroker.getId(connection);
+			recensione.setId(id); 
+			String insert = "insert into recensione(id , data_creazione , creatore , annuncio) values (?,?,?,?)";
 			PreparedStatement statement = connection.prepareStatement(insert);
-			statement.setString(1, recensione.getId());
+			statement.setLong(1, recensione.getId());
 			long secs = recensione.getData().getTime();
 			statement.setDate(2, new java.sql.Date(secs));
+			statement.setString(3,recensione.getCreatore());
+			statement.setLong(4, recensione.getAnnuncio());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -41,20 +45,22 @@ public class RecensioneDaoJDBC implements RecensioneDao {
 	}
 
 	@Override
-	public Recensione findByPrimaryKey(String id) {
+	public Recensione findByPrimaryKey(Long id) {
 		Connection connection = this.dataSource.getConnection();
 		Recensione recensione= null;
 		try {
 			PreparedStatement statement;
 			String query = "select * from recensione where id = ?";
 			statement = connection.prepareStatement(query);
-			statement.setString(1,id);
+			statement.setLong(1,id);
 			ResultSet result = statement.executeQuery();
 			if (result.next()) {
 				recensione= new Recensione();
-				recensione.setId(result.getString("id"));
+				recensione.setId(result.getLong("id"));
 				long secs = result.getDate("data_creazione").getTime();
 				recensione.setData(new java.util.Date(secs));
+				recensione.setCreatore(result.getString("creatore"));
+				recensione.setAnnuncio(result.getLong("annuncio"));
 			}
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -80,9 +86,11 @@ public class RecensioneDaoJDBC implements RecensioneDao {
 			ResultSet result = statement.executeQuery();
 			while (result.next()) {
 				recensione = new Recensione();
-				recensione.setId(result.getString("id"));
+				recensione.setId(result.getLong("id"));
 				long secs= result.getDate("data_creazione").getTime();
 				recensione.setData(new java.util.Date(secs));
+				recensione.setCreatore(result.getString("creatore"));
+				recensione.setAnnuncio(result.getLong("annuncio"));
 				
 				recensioni.add(recensione);
 			}
@@ -102,11 +110,13 @@ public class RecensioneDaoJDBC implements RecensioneDao {
 	public void update(Recensione recensione) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			String update = "update annuncio SET data_creazione= ? WHERE id=?";
+			String update = "update annuncio SET data_creazione= ?, creatore = ?,annuncio = ?, WHERE id=?";
 			PreparedStatement statement = connection.prepareStatement(update);
 			long secs= recensione.getData().getTime();
 			statement.setDate(1, new java.sql.Date(secs));
-			statement.setString(2, recensione.getId());
+			statement.setString(2,recensione.getCreatore());
+			statement.setLong(3, recensione.getAnnuncio());
+			statement.setLong(4, recensione.getId());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -125,7 +135,7 @@ public class RecensioneDaoJDBC implements RecensioneDao {
 		try {
 			String delete = "delete FROM recensione WHERE id = ? ";
 			PreparedStatement statement = connection.prepareStatement(delete);
-			statement.setString(1, recensione.getId());
+			statement.setLong(1, recensione.getId());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());

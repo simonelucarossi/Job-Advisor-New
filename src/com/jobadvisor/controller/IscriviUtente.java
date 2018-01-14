@@ -40,14 +40,16 @@ public class IscriviUtente extends HttpServlet {
 		String cognome = req.getParameter("cognome");
 		String sesso = req.getParameter("sesso");
 		String dataNascita = req.getParameter("dataNascita");
-		String password = req.getParameter("password");
 		String tipo = req.getParameter("tipo");
+		String email = req.getParameter("email");
+		String telefono= req.getParameter("telefono");
+		String password = req.getParameter("password");
 
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ITALIAN);
 		Date date;
 		try {
 			date = format.parse(dataNascita);
-			Utente utente= new Utente(username,nome, cognome,sesso,date,tipo);
+			Utente utente= new Utente(username,nome, cognome,sesso,date,tipo,email,telefono);
 
 			UtenteDao utenteDao = DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
 			utenteDao.save(utente);

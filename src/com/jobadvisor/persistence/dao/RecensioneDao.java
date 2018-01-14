@@ -7,7 +7,7 @@ import com.jobadvisor.model.Recensione;
 public interface RecensioneDao {
 	public void save(Recensione recensione); // Create
 
-	public Recensione findByPrimaryKey(String id); // Retrieve
+	public Recensione findByPrimaryKey(Long id); // Retrieve
 
 	public List<Recensione> findAll();
 

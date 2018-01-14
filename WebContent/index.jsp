@@ -49,25 +49,9 @@ color: rgba(255, 255, 255, 0.7);
 <link href="css/creative.min.css" rel="stylesheet">
 
 
-<!-- SCRIPT DISAPPEAR BUTTON -->
-<script type='text/javascript'>
-	function disappearButton() {
-		document.getElementById("button-search").style.visibility="hidden";
-		document.getElementById("form-search").style.visibility="visible";
-	}
-	function appearLogin() {
-		document.getElementById("login-box").style.visibility="visible";
-		document.getElementById("fade-box").style.visibility="visible";
-	}
-	function disappearLogin() {
-		document.getElementById("login-box").style.visibility="hidden";
-		document.getElementById("fade-box").style.visibility="hidden";
-	}
-</script>
-
 </head>
 
-<body id="page-top">
+<body id="page-top" style="display:none;" >
 
 	<!-- Navigation -->
 	<nav id="nav-bar-mobile" class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
@@ -85,7 +69,7 @@ color: rgba(255, 255, 255, 0.7);
 				</li>
 				<li>
 					<c:if test="${utente == null}">
-					<span onclick="appearLogin()" id="login-img" class="fa fa-user"> </span>
+					<span id="login-img" class="fa fa-user"> </span>
 					</c:if>
 				</li>
 				<li>
@@ -113,11 +97,11 @@ color: rgba(255, 255, 255, 0.7);
 					<p class="text-faded mb-5">JobAdvisor offers you the
 						opportunity to publish your ad if you are a pro, but also to seek
 						pro or companies in your area that can solve your problem!</p>
-					<a onclick="disappearButton()" id="button-search"
+					<a id="button-search"
 						class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Find
 						Your Pro</a>
 
-					<form id="form-search" style="visibility: hidden; margin-top: -30px;" action="ads" method="post">
+					<form id="form-search" style="margin-top: -30px;" action="ads" method="post">
 						<div class="input-group">
 							<input name="lat" type="hidden" id="my-lat">
 							<input name="lon" type="hidden" id="my-lon">
@@ -149,21 +133,24 @@ color: rgba(255, 255, 255, 0.7);
 
 	<!-- LOGIN HTML -->
 	<div id="fade-box"
-		style="visibility: hidden; width: 100%; height: 100%; z-index: 9999; background-color: black; top: 0px; left: 0px; right: 0px; position: fixed; opacity: 0.8;">
+		style="width: 100%; height: 100%; z-index: 9999; background-color: black; top: 0px; left: 0px; right: 0px; position: fixed; opacity: 0.8;">
 	</div>
-	<div id="login-box" class="wrapper" style="visibility: hidden;">
-		<form class="form-signin" action="login" method="post" >
+	<div id="login-box" class="wrapper">
+		<form id="login-form" class="form-signin" action="login" method="post" >
 				<!-- LOGIN -->
 				<h2 id="login-title" class="form-signin-heading">LOGIN</h2>
-				<a onclick="disappearLogin()"><h2 id="exit-button">x</h2></a> 
-				<img id="logo-site-login" src="img/gps.png"> <input id="usernameL" type="text"
-					class="form-control" name="username" placeholder="Username"
-					required="" autofocus="" /> <input id="passwordL" type="password"
+				<a><h2 id="exit-button">x</h2></a>
+				<img id="logo-site-login" src="img/gps.png"> 
+				<c:if test="${!logged}"><p style="color:red;">Incorrect username or password!</p></c:if> 
+				<input id="usernameL" type="text" class="form-control" name="username" placeholder="Username"
+					required="" autofocus="" /> 
+				<input id="passwordL" type="password"
 					class="form-control" name="password" placeholder="Password"
-					required="" /> <label id="rememberL" class="checkbox"> <input 
-					type="checkbox" value="remember-me" id="rememberMe"
+					required="" /> 
+					<label id="rememberL" class="checkbox">
+				<input type="checkbox" value="remember-me" id="rememberMe"
 					name="rememberMe"> Remember me
-				</label>
+					</label>
 				<button id="login-button-submit"
 					class="btn btn-lg btn-primary btn-block" type="submit">Login
 				</button>
@@ -184,5 +171,7 @@ color: rgba(255, 255, 255, 0.7);
 
 	<!-- Custom scripts for this template -->
 	<script src="js/creative.min.js"></script>
+	<script type='text/javascript' src="js/home.js"></script>
+
 </body>
 </html>

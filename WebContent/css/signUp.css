@@ -1,17 +1,8 @@
 @charset "ISO-8859-1";
 
-@media ( min-width : 400px) {
-	body {
-		background-image: url(../img/header.jpg);
-		background-position: center center;
-	}
-}
-
-@media ( min-width : 800px) {
-	body {
-		background-image: url(../img/header.jpg);
-		background-position: center center;
-	}
+body {
+	background-image: url('../img/AdformBackground.jpg');
+	background-position: center center;
 }
 
 html, body {

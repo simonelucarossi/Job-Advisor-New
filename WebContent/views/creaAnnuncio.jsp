@@ -38,7 +38,7 @@
 			<input name="category" type="text" class="form-control" id="inputCategory" placeholder="Category..." required>
 			<input name="lat" type="hidden" id="my-lat"> 
 			<input name="lon" type="hidden" id="my-lon">
-			<input name="creator" value="${utente.username}" type="hidden" id="creator">
+			<input name="creator" value="${username}" type="hidden" id="creator">
 		</div>
 
 		<div class="form-group">

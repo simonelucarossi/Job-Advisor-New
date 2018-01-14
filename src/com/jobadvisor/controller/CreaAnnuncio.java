@@ -46,7 +46,6 @@ public class CreaAnnuncio extends HttpServlet{
 		Double latitudine= Double.parseDouble(request.getParameter("lat"));
 		Double longitudine= Double.parseDouble(request.getParameter("lon"));
 		String creatore= request.getParameter("creator");
-		System.out.println(creatore);
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ITALIAN);
 		Date date;
 		try {
@@ -55,8 +54,7 @@ public class CreaAnnuncio extends HttpServlet{
 
 			AnnuncioDao annuncioDao = DatabaseManager.getInstance().getDaoFactory().getAnnuncioDAO();
 			annuncioDao.save(annuncio);
-
-
+			
 			RequestDispatcher dispacher = request.getRequestDispatcher("/views/creaAnnuncio.jsp");
 			dispacher.forward(request, response);
 

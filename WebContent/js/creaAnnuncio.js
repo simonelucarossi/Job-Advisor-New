@@ -1,6 +1,5 @@
 function checkPrice() {
 	var value=$("#inputPrice").val();
-	console.log(value);
 	if (!isNaN(value) && value.toString().indexOf('.') != -1){
 		return true;
 	}

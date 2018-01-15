@@ -30,7 +30,7 @@ public class UtenteProxy extends Utente {
 			ResultSet result = statement.executeQuery();
 			while (result.next()) {
 				Annuncio annuncio = new Annuncio();
-				annuncio.setId(result.getString("id"));
+				annuncio.setId(result.getLong("id"));
 				long secs1 = result.getDate("data").getTime();
 				annuncio.setData(new java.util.Date(secs1));
 				long secs2 = result.getDate("ora").getTime();
@@ -62,7 +62,7 @@ public class UtenteProxy extends Utente {
 			ResultSet result = statement.executeQuery();
 			while (result.next()) {
 				Recensione recensione= new Recensione();
-				recensione.setId(result.getString("id"));
+				recensione.setId(result.getLong("id"));
 				long secs = result.getDate("data").getTime();
 				recensione.setData(new java.util.Date(secs));
 
@@ -79,35 +79,5 @@ public class UtenteProxy extends Utente {
 		}
 		this.setRecensioniScritte(recensioni);
 		return super.getRecensioniScritte();
-	}
-	
-	public Set<Recensione> getRecensioniRelative() {
-		Set<Recensione> recensioni = new HashSet<>();
-		Connection connection = this.dataSource.getConnection();
-		try {
-			PreparedStatement statement;
-			String query = "select * from recensione where destinatario= ?";
-			statement = connection.prepareStatement(query);
-			statement.setString(1, this.getUsername());
-			ResultSet result = statement.executeQuery();
-			while (result.next()) {
-				Recensione recensione= new Recensione();
-				recensione.setId(result.getString("id"));
-				long secs = result.getDate("data").getTime();
-				recensione.setData(new java.util.Date(secs));
-
-				recensioni.add(recensione);
-			}
-		} catch (SQLException e) {
-			throw new PersistenceException(e.getMessage());
-		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				throw new PersistenceException(e.getMessage());
-			}
-		}
-		this.setRecensioniRelative(recensioni);
-		return super.getRecensioniRelative();
 	}
 }

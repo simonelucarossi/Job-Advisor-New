@@ -13,27 +13,28 @@ public class Utente {
 	private String sesso;
 	private Date dataNascita;
 	private String tipo;
+	private String email;
+	private String telefono;
 	private String password;
 	private Set<Annuncio> annunci;
 	private Set<Recensione> recensioniScritte;
-	private Set<Recensione> recensioniRelative;
 
-	public Utente(String u, String n, String c, String s, Date dn, String t) {
+	public Utente(String u, String n, String c, String s, Date dn, String t,String em,String tel) {
 		this.username = u;
 		this.nome = n;
 		this.cognome = c;
 		this.sesso = s;
 		this.dataNascita = dn;
 		this.tipo = t;
+		this.email=em;
+		this.telefono=tel;
 		annunci = new HashSet<>();
 		recensioniScritte = new HashSet<>();
-		recensioniRelative = new HashSet<>();
 	}
 
 	public Utente() {
 		annunci = new HashSet<>();
 		recensioniScritte = new HashSet<>();
-		recensioniRelative = new HashSet<>();
 	}
 
 	public String getUsername() {
@@ -110,14 +111,6 @@ public class Utente {
 		this.recensioniScritte = recensioniScritte;
 	}
 
-	public Set<Recensione> getRecensioniRelative() {
-		return recensioniRelative;
-	}
-
-	public void setRecensioniRelative(Set<Recensione> recensioniRelative) {
-		this.recensioniRelative = recensioniRelative;
-	}
-
 	public void addAnnuncio(Annuncio a) {
 		getAnnunci().add(a);
 	}
@@ -134,18 +127,27 @@ public class Utente {
 		getRecensioniScritte().remove(r);
 	}
 
-	public void addRecensioneRelativa(Recensione r) {
-		getRecensioniRelative().add(r);
-	}
-
-	public void removeRecensioneRelativa(Recensione r) {
-		getRecensioniRelative().remove(r);
-	}
-
 	public String toString() {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
 		return "Utente[" + this.getUsername() + ", " + this.getNome() + ", " + this.getCognome() + ", "
-				+ this.getSesso() + ", " + sdf.format(this.getDataNascita()) + ", " + this.getTipo() + "]";
+				+ this.getSesso() + ", " + sdf.format(this.getDataNascita()) + ", " + this.getTipo() 
+				+ ", " + this.getEmail() + ", " + this.getTelefono()+"]";
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
 	}
 }

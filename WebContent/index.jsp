@@ -9,6 +9,12 @@ prefix="c" %>
 <html lang="en">
 <head>
 
+<style type="text/css">
+#logout,#ads_panel{
+color: rgba(255, 255, 255, 0.7);
+}
+</style>
+
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -43,45 +49,36 @@ prefix="c" %>
 <link href="css/creative.min.css" rel="stylesheet">
 
 
-<!-- SCRIPT DISAPPEAR BUTTON -->
-<script type='text/javascript'>
-	function disappearButton() {
-		document.getElementById("button-search").style.visibility="hidden";
-		document.getElementById("form-search").style.visibility="visible";
-	}
-	function appearLogin() {
-		document.getElementById("login-box").style.visibility="visible";
-		document.getElementById("fade-box").style.visibility="visible";
-	}
-	function disappearLogin() {
-		document.getElementById("login-box").style.visibility="hidden";
-		document.getElementById("fade-box").style.visibility="hidden";
-	}
-</script>
-
-<script>
-if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function (position) {
-    document.getElementById("my-lat").value=position.coords.latitude;
-    document.getElementById("my-lon").value=position.coords.longitude;
-      }
-    );
-}
-</script>
-
 </head>
 
 <body id="page-top">
 	<div class="container-site">
 	<!-- Navigation -->
-	<nav id="nav-bar-mobile"
-		class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+	<nav id="nav-bar-mobile" class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
 		<div class="container">
 			<a id="brand-site" class="navbar-brand js-scroll-trigger"
 				href="#page-top"> <img id="logo-site" src="img/gps.png"> <strong
 				id="site-title">JOB ADVISOR</strong>
 			</a> 
-			<span onclick="appearLogin()" id="login-img" class="fa fa-user"> </span>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+	          <ul class="navbar-nav ml-auto">
+	            <li class="nav-item">
+				<c:if test="${utente.tipo=='Professionista'}">
+					<a id="ads_panel" class="nav-link js-scroll-trigger" href="adsPanel?username=${utente.username}">Ads Panel</a>
+				</c:if>	
+				</li>
+				<li>
+					<c:if test="${utente == null}">
+					<span id="login-img" class="fa fa-user"> </span>
+					</c:if>
+				</li>
+				<li>
+	            <c:if test="${utente != null }">
+				 	<a id="logout" class="nav-link js-scroll-trigger" href="logout">Logout</a>
+				</c:if>
+	            </li>
+	          </ul>
+	        </div>
 		</div>
 	</nav>
 
@@ -100,12 +97,14 @@ if (navigator.geolocation) {
 					<p class="text-faded mb-5">JobAdvisor offers you the
 						opportunity to publish your ad if you are a pro, but also to seek
 						pro or companies in your area that can solve your problem!</p>
-					<a onclick="disappearButton()" id="button-search"
+					<a id="button-search"
 						class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Find
 						Your Pro</a>
 
-					<form id="form-search" style="visibility: hidden; margin-top: -30px;" action="ads" method="get">
+					<form id="form-search" style="margin-top: -30px;" action="ads" method="post">
 						<div class="input-group">
+							<input name="lat" type="hidden" id="my-lat">
+							<input name="lon" type="hidden" id="my-lon">
 							<input name="category" type="text" class="form-control" placeholder="Search your Pro's category...">
 							<div class="input-group-btn">
 								<button class="btn btn-default" type="submit">
@@ -127,35 +126,29 @@ if (navigator.geolocation) {
 	</div>
 	<!-- LOGIN HTML -->
 	<div id="fade-box"
-		style="visibility: hidden; width: 100%; height: 100%; z-index: 9999; background-color: black; top: 0px; left: 0px; right: 0px; position: fixed; opacity: 0.8;">
+		style="width: 100%; height: 100%; z-index: 9999; background-color: black; top: 0px; left: 0px; right: 0px; position: fixed; opacity: 0.8;">
 	</div>
-	<div id="login-box" class="wrapper" style="visibility: hidden;">
-		<form class="form-signin" action="login" method="post" >
-			<c:if test="${utente == null}">	
+	<div id="login-box" class="wrapper">
+		<form id="login-form" class="form-signin" action="login" method="post" >
 				<!-- LOGIN -->
 				<h2 id="login-title" class="form-signin-heading">LOGIN</h2>
-				<a onclick="disappearLogin()"><h2 id="exit-button">x</h2></a> 
-				<img id="logo-site-login" src="img/gps.png"> <input id="usernameL" type="text"
-					class="form-control" name="username" placeholder="Username"
-					required="" autofocus="" /> <input id="passwordL" type="password"
+				<a><h2 id="exit-button">x</h2></a>
+				<img id="logo-site-login" src="img/gps.png"> 
+				<c:if test="${!logged}"><p style="color:red;">Incorrect username or password!</p></c:if> 
+				<input id="usernameL" type="text" class="form-control" name="username" placeholder="Username"
+					required="" autofocus="" /> 
+				<input id="passwordL" type="password"
 					class="form-control" name="password" placeholder="Password"
-					required="" /> <label id="rememberL" class="checkbox"> <input 
-					type="checkbox" value="remember-me" id="rememberMe"
+					required="" /> 
+					<label id="rememberL" class="checkbox">
+				<input type="checkbox" value="remember-me" id="rememberMe"
 					name="rememberMe"> Remember me
-				</label>
+					</label>
 				<button id="login-button-submit"
 					class="btn btn-lg btn-primary btn-block" type="submit">Login
 				</button>
 				<div class="dropdown-divider"></div>
-				  <a class="dropdown-item" href="subscribe">New around here? Sign up</a>
-			</c:if>
-			<c:if test="${utente != null }">
-			<a onclick="disappearLogin()"><h2 id="exit-button">x</h2></a> 
-				<a href="logout"><button id="logout-button-submit" class="btn btn-lg btn-primary" type="button">Logout</button></a>
-				<c:if test="${utente.tipo=='Professionista'}">
-					<a href="adsPanel?username=${utente.username}"><button id="ads-panel-link" class="btn btn-lg btn-primary" type="button">Ads Panel</button></a>
-				</c:if>
-			</c:if>
+				  <a class="dropdown-item" href="views/subscribe">New around here? Sign up</a>
 		</form>
 	</div>
 	<!-- END LOGIN HTML -->
@@ -171,5 +164,7 @@ if (navigator.geolocation) {
 
 	<!-- Custom scripts for this template -->
 	<script src="js/creative.min.js"></script>
+	<script type='text/javascript' src="js/home.js"></script>
+
 </body>
 </html>

@@ -27,7 +27,7 @@ public class UtenteDaoJDBC implements UtenteDao {
 	public void save(Utente utente) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			String insert = "insert into utente(username, nome, cognome , sesso, data_nascita,tipo) values (?,?,?,?,?,?)";
+			String insert = "insert into utente(username, nome, cognome , sesso, data_nascita, tipo, email, telefono) values (?,?,?,?,?,?,?,?)";
 			PreparedStatement statement = connection.prepareStatement(insert);
 			statement.setString(1, utente.getUsername());
 			statement.setString(2, utente.getNome());
@@ -36,8 +36,9 @@ public class UtenteDaoJDBC implements UtenteDao {
 			long secs = utente.getDataNascita().getTime();
 			statement.setDate(5, new java.sql.Date(secs));
 			statement.setString(6, utente.getTipo());
+			statement.setString(7, utente.getEmail());
+			statement.setString(8, utente.getTelefono());
 			statement.executeUpdate();
-
 			updateReferences(utente, connection);
 			
 		} catch (SQLException e) {
@@ -61,18 +62,6 @@ public class UtenteDaoJDBC implements UtenteDao {
 		RecensioneDao recensioneDao = new RecensioneDaoJDBC(dataSource);
 		AnnuncioDao annuncioDao = new AnnuncioDaoJDBC(dataSource);
 
-		for (Recensione recensione : utente.getRecensioniRelative()) {
-			if (recensioneDao.findByPrimaryKey(recensione.getId()) == null) {
-				recensioneDao.save(recensione);
-			}
-
-			String update = "update recensione SET destinatario = ? WHERE id = ?";
-			PreparedStatement statement = connection.prepareStatement(update);
-			statement.setString(1, utente.getUsername());
-			statement.setString(2, recensione.getId());
-			statement.executeUpdate();
-		}
-
 		for (Annuncio annuncio : utente.getAnnunci()) {
 			if (annuncioDao.findByPrimaryKey(annuncio.getId()) == null) {
 				annuncioDao.save(annuncio);
@@ -81,7 +70,7 @@ public class UtenteDaoJDBC implements UtenteDao {
 			String update = "update annuncio SET creatore = ? WHERE id = ?";
 			PreparedStatement statement = connection.prepareStatement(update);
 			statement.setString(1, utente.getUsername());
-			statement.setString(2, annuncio.getId());
+			statement.setLong(2, annuncio.getId());
 			statement.executeUpdate();
 		}
 
@@ -93,7 +82,7 @@ public class UtenteDaoJDBC implements UtenteDao {
 			String update = "update recensione SET creatore = ? WHERE id = ?";
 			PreparedStatement statement = connection.prepareStatement(update);
 			statement.setString(1, utente.getUsername());
-			statement.setString(2, recensione.getId());
+			statement.setLong(2, recensione.getId());
 			statement.executeUpdate();
 		}
 	}
@@ -117,6 +106,8 @@ public class UtenteDaoJDBC implements UtenteDao {
 				long secs = result.getDate("data_nascita").getTime();
 				utente.setDataNascita(new java.util.Date(secs));
 				utente.setTipo(result.getString("tipo"));
+				utente.setEmail(result.getString("email"));
+				utente.setTelefono(result.getString("telefono"));
 			}
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -149,6 +140,8 @@ public class UtenteDaoJDBC implements UtenteDao {
 				long secs = result.getDate("data_nascita").getTime();
 				utente.setDataNascita(new java.util.Date(secs));
 				utente.setTipo(result.getString("tipo"));
+				utente.setEmail(result.getString("email"));
+				utente.setTelefono(result.getString("telefono"));
 				utenti.add(utente);
 			}
 		} catch (SQLException e) {
@@ -167,7 +160,8 @@ public class UtenteDaoJDBC implements UtenteDao {
 	public void update(Utente utente) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			String update = "update utente SET nome = ?, cognome = ?, sesso = ?, data_nascita = ?, tipo = ? WHERE username=?";
+			String update = "update utente SET nome = ?, cognome = ?, sesso = ?, "
+					+ " data_nascita = ?, tipo = ?, email = ?, telefono = ? WHERE username=?";
 			PreparedStatement statement = connection.prepareStatement(update);
 			statement.setString(1, utente.getNome());
 			statement.setString(2, utente.getCognome());
@@ -175,7 +169,9 @@ public class UtenteDaoJDBC implements UtenteDao {
 			long secs = utente.getDataNascita().getTime();
 			statement.setDate(4, new java.sql.Date(secs));
 			statement.setString(5, utente.getTipo());
-			statement.setString(6, utente.getUsername());
+			statement.setString(6, utente.getEmail());
+			statement.setString(7, utente.getTelefono());
+			statement.setString(8, utente.getUsername());
 			statement.executeUpdate();
 			updateReferences(utente, connection);
 		} catch (SQLException e) {
@@ -200,9 +196,6 @@ public class UtenteDaoJDBC implements UtenteDao {
 				annuncioDao.delete(annuncio);
 			}
 			for (Recensione recensione : utente.getRecensioniScritte()) {
-				recensioneDao.delete(recensione);
-			}
-			for (Recensione recensione : utente.getRecensioniRelative()) {
 				recensioneDao.delete(recensione);
 			}
 
@@ -254,6 +247,8 @@ public class UtenteDaoJDBC implements UtenteDao {
 			utenteCred.setSesso(utente.getSesso());
 			utenteCred.setDataNascita(utente.getDataNascita());
 			utenteCred.setTipo(utente.getTipo());
+			utenteCred.setEmail(utente.getEmail());
+			utenteCred.setTelefono(utente.getTelefono());
 		}
 		return utenteCred;
 	}

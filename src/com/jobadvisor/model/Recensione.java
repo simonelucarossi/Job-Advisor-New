@@ -5,22 +5,24 @@ import java.util.Date;
 
 public class Recensione {
 
-	private String id;
+	private Long id;
 	private Date data;
+	private String creatore;
+	private Long annuncio;
 
 	public Recensione() {
 	}
 
-	public Recensione(String id, Date d) {
-		this.setId(id);
-		this.setData(d);
+	public Recensione(Long id, Date d) {
+		this.id=id;
+		this.data=d;
 	}
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -35,7 +37,23 @@ public class Recensione {
 	public String toString() {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-		return "Recensione[" + this.getId() + ", " + sdf.format(this.getData()) + "]";
+		return "Recensione[" + this.getId() + ", " + sdf.format(this.getData()) + ", "+this.getCreatore()+", "+this.getAnnuncio()+"]";
+	}
+
+	public String getCreatore() {
+		return creatore;
+	}
+
+	public void setCreatore(String creatore) {
+		this.creatore = creatore;
+	}
+
+	public Long getAnnuncio() {
+		return annuncio;
+	}
+
+	public void setAnnuncio(Long annuncio) {
+		this.annuncio = annuncio;
 	}
 
 }

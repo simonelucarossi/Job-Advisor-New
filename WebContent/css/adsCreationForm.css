@@ -1,0 +1,28 @@
+@charset "ISO-8859-1";
+
+label,strong,body{
+	color:white;
+}
+
+html{
+	margin:20px;
+}
+
+body{
+	background-image: url('../img/AdformBackground.jpg'); 
+}
+
+#inputDescription{
+	height: 10em;
+}
+#inputPrice,#inputCategory,#categoryLabel,#priceLabel{
+	margin-left: -15px;
+}
+
+
+#map {
+	height: 400px;
+	width: 100%;
+	margin-top:15px;
+	margin-bottom:15px;
+}

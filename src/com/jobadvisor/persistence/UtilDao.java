@@ -43,11 +43,15 @@ public class UtilDao {
 		try {
 			String create = "create SEQUENCE sequenza_id;"
 					+ "create table utente(\"username\" VARCHAR(255) primary key,nome VARCHAR(255),cognome VARCHAR(255),"
-					+ "sesso VARCHAR(1),data_nascita DATE,password VARCHAR(255),tipo VARCHAR(255));"
-					+ "create table annuncio(\"id\" VARCHAR(255) primary key,categoria VARCHAR(255),data_pubblicazione DATE,"
-					+ " creatore VARCHAR(255) REFERENCES utente(\"username\"),latitudine DECIMAL,longitudine DECIMAL);"
-					+ "create table recensione(\"id\" VARCHAR(255) primary key,data_creazione DATE,"
-					+ " creatore VARCHAR(255) REFERENCES utente(\"username\"),destinatario VARCHAR(255) REFERENCES utente(\"username\"));";
+					+ "sesso VARCHAR(1),data_nascita DATE,tipo VARCHAR(255),email VARCHAR(255),telefono VARCHAR(255)"
+					+ ",password VARCHAR(255));"
+					
+					+ "create table annuncio(\"id\" bigint primary key,categoria VARCHAR(255),data_pubblicazione DATE,"
+					+ "descrizione VARCHAR(500),prezzo DECIMAL,"
+					+ "latitudine DECIMAL,longitudine DECIMAL,creatore VARCHAR(255) REFERENCES utente(\"username\"));"
+					
+					+ "create table recensione(\"id\" bigint primary key,data_creazione DATE,"
+					+ " creatore VARCHAR(255) REFERENCES utente(\"username\"),annuncio bigint REFERENCES annuncio(\"id\"));";
 
 			PreparedStatement statement = connection.prepareStatement(create);
 			statement.executeUpdate();

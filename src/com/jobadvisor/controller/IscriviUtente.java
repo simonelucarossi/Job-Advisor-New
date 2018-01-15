@@ -19,7 +19,7 @@ import com.jobadvisor.persistence.dao.UtenteDao;
 import com.jobadvisor.model.Utente;
 import com.jobadvisor.persistence.DatabaseManager;
 
-@WebServlet("/views/subscribe")
+@WebServlet("/subscribe")
 public class IscriviUtente extends HttpServlet {
 
 	/**
@@ -29,7 +29,7 @@ public class IscriviUtente extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher dispacher = req.getRequestDispatcher("subscribe.jsp");
+		RequestDispatcher dispacher = req.getRequestDispatcher("/views/subscribe.jsp");
 		dispacher.forward(req, resp);
 	}
 
@@ -55,7 +55,7 @@ public class IscriviUtente extends HttpServlet {
 
 			req.setAttribute("utente", utente);
 
-			RequestDispatcher dispacher = req.getRequestDispatcher("subscribe.jsp");
+			RequestDispatcher dispacher = req.getRequestDispatcher("/views/subscribe.jsp");
 			dispacher.forward(req, resp);
 
 		} catch (ParseException e) {

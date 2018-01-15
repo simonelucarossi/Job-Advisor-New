@@ -31,7 +31,7 @@ public class DammiAdsRicerca extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String category=request.getParameter("category");
+		String category = request.getParameter("category");
 		List<Annuncio> annunci = DAOFactory.getDAOFactory(DAOFactory.POSTGRESQL).getAnnuncioDAO().findAllByCategory(category);
 		request.setAttribute("annunci", annunci);
 		RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/views/ads.jsp");

@@ -72,7 +72,7 @@ if (navigator.geolocation) {
 </head>
 
 <body id="page-top">
-
+	<div class="container-site">
 	<!-- Navigation -->
 	<nav id="nav-bar-mobile"
 		class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
@@ -91,7 +91,7 @@ if (navigator.geolocation) {
 				<div class="col-lg-10 mx-auto">
 					<img id="logo-header" src="img/worker-icon.png" />
 					<h1 class="text-uppercase">
-						<strong> The place where you can find the right pro for
+						<strong> Find the right pro for
 							your problem</strong>
 					</h1>
 					<hr>
@@ -104,7 +104,7 @@ if (navigator.geolocation) {
 						class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Find
 						Your Pro</a>
 
-					<form id="form-search" style="visibility: hidden; margin-top: -30px;" action="ads" method="post">
+					<form id="form-search" style="visibility: hidden; margin-top: -30px;" action="ads" method="get">
 						<div class="input-group">
 							<input name="category" type="text" class="form-control" placeholder="Search your Pro's category...">
 							<div class="input-group-btn">
@@ -123,15 +123,8 @@ if (navigator.geolocation) {
 
 
 
-	<footer>
-		<div id="icons-footer">
-			<span id="emailFooter" class="fa fa-envelope"></span> <span
-				id="facebookFooter" class="fa fa-thumbs-up"></span> <span
-				id="adsFooter" class="fa fa-bullhorn"></span>
-
-		</div>
-	</footer>
-
+	<jsp:include page="views/_footer.jsp"></jsp:include>
+	</div>
 	<!-- LOGIN HTML -->
 	<div id="fade-box"
 		style="visibility: hidden; width: 100%; height: 100%; z-index: 9999; background-color: black; top: 0px; left: 0px; right: 0px; position: fixed; opacity: 0.8;">
@@ -154,7 +147,7 @@ if (navigator.geolocation) {
 					class="btn btn-lg btn-primary btn-block" type="submit">Login
 				</button>
 				<div class="dropdown-divider"></div>
-				  <a class="dropdown-item" href="views/subscribe">New around here? Sign up</a>
+				  <a class="dropdown-item" href="subscribe">New around here? Sign up</a>
 			</c:if>
 			<c:if test="${utente != null }">
 			<a onclick="disappearLogin()"><h2 id="exit-button">x</h2></a> 

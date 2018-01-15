@@ -88,6 +88,7 @@ footer {
 	width: 100%;
 	color: white;
 	text-align: center;
+	font-size: 35px;
 }
 
 #emailFooter {
@@ -635,6 +636,9 @@ h1 {
 }
 
 @media ( max-width : 992px) {
+	.container-site {
+		position: relative;
+	}
 	header.masthead {
 		height: 93%;
 		background-image:
@@ -653,7 +657,7 @@ h1 {
 		color: white;
 	}
 	footer {
-		position: fixed;
+		position: absolute;
 		left: 0;
 		bottom: 0px;
 		height: 65px;
@@ -662,6 +666,10 @@ h1 {
 		color: white;
 		text-align: center;
 		box-shadow: 0 -1px 20px 3px #171717;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 34px;
 	}
 	#icons-footer {
 		font-size: 30px;
@@ -682,7 +690,11 @@ h1 {
 		font-size: 1.5rem;
 	}
 	.form-signin {
-		width: 75% !important; 
+		width: 75% !important;
+	}
+	
+	#adsFooter {
+		padding-right: 0px;
 	}
 }
 
@@ -690,7 +702,6 @@ h1 {
 
 /****** LOGIN MODAL ******/
 .wrapper {
-	
 	position: absolute;
 	width: 100%;
 }

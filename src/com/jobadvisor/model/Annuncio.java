@@ -8,15 +8,17 @@ public class Annuncio {
 	private String id;
 	private String categoria;
 	private Date data;
+	private Utente creator;
 	private Double latitudine;
 	private Double longitudine;
 
-	public Annuncio(String id, String cat, Date d ,Double lat,Double lon) {
+	public Annuncio(String id, String cat, Date d ,Double lat,Double lon, Utente creator) {
 		this.id = id;
 		this.categoria = cat;
 		this.data = d;
-		this.latitudine=lat;
-		this.longitudine=lon;
+		this.latitudine = lat;
+		this.longitudine = lon;
+        this.creator = creator;
 	}
 
 	public Annuncio() {
@@ -44,6 +46,12 @@ public class Annuncio {
 
 	public void setData(Date data) {
 		this.data = data;
+	}
+	
+	public Utente getCreator() { return this.creator; }
+	
+	public void setCreator(Utente creator) { 
+		this.creator = creator;
 	}
 
 	public String toString() {

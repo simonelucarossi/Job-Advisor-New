@@ -59,6 +59,8 @@ public class Utente {
 	public void setCognome(String cognome) {
 		this.cognome = cognome;
 	}
+	
+	public String getNomeCompleto() { return (this.nome + " " + this.cognome); }
 
 	public String getSesso() {
 		return sesso;

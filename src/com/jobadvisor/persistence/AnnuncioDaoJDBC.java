@@ -9,7 +9,9 @@ import java.util.List;
 
 import com.jobadvisor.model.Annuncio;
 import com.jobadvisor.persistence.dao.AnnuncioDao;
-
+import com.jobadvisor.persistence.dao.UtenteDao;
+import com.jobadvisor.model.Annuncio;
+import com.jobadvisor.model.Utente;
 
 public class AnnuncioDaoJDBC implements AnnuncioDao {
 
@@ -23,7 +25,7 @@ public class AnnuncioDaoJDBC implements AnnuncioDao {
 	public void save(Annuncio annuncio) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			String insert = "insert into annuncio(id, categoria, data_pubblicazione, latitudine, longitudine ) values (?,?,?,?,?)";
+			String insert = "insert into annuncio(id, categoria, data_pubblicazione, latitudine, longitudine, creatore ) values (?,?,?,?,?,?)";
 			PreparedStatement statement = connection.prepareStatement(insert);
 			statement.setString(1, annuncio.getId());
 			statement.setString(2, annuncio.getCategoria());
@@ -31,6 +33,7 @@ public class AnnuncioDaoJDBC implements AnnuncioDao {
 			statement.setDate(3, new java.sql.Date(secs));
 			statement.setDouble(4, annuncio.getLatitudine());
 			statement.setDouble(5, annuncio.getLongitudine());
+			statement.setObject(6, annuncio.getCreator());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -54,13 +57,18 @@ public class AnnuncioDaoJDBC implements AnnuncioDao {
 			statement.setString(1, id);
 			ResultSet result = statement.executeQuery();
 			if (result.next()) {
-				annuncio = new Annuncio();
+				UtenteDao creatoreDAO = new UtenteDaoJDBC(dataSource);
+				Utente creatore = creatoreDAO.findByPrimaryKey(result.getString("creatore"));
+				
+				annuncio= new Annuncio();
 				annuncio.setId(result.getString("id"));
 				annuncio.setCategoria(result.getString("categoria"));
 				long secs = result.getDate("data_pubblicazione").getTime();
 				annuncio.setData(new java.util.Date(secs));
 				annuncio.setLatitudine(result.getDouble("latitudine"));
 				annuncio.setLongitudine(result.getDouble("longitudine"));
+				annuncio.setCreator(creatore);
+				result.getObject(6);
 			}
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -85,6 +93,9 @@ public class AnnuncioDaoJDBC implements AnnuncioDao {
 			statement = connection.prepareStatement(query);
 			ResultSet result = statement.executeQuery();
 			while (result.next()) {
+				UtenteDao creatoreDAO = new UtenteDaoJDBC(dataSource);
+				Utente creatore = creatoreDAO.findByPrimaryKey(result.getString("creatore")); 
+				
 				annuncio = new Annuncio();
 				annuncio.setId(result.getString("id"));
 				annuncio.setCategoria(result.getString("categoria"));
@@ -93,6 +104,7 @@ public class AnnuncioDaoJDBC implements AnnuncioDao {
 				annuncio.setLatitudine(result.getDouble("latitudine"));
 				annuncio.setLongitudine(result.getDouble("longitudine"));
 
+				annuncio.setCreator(creatore);
 				annunci.add(annuncio);
 			}
 		} catch (SQLException e) {
@@ -199,11 +211,16 @@ public class AnnuncioDaoJDBC implements AnnuncioDao {
 			statement.setString(1, categoria);
 			ResultSet result = statement.executeQuery();
 			while (result.next()) {
+				UtenteDao creatoreDAO = new UtenteDaoJDBC(dataSource);
+				Utente creatore = creatoreDAO.findByPrimaryKey(result.getString("creatore")); 
 				annuncio = new Annuncio();
 				annuncio.setId(result.getString("id"));
 				annuncio.setCategoria(result.getString("categoria"));
 				long secs = result.getDate("data_pubblicazione").getTime();
 				annuncio.setData(new java.util.Date(secs));
+				annuncio.setLatitudine(result.getDouble("latitudine"));
+				annuncio.setLongitudine(result.getDouble("longitudine"));
+				annuncio.setCreator(creatore);
 				annunci.add(annuncio);
 			}
 		} catch (SQLException e) {

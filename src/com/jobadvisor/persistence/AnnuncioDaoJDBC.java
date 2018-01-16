@@ -37,7 +37,7 @@ public class AnnuncioDaoJDBC implements AnnuncioDao {
 			statement.setDouble(5, annuncio.getPrezzo());
 			statement.setDouble(6, annuncio.getLatitudine());
 			statement.setDouble(7, annuncio.getLongitudine());
-			statement.setString(8, annuncio.getCreatore());
+			statement.setObject(8, annuncio.getCreator());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -65,7 +65,7 @@ public class AnnuncioDaoJDBC implements AnnuncioDao {
 				Utente creatore = creatoreDAO.findByPrimaryKey(result.getString("creatore"));
 				
 				annuncio= new Annuncio();
-				annuncio.setId(result.getString("id"));
+				annuncio.setId(result.getLong("id"));
 				annuncio.setCategoria(result.getString("categoria"));
 				long secs = result.getDate("data_pubblicazione").getTime();
 				annuncio.setData(new java.util.Date(secs));
@@ -140,7 +140,7 @@ public class AnnuncioDaoJDBC implements AnnuncioDao {
 			statement.setDouble(4, annuncio.getPrezzo());
 			statement.setDouble(5, annuncio.getLatitudine());
 			statement.setDouble(6, annuncio.getLongitudine());
-			statement.setString(7, annuncio.getCreatore());
+			statement.setObject(7, annuncio.getCreator());
 			statement.setLong(8, annuncio.getId());
 			statement.executeUpdate();
 		} catch (SQLException e) {
@@ -189,6 +189,8 @@ public class AnnuncioDaoJDBC implements AnnuncioDao {
 			statement.setString(1, categoria);
 			ResultSet result = statement.executeQuery();
 			while (result.next()) {
+				UtenteDao creatoreDAO = new UtenteDaoJDBC(dataSource);
+				Utente creatore = creatoreDAO.findByPrimaryKey(result.getString("creatore")); 
 				annuncio = new Annuncio();
 				annuncio.setId(result.getLong("id"));
 				annuncio.setCategoria(result.getString("categoria"));
@@ -198,7 +200,7 @@ public class AnnuncioDaoJDBC implements AnnuncioDao {
 				annuncio.setPrezzo(result.getDouble("prezzo"));
 				annuncio.setLatitudine(result.getDouble("latitudine"));
 				annuncio.setLongitudine(result.getDouble("longitudine"));
-				annuncio.setCreatore(result.getString("creatore"));
+				annuncio.setCreator(creatore);
 				
 				annunci.add(annuncio);
 				
@@ -238,7 +240,7 @@ public class AnnuncioDaoJDBC implements AnnuncioDao {
 				annuncio.setPrezzo(result.getDouble("prezzo"));
 				annuncio.setLatitudine(result.getDouble("latitudine"));
 				annuncio.setLongitudine(result.getDouble("longitudine"));
-				annuncio.setCreatore(result.getString("creatore"));
+				annuncio.setCreator(creatore);
 				
 				annunci.add(annuncio);
 			}
@@ -266,6 +268,8 @@ public class AnnuncioDaoJDBC implements AnnuncioDao {
 			statement.setString(1, user);
 			ResultSet result = statement.executeQuery();
 			while (result.next()) {
+				UtenteDao creatoreDAO = new UtenteDaoJDBC(dataSource);
+				Utente creatore = creatoreDAO.findByPrimaryKey(result.getString("creatore")); 
 				annuncio = new Annuncio();
 				annuncio.setId(result.getLong("id"));
 				annuncio.setCategoria(result.getString("categoria"));
@@ -275,7 +279,7 @@ public class AnnuncioDaoJDBC implements AnnuncioDao {
 				annuncio.setPrezzo(result.getDouble("prezzo"));
 				annuncio.setLatitudine(result.getDouble("latitudine"));
 				annuncio.setLongitudine(result.getDouble("longitudine"));
-				annuncio.setCreatore(result.getString("creatore"));
+				annuncio.setCreator(creatore);
 				
 				annunci.add(annuncio);
 			}

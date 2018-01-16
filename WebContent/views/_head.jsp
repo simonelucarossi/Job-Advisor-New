@@ -29,8 +29,8 @@
 
 <link href="/JobAdvisorNew/css/annunci.css" rel="stylesheet">
 
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/JobAdvisorNew/vendor/jquery/jquery.min.js"></script>
+<script src="/JobAdvisorNew/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 
 <meta charset="UTF-8">
@@ -39,6 +39,7 @@
 <title>JobAdvisor ~ Ads</title>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqNtHjb8e1Shen-Pimqrv9xIIUs8nqZII"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
@@ -46,5 +47,7 @@
 <script src="/JobAdvisorNew/js/annunci.js"></script>
 <script src="/JobAdvisorNew/js/gmaps.js"></script>
 <jsp:include page="_handlebarsTemplates.jsp"></jsp:include>
+
+
 
 </head>

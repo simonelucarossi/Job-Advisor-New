@@ -15,6 +15,7 @@ import org.json.simple.JSONObject;
 
 import com.jobadvisor.model.Annuncio;
 import com.jobadvisor.persistence.DAOFactory;
+import com.jobadvisor.persistence.UtilDao;
 
 /**
  * Servlet implementation class DammiAdsApi
@@ -35,6 +36,12 @@ public class DammiAdsApi extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		DAOFactory factory = DAOFactory.getDAOFactory(DAOFactory.POSTGRESQL);
+		UtilDao util = factory.getUtilDAO();
+
+		util.dropDatabase();
+		util.createDatabase();
+		
 		String category = request.getParameter("category");
 		System.out.println(category);
 		List<Annuncio> annunci = DAOFactory.getDAOFactory(DAOFactory.POSTGRESQL).getAnnuncioDAO().findAllByCategory(category);

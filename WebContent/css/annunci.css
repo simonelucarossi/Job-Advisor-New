@@ -507,6 +507,7 @@ footer {
 .container-site {
 	min-height: 100%;
 	position: relative;
+	height: 100%;
 }
 
 .sorting-btn {

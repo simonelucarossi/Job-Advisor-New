@@ -12,9 +12,9 @@ public class Annuncio {
 	private Double prezzo;
 	private Double latitudine;
 	private Double longitudine;
-	private String creatore;
+	private Utente creatore;
 
-	public Annuncio(String cat, Date d,String descr,Double prezzo,Double lat,Double lon,String creatore) {
+	public Annuncio(String cat, Date d,String descr,Double prezzo,Double lat,Double lon,Utente creatore) {
 		this.categoria = cat;
 		this.data = d;
 		this.descrizione=descr;
@@ -51,10 +51,10 @@ public class Annuncio {
 		this.data = data;
 	}
 	
-	public Utente getCreator() { return this.creator; }
+	public Utente getCreator() { return this.creatore; }
 	
 	public void setCreator(Utente creator) { 
-		this.creator = creator;
+		this.creatore = creator;
 	}
 
 	public String toString() {
@@ -94,11 +94,5 @@ public class Annuncio {
 		this.descrizione = descrizione;
 	}
 
-	public String getCreatore() {
-		return creatore;
-	}
 
-	public void setCreatore(String creatore) {
-		this.creatore = creatore;
-	}
 }

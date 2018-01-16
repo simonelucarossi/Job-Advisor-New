@@ -31,7 +31,8 @@ public class DammiAdApi extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = (request.getPathInfo().replace("/", ""));
-		Annuncio annuncio = DAOFactory.getDAOFactory(DAOFactory.POSTGRESQL).getAnnuncioDAO().findByPrimaryKey(id);
+		Long newID= Long.parseLong(id);
+		Annuncio annuncio = DAOFactory.getDAOFactory(DAOFactory.POSTGRESQL).getAnnuncioDAO().findByPrimaryKey(newID);
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");
 		response.getWriter().write(makeAnnuncioJson(annuncio)); 

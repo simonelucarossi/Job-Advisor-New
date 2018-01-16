@@ -16,8 +16,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.jobadvisor.model.Annuncio;
+import com.jobadvisor.model.Utente;
 import com.jobadvisor.persistence.DatabaseManager;
+import com.jobadvisor.persistence.UtenteDaoJDBC;
 import com.jobadvisor.persistence.dao.AnnuncioDao;
+import com.jobadvisor.persistence.dao.UtenteDao;
 
 @WebServlet("/views/createAd")
 public class CreaAnnuncio extends HttpServlet{
@@ -39,13 +42,15 @@ public class CreaAnnuncio extends HttpServlet{
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		UtenteDao creatoreDAO = DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
+		Utente creatore = creatoreDAO.findByPrimaryKey(request.getParameter("creator")); 
+
 		String categoria = request.getParameter("category");
 		String descrizione = request.getParameter("description");
 		Double prezzo= Double.parseDouble(request.getParameter("price"));
 		String data= request.getParameter("date");
 		Double latitudine= Double.parseDouble(request.getParameter("lat"));
 		Double longitudine= Double.parseDouble(request.getParameter("lon"));
-		String creatore= request.getParameter("creator");
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ITALIAN);
 		Date date;
 		try {

@@ -10,7 +10,7 @@ $(document).ready(function () {
 		$("#login-box").hide();
 		$("#fade-box").hide();
 
-		$(document).on('click','#login-img',function() {
+		$("#login-img").on('click', function() {
 			$("#usernameL").val('');
 			$("#passwordL").val('');
 			$("#login-box").show("slow");

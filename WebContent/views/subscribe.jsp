@@ -10,10 +10,10 @@
 <title>Job Advisor sign up</title>
 <meta charset="utf-8">
 
-<link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/signUp.css">
-<script src="js/creative.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/JobAdvisorNew/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/JobAdvisorNew/css/signUp.css">
+<script src="/JobAdvisorNew/js/creative.min.js"></script>
+<script src="/JobAdvisorNew/vendor/bootstrap/js/bootstrap.min.js"></script>
 
 <!--   
 <LINK rel="stylesheet" href="css/common.css" type="text/css">
@@ -35,7 +35,7 @@
 			<p>${utente.sesso}</p>
 			<p>${utente.dataNascita}</p>
 			<a style="margin-left: 10px;" class="btn btn-primary"
-				href="../index.jsp" role="button">Home</a>
+				href="/JobAdvisorNew/index.jsp" role="button">Home</a>
 		</c:if>
 		<c:if test="${utente == null}">
 			<h2>Complete the form below to register a new user</h2>

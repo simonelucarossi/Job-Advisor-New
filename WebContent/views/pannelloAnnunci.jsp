@@ -4,28 +4,16 @@
 <jsp:include page="_head.jsp"></jsp:include>
 
 <body style="background-color: #4e4a4a;">
-	<jsp:include page="_header.jsp"></jsp:include>
+	<jsp:include page="_header_dropdown.jsp"></jsp:include>
+	<div class="container-site">
 	<main id="container-box"> <!-- Navigation -->
-	<nav id="nav-bar-mobile"
-		class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-		<div class="container">
-			<a id="brand-site" class="navbar-brand js-scroll-trigger"
-				href="index.jsp"> <img id="logo-site" src="img/gps.png"> <strong
-				id="site-title">JOB ADVISOR</strong>
-			</a> <span onclick="appearLogin()" id="login-img" class="fa fa-user"></span>
-			<div class="btn-group">
-				<a id="cong-funz" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"> <span class="glyphicon glyphicon-cog"></span>
-				</a>
-				<div style="font-size: 18px;" class="dropdown-menu">
-					<a class="dropdown-item" href="views/creaAnnuncio.jsp"><strong>Create
-							new Ad</strong></a> <a class="dropdown-item" href="#"><strong>Delete
-							Ad</strong></a> <a class="dropdown-item" href="#"><strong>Modify
-							Ad</strong></a>
-				</div>
-			</div>
-		</div>
-	</nav>
+	
+	<script>
+	$('[data-toggle=dropdown]').each(function() {
+	    this.addEventListener('click', function() {}, false);
+	});
+	</script>
+	
 
 	<div class="entries">
 		<c:forEach items="${annunci}" var="annuncio">
@@ -57,14 +45,13 @@
 			</div>
 		</c:forEach>
 	</div>
-
+</main>
 
 	<footer>
-		<div id="icons-footer">
 			<span id="emailFooter" class="fa fa-envelope"></span> <span
 				id="facebookFooter" class="fa fa-thumbs-up"></span> <span
 				id="adsFooter" class="fa fa-bullhorn"></span>
 
-		</div>
-	</footer> </main>
+	</footer> 
+	</div>
 </body>

@@ -51,36 +51,11 @@ color: rgba(255, 255, 255, 0.7);
 
 </head>
 
-<body id="page-top" style="display:none;" >
-
+<body id="page-top">
+	<div class="container-site">
 	<!-- Navigation -->
-	<nav id="nav-bar-mobile" class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-		<div class="container">
-			<a id="brand-site" class="navbar-brand js-scroll-trigger"
-				href="#page-top"> <img id="logo-site" src="img/gps.png"> <strong
-				id="site-title">JOB ADVISOR</strong>
-			</a> 
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-	          <ul class="navbar-nav ml-auto">
-	            <li class="nav-item">
-				<c:if test="${utente.tipo=='Professionista'}">
-					<a id="ads_panel" class="nav-link js-scroll-trigger" href="adsPanel?username=${utente.username}">Ads Panel</a>
-				</c:if>	
-				</li>
-				<li>
-					<c:if test="${utente == null}">
-					<span id="login-img" class="fa fa-user"> </span>
-					</c:if>
-				</li>
-				<li>
-	            <c:if test="${utente != null }">
-				 	<a id="logout" class="nav-link js-scroll-trigger" href="logout">Logout</a>
-				</c:if>
-	            </li>
-	          </ul>
-	        </div>
-		</div>
-	</nav>
+		<jsp:include page="views/_header.jsp"></jsp:include>
+	
 
 	<header class="masthead text-center text-white d-flex">
 		<div class="container my-auto">
@@ -88,7 +63,7 @@ color: rgba(255, 255, 255, 0.7);
 				<div class="col-lg-10 mx-auto">
 					<img id="logo-header" src="img/worker-icon.png" />
 					<h1 class="text-uppercase">
-						<strong> The place where you can find the right pro for
+						<strong> Find the right pro for
 							your problem</strong>
 					</h1>
 					<hr>
@@ -101,7 +76,7 @@ color: rgba(255, 255, 255, 0.7);
 						class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Find
 						Your Pro</a>
 
-					<form id="form-search" style="margin-top: -30px;" action="ads" method="post">
+					<form id="form-search" style="margin-top: -30px;" action="ads" method="get">
 						<div class="input-group">
 							<input name="lat" type="hidden" id="my-lat">
 							<input name="lon" type="hidden" id="my-lon">
@@ -122,15 +97,8 @@ color: rgba(255, 255, 255, 0.7);
 
 
 
-	<footer>
-		<div id="icons-footer">
-			<span id="emailFooter" class="fa fa-envelope"></span> <span
-				id="facebookFooter" class="fa fa-thumbs-up"></span> <span
-				id="adsFooter" class="fa fa-bullhorn"></span>
-
-		</div>
-	</footer>
-
+	<jsp:include page="views/_footer.jsp"></jsp:include>
+	</div>
 	<!-- LOGIN HTML -->
 	<div id="fade-box"
 		style="width: 100%; height: 100%; z-index: 9999; background-color: black; top: 0px; left: 0px; right: 0px; position: fixed; opacity: 0.8;">
@@ -155,7 +123,7 @@ color: rgba(255, 255, 255, 0.7);
 					class="btn btn-lg btn-primary btn-block" type="submit">Login
 				</button>
 				<div class="dropdown-divider"></div>
-				  <a class="dropdown-item" href="views/subscribe">New around here? Sign up</a>
+				  <a class="dropdown-item" href="/JobAdvisorNew/subscribe">New around here? Sign up</a>
 		</form>
 	</div>
 	<!-- END LOGIN HTML -->

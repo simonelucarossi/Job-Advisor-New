@@ -1,13 +1,33 @@
+function checkPosition() {
+	var lat=$("#my-lat").val();
+	var lon=$("#my-lon").val();
+
+	
+	if(!lat || !lon )
+		return false;
+	else
+		return true;
+}
+
 function checkPrice() {
 	var value=$("#inputPrice").val();
 	if (!isNaN(value) && value.toString().indexOf('.') != -1){
 		return true;
 	}
-	alert("Please enter a correct value of price..(ex: 25,00)");
 	return false;
 }
 
-function setDate(){
+function checkForm(){
+    
+    if(!checkPrice()){
+    	alert("Please enter a correct value of price..(ex: 25,00)");
+    	return false;
+    }
+    if(!checkPosition()){
+    	alert("You didn't give your position!")
+    	return false;
+    }
+    
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth()+1; 
@@ -18,7 +38,7 @@ function setDate(){
     today = yyyy+'-'+mm+'-'+dd;     
 
     $("#date").val(today);
-    return checkPrice();
+    return true;
 }
 
 var map;

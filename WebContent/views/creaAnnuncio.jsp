@@ -32,7 +32,7 @@
 </head>
 <body>
 	<h2><strong>Create your own Ad</strong></h2>
-	<form action="createAd" method="post" id="ads_creation_form" onsubmit="return setDate()">
+	<form action="createAd" method="post" id="ads_creation_form" onsubmit="return checkForm()">
 		<div class="form-group col-md-6">
 			<label id="categoryLabel" for="inputCategory">Category</label>
 			<input name="category" type="text" class="form-control" id="inputCategory" placeholder="Category..." required>

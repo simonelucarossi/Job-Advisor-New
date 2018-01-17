@@ -36,11 +36,7 @@ public class DammiAdsApi extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		DAOFactory factory = DAOFactory.getDAOFactory(DAOFactory.POSTGRESQL);
-		UtilDao util = factory.getUtilDAO();
 
-		util.dropDatabase();
-		util.createDatabase();
 		
 		String category = request.getParameter("category");
 		System.out.println(category);

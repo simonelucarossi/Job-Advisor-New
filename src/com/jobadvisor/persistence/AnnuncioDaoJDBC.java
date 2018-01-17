@@ -37,7 +37,7 @@ public class AnnuncioDaoJDBC implements AnnuncioDao {
 			statement.setDouble(5, annuncio.getPrezzo());
 			statement.setDouble(6, annuncio.getLatitudine());
 			statement.setDouble(7, annuncio.getLongitudine());
-			statement.setObject(8, annuncio.getCreator());
+			statement.setString(8, annuncio.getCreator().getUsername());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -74,7 +74,6 @@ public class AnnuncioDaoJDBC implements AnnuncioDao {
 				annuncio.setLatitudine(result.getDouble("latitudine"));
 				annuncio.setLongitudine(result.getDouble("longitudine"));
 				annuncio.setCreator(creatore);
-				result.getObject(8);
 			}
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -140,7 +139,7 @@ public class AnnuncioDaoJDBC implements AnnuncioDao {
 			statement.setDouble(4, annuncio.getPrezzo());
 			statement.setDouble(5, annuncio.getLatitudine());
 			statement.setDouble(6, annuncio.getLongitudine());
-			statement.setObject(7, annuncio.getCreator());
+			statement.setString(7, annuncio.getCreator().getUsername());
 			statement.setLong(8, annuncio.getId());
 			statement.executeUpdate();
 		} catch (SQLException e) {

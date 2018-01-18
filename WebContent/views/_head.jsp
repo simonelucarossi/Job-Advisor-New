@@ -2,8 +2,6 @@
 	pageEncoding="UTF-8"%>
 <head>
 
-
-
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -34,7 +32,7 @@
 
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
 <title>JobAdvisor ~ Ads</title>
 

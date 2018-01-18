@@ -7,6 +7,7 @@ prefix="c" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
+
 <head>
 
 <style type="text/css">
@@ -51,10 +52,10 @@ color: rgba(255, 255, 255, 0.7);
 
 </head>
 
-<body id="page-top">
+<body id="page-top" style="display:none;">
 	<div class="container-site">
 	<!-- Navigation -->
-		<jsp:include page="views/_header.jsp"></jsp:include>
+	<jsp:include page="views/_header.jsp"></jsp:include>
 	
 
 	<header class="masthead text-center text-white d-flex">

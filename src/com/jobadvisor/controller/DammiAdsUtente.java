@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jobadvisor.model.Annuncio;
 import com.jobadvisor.persistence.DAOFactory;
+import com.jobadvisor.persistence.UtilDao;
 
 @WebServlet("/adsPanel")
 public class DammiAdsUtente extends HttpServlet{
@@ -32,7 +33,7 @@ public class DammiAdsUtente extends HttpServlet{
 		String username=request.getParameter("username");
 		List<Annuncio> annunci = DAOFactory.getDAOFactory(DAOFactory.POSTGRESQL).getAnnuncioDAO().findAllByUtente(username);
 		request.setAttribute("annunci", annunci);
-		RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/views/pannelloAnnunci.jsp");
+		RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/views/panel.jsp");
 		dispatcher.forward(request, response);
 		
 	}

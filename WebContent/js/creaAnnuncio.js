@@ -44,17 +44,17 @@ function checkForm(){
 var map;
 
 function initMap() {
+	google.maps.event.trigger(map, 'resize'); 
     var mapOptions = {
         center: new google.maps.LatLng(10, 10),
         zoom: 8
     };
-
     map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
     var geolocationDiv = document.createElement('div');
     var geolocationControl = new GeolocationControl(geolocationDiv, map);
-
+    
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(geolocationDiv);
+    
 }
 
 function GeolocationControl(controlDiv, map) {
@@ -83,10 +83,10 @@ function GeolocationControl(controlDiv, map) {
 
     // Setup the click event listeners to geolocate user
     google.maps.event.addDomListener(controlUI, 'click', geolocate);
+    
 }
 
 function geolocate() {
-	
     if (navigator.geolocation) {
 
         navigator.geolocation.getCurrentPosition(function (position) {
@@ -104,3 +104,37 @@ function geolocate() {
         });
     }
 }
+
+$(document).ready(function() {
+	// Activate tooltip
+	$('[data-toggle="tooltip"]').tooltip();
+
+	// Select/Deselect checkboxes
+	var checkbox = $('table tbody input[type="checkbox"]');
+	$("#selectAll").click(function() {
+		if (this.checked) {
+			checkbox.each(function() {
+				this.checked = true;
+			});
+		} else {
+			checkbox.each(function() {
+				this.checked = false;
+			});
+		}
+	});
+	checkbox.click(function() {
+		if (!this.checked) {
+			$("#selectAll").prop("checked", false);
+		}
+	});
+	
+	$("#newAdd").click(function name() {
+		setTimeout(loadWithDelay,2000 );
+	});
+	
+});
+
+function loadWithDelay() {
+	google.maps.event.trigger(map, 'resize');
+}
+

@@ -15,10 +15,10 @@ prefix="c" %>
 					aria-expanded="false"> <span class="glyphicon glyphicon-cog"></span>
 				</a>
 				<div style="font-size: 18px;" class="dropdown-menu">
-					<a class="dropdown-item" href="views/creaAnnuncio.jsp"><strong>Create
-							new Ad</strong></a> <a class="dropdown-item" href="#"><strong>Delete
-							Ad</strong></a> <a class="dropdown-item" href="#"><strong>Modify
-							Ad</strong></a>
+					<a class="dropdown-item" href="/JobAdvisorNew/views/creaAnnuncio.jsp">Create
+							new Ad</a> <a class="dropdown-item" href="#">Delete
+							Ad</a> <a class="dropdown-item" href="#">Modify
+							Ad</a>
 				</div>
 			</div>
 		</div>

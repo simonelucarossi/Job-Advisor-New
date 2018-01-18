@@ -59,9 +59,7 @@ public class CreaAnnuncio extends HttpServlet{
 
 			AnnuncioDao annuncioDao = DatabaseManager.getInstance().getDaoFactory().getAnnuncioDAO();
 			annuncioDao.save(annuncio);
-			
-			RequestDispatcher dispacher = request.getRequestDispatcher("/views/creaAnnuncio.jsp");
-			dispacher.forward(request, response);
+			response.sendRedirect("/JobAdvisorNew/adsPanel?username="+ request.getParameter("creator"));
 
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block

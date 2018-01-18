@@ -51,10 +51,9 @@
 			<label id="priceLabel" for="inputPrice">Job-price</label> 
 			<input name="price" type="number" step="0.01" min="5" class="form-control" id="inputPrice" placeholder="Insert a price..." required>
 		</div>
-		<div id="map">
-		</div>
-		<button type="submit" class="btn btn-primary">Create Ad</button>
+		<div id="map"></div>
 		<input id="date" name="date" type="hidden">
+		<button type="submit" class="btn btn-primary">Create Ad</button>
 	</form>
 </body>
 </html>

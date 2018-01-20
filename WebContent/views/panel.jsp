@@ -22,7 +22,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDe9jibJf963yX2fZCd6FLxYJzTljlhzhc&callback=initMap"></script>
-<script src="/JobAdvisorNew/js/creaAnnuncio.js"></script>
+<script src="/JobAdvisorNew/js/AdsPanel.js"></script>
 </head>
 <body>
 	<div class="container">
@@ -35,9 +35,9 @@
 						</h2>
 					</div>
 					<div class="col-sm-6">
-						<a id="newAdd" href="#addEmployeeModal" class="btn btn-success"
+						<a id="newAdd" href="#addNewModal" class="btn btn-success"
 							data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add
-								New </span></a> <a href="#deleteEmployeeModal"
+								New </span></a> <a href="#deleteAddModal"
 							class="btn btn-danger" data-toggle="modal"><i
 							class="material-icons">&#xE15C;</i> <span>Delete</span></a>
 					</div>
@@ -49,6 +49,7 @@
 						<th><span class="custom-checkbox"> <input
 								type="checkbox" id="selectAll"> <label for="selectAll"></label>
 						</span></th>
+						<th>ID</th>
 						<th>Category</th>
 						<th>Price</th>
 						<th>Date</th>
@@ -64,13 +65,14 @@
 								<label for="checkbox1"></label>
 							</span>
 							</td>
+							<td>${annuncio.getId()}</td>
 							<td>${annuncio.getCategoria()}</td>
 							<td>${annuncio.getPrezzo()}</td>
 							<td>${annuncio.getData()}</td>
 							<td><a href="#editEmployeeModal" class="edit"
 								data-toggle="modal"><i class="material-icons"
 									data-toggle="tooltip" title="Edit">&#xE254;</i></a> <a
-								href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i
+								href="#deleteAddModal" class="delete" data-toggle="modal"><i
 									class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
 							</td>
 						</tr>
@@ -91,7 +93,7 @@
 		</div>
 	</div>
 	<!-- Edit Modal HTML -->
-	<div id="addEmployeeModal" class="modal fade">
+	<div id="addNewModal" class="modal fade">
 		<div class="modal-dialog">
 			<div id="creationForm" class="modal-content">
 				<form action="views/createAd" method="post" onsubmit="return checkForm()">
@@ -165,10 +167,10 @@
 		</div>
 	</div>
 	<!-- Delete Modal HTML -->
-	<div id="deleteEmployeeModal" class="modal fade">
+	<div id="deleteAddModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form>
+				<form id="deleteAdForm">
 					<div class="modal-header">
 						<h4 class="modal-title">Delete Ad</h4>
 						<button type="button" class="close" data-dismiss="modal"
@@ -181,9 +183,9 @@
 						</p>
 					</div>
 					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal"
-							value="Cancel"> <input type="submit"
-							class="btn btn-danger" value="Delete">
+						<input type="hidden" name="id"> 					
+						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel"> 
+						<input type="submit" class="btn btn-danger" value="Delete">
 					</div>
 				</form>
 			</div>

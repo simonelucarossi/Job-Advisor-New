@@ -173,6 +173,24 @@ public class AnnuncioDaoJDBC implements AnnuncioDao {
 	}
 
 	@Override
+	public void deleteAll() {
+		Connection connection = this.dataSource.getConnection();
+		try {
+			String delete = "delete FROM annuncio";
+			PreparedStatement statement = connection.prepareStatement(delete);
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			}
+		}
+	}
+	
+	@Override
 	public List<Annuncio> findAllByCategoryAndPosition(String categoria, String lat, String lon) {
 		Connection connection = this.dataSource.getConnection();
 		List<Annuncio> annunci = new LinkedList<>();

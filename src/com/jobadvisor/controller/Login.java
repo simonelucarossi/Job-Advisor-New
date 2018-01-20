@@ -1,7 +1,6 @@
 package com.jobadvisor.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -29,23 +28,19 @@ public class Login extends HttpServlet {
 		HttpSession session = req.getSession();
 		String username = (String) req.getParameter("username");
 		String password = (String) req.getParameter("password");
-		
 		UtenteDao dao = DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
-
 		UtenteCredenziali utente = dao.findByPrimaryKeyCredential(username);
-		boolean logged=false;
+		String text = "success_login";
+		
 		if (utente!= null) {
 			if (password.equals(utente.getPassword())) {
-				logged=true;
 				session.setAttribute("username", username);
 				session.setAttribute("utente", utente);
 			}
 		}else {
-			session.setAttribute("logged",logged);
+			text="login_failed";
 		}
-
-		RequestDispatcher dispacher = req.getRequestDispatcher("index.jsp");
-		dispacher.forward(req, resp);
+		resp.getWriter().print(text);
 	}
 
 }

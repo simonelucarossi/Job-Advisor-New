@@ -15,9 +15,13 @@ public interface AnnuncioDao {
 
 	public void delete(Annuncio annuncio); // Delete
 
+	void deleteAll();
+
 	public List<Annuncio> findAllByCategoryAndPosition(String category, String lat, String lon);
 
 	public List<Annuncio> findAllByCategory(String category);
 	
 	public List<Annuncio> findAllByUtente(String user);
+
+
 }

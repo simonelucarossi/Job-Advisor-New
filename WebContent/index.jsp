@@ -12,7 +12,9 @@ prefix="c" %>
 
 <style type="text/css">
 #logout,#ads_panel{
-color: rgba(255, 255, 255, 0.7);
+	color: rgba(255, 255, 255, 0.7);
+	font-family: sans-serif;
+	font-size: 1.3rem;
 }
 </style>
 
@@ -110,7 +112,6 @@ color: rgba(255, 255, 255, 0.7);
 				<h2 id="login-title" class="form-signin-heading">LOGIN</h2>
 				<a><h2 id="exit-button">x</h2></a>
 				<img id="logo-site-login" src="img/gps.png"> 
-				<c:if test="${!logged}"><p style="color:red;">Incorrect username or password!</p></c:if> 
 				<input id="usernameL" type="text" class="form-control" name="username" placeholder="Username"
 					required="" autofocus="" /> 
 				<input id="passwordL" type="password"
@@ -140,7 +141,7 @@ color: rgba(255, 255, 255, 0.7);
 
 	<!-- Custom scripts for this template -->
 	<script src="js/creative.min.js"></script>
-	<script type='text/javascript' src="js/home.js"></script>
+	<script type='text/javascript' src="/JobAdvisorNew/js/home.js"></script>
 
 </body>
 </html>

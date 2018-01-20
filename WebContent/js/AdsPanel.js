@@ -132,6 +132,26 @@ $(document).ready(function() {
 		setTimeout(loadWithDelay,2000 );
 	});
 	
+	$("#deleteAdForm").submit(function(e) {
+		var myCheckboxes = new Array();
+		$("td:checked").each(function() {
+		   data['options[]'].push($(this).val());
+		});
+		alert(myCheckboxes);
+	    var url = "/JobAdvisorNew/deleteAd"; 
+	    $.ajax({
+	           type: "POST",
+	           url: url,
+	           data: myCheckboxes, 
+	           success: function(data)
+	           {
+	        	   location.reload();
+	           }
+	         });
+
+	    e.preventDefault(); // avoid to execute the actual submit of the form.
+	});
+	
 });
 
 function loadWithDelay() {

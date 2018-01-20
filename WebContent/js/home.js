@@ -26,5 +26,29 @@ $(document).ready(function () {
 			$("#button-search").hide("fast");
 			$("#form-search").show("slow");
 		});
+		
+		$("#login-form").submit(function(e) {
+
+		    var url = "/JobAdvisorNew/login"; 
+		    $.ajax({
+		           type: "POST",
+		           url: url,
+		           data: $("#login-form").serialize(),
+		           success: function(response)
+		           {
+		        	if(response == "login_failed"){
+		        		$("#usernameL").val('');
+		        		$("#passwordL").val('');
+		        		$("#login-box").show("slow");
+		        		$("#fade-box").show("slow");
+		        		$("#logo-site-login").after("<p style=\"color:red;\">Incorrect username or password!</p>");
+		        	}else{
+		        		document.location.href="index.jsp";
+		        	}
+		           }
+		         });
+
+		    e.preventDefault(); // avoid to execute the actual submit of the form.
+		});
 	
 });

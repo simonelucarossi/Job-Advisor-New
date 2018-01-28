@@ -27,6 +27,12 @@ public class Annuncio {
 	public Annuncio() {
 	}
 
+	public Annuncio(String category, String description, Double price) {
+		this.categoria=category;
+		this.descrizione=description;
+		this.prezzo=price;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -59,7 +65,7 @@ public class Annuncio {
 
 	public String toString() {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		return "Annuncio[" + this.getId() + ", " + this.getCategoria() + ", " + sdf.format(this.getData()) + this.getLatitudine()+", "+ this.getLongitudine()+"]";
+		return "Annuncio["+ this.getCategoria() + ", "+this.getDescrizione()+", "+ sdf.format(this.getData()) +", "+this.getPrezzo()+", "+ this.getLatitudine()+", "+ this.getLongitudine()+"]";
 	}
 
 	public Double getLatitudine() {

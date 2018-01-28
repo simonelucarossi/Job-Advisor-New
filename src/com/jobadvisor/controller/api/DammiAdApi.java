@@ -2,7 +2,6 @@ package com.jobadvisor.controller.api;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,11 +30,13 @@ public class DammiAdApi extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = (request.getPathInfo().replace("/", ""));
+		if(!id.equals("ads")) {
 		Long newID= Long.parseLong(id);
 		Annuncio annuncio = DAOFactory.getDAOFactory(DAOFactory.POSTGRESQL).getAnnuncioDAO().findByPrimaryKey(newID);
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");
 		response.getWriter().write(makeAnnuncioJson(annuncio)); 
+		}
 	}
 
 	/**
@@ -46,12 +47,15 @@ public class DammiAdApi extends HttpServlet {
 		doGet(request, response);
 	}
 	
+	@SuppressWarnings("unchecked")
 	protected String makeAnnuncioJson(Annuncio annuncio) {
 		JSONObject obj = new JSONObject();
 		obj.put("id", annuncio.getId());
 		obj.put("data", annuncio.getData().toString());
 		obj.put("creatore", annuncio.getCreator().getNomeCompleto());
 		obj.put("categoria", annuncio.getCategoria());
+		obj.put("descrizione", annuncio.getDescrizione());
+		obj.put("prezzo", annuncio.getPrezzo());
 		obj.put("latitudine", annuncio.getLatitudine());
 		obj.put("longitudine", annuncio.getLongitudine());
 		return obj.toString();

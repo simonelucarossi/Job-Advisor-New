@@ -46,10 +46,11 @@ var map;
 function initMap() {
 	google.maps.event.trigger(map, 'resize'); 
     var mapOptions = {
-        center: new google.maps.LatLng(10, 10),
+        center: new google.maps.LatLng(10,10),
         zoom: 8
     };
     map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    
     var geolocationDiv = document.createElement('div');
     var geolocationControl = new GeolocationControl(geolocationDiv, map);
     
@@ -81,7 +82,6 @@ function GeolocationControl(controlDiv, map) {
     controlText.innerHTML = 'Center map on your location';
     controlUI.appendChild(controlText);
 
-    // Setup the click event listeners to geolocate user
     google.maps.event.addDomListener(controlUI, 'click', geolocate);
     
 }
@@ -122,6 +122,7 @@ $(document).ready(function() {
 			});
 		}
 	});
+	
 	checkbox.click(function() {
 		if (!this.checked) {
 			$("#selectAll").prop("checked", false);
@@ -132,24 +133,100 @@ $(document).ready(function() {
 		setTimeout(loadWithDelay,2000 );
 	});
 	
-	$("#deleteAdForm").submit(function(e) {
-		var myCheckboxes = new Array();
-		$("td:checked").each(function() {
-		   data['options[]'].push($(this).val());
+	$("#deleteButton").click(function(e) {
+		var myCheckboxes = [];
+		$(":checkbox").each(function() {
+			var ischecked = $(this).is(":checked");
+	        if (ischecked) {
+	            myCheckboxes.push($(this).val());
+	        }
 		});
-		alert(myCheckboxes);
-	    var url = "/JobAdvisorNew/deleteAd"; 
 	    $.ajax({
 	           type: "POST",
-	           url: url,
-	           data: myCheckboxes, 
-	           success: function(data)
-	           {
+	           url: "/JobAdvisorNew/deleteAd",
+	           dataType: 'json',
+	           data: {
+	        	   myCheckboxes: JSON.stringify(myCheckboxes)
+	           },
+	           error: function (data) {
 	        	   location.reload();
 	           }
 	         });
 
-	    e.preventDefault(); // avoid to execute the actual submit of the form.
+	    e.preventDefault(); 
+	});
+	
+	$('.edit').click(function(e) {
+		 var id = $(this).closest("tr").find("td").eq(1).text();
+		 $.ajax({
+			 method: "GET",
+				url: "/JobAdvisorNew/api/annuncio/" + id,
+				dataType: "json",
+				success: function (result) {
+					$('input[name=id]').val(id);
+					$('input[name=category]').val(result.categoria);
+					$('textarea[name=description]').val(result.descrizione);
+					$('input[name=price]').val(result.prezzo);
+	           }
+	         });
+		 $("#saveButton").click(function name() {
+			 $.ajax({
+				 method: "POST",
+					url: "/JobAdvisorNew/updateAd",
+					data:$("#editForm").serialize(),
+					success: function (result) {
+						location.reload();
+		           }
+		         });
+		 });
+	});
+	
+	$("#showMyAd").click(function(e) {
+		 var id = $(this).closest("tr").find("td").eq(1).text();
+		 $.ajax({
+			 method: "GET",
+				url: "/JobAdvisorNew/api/annuncio/" + id,
+				dataType: "json",
+				success: function (result) {
+					$('input[name=id]').val(id);
+					$('input[name=category]').val(result.categoria);
+					$('textarea[name=description]').val(result.descrizione);
+					$('input[name=price]').val(result.prezzo);
+					$('input[name=date]').val(result.data);
+	           }
+	         });
+	});
+	
+	$("#searchInput").keyup(function () {
+	    //split the current value of searchInput
+	    var data = this.value.split(" ");
+	    //create a jquery object of the rows
+	    var jo = $('tbody').find("tr");
+	    if (this.value == "") {
+	        jo.show();
+	        return;
+	    }
+	    //hide all the rows
+	    jo.hide();
+
+	    //Recusively filter the jquery object to get results.
+	    jo.filter(function (i, v) {
+	        var $t = $(this);
+	        for (var d = 0; d < data.length; ++d) {
+	            if ($t.is(":contains('" + data[d] + "')")) {
+	                return true;
+	            }
+	        }
+	        return false;
+	    }).show();
+	}).focus(function () {
+	    this.value = "";
+	    $(this).css({
+	        "color": "black"
+	    });
+	    $(this).unbind('focus');
+	}).css({
+	    "color": "#C0C0C0"
 	});
 	
 });
@@ -157,4 +234,3 @@ $(document).ready(function() {
 function loadWithDelay() {
 	google.maps.event.trigger(map, 'resize');
 }
-

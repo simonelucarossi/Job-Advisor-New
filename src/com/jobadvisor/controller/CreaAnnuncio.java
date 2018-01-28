@@ -17,10 +17,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jobadvisor.model.Annuncio;
 import com.jobadvisor.model.Utente;
+import com.jobadvisor.persistence.DAOFactory;
 import com.jobadvisor.persistence.DatabaseManager;
 import com.jobadvisor.persistence.UtenteDaoJDBC;
+import com.jobadvisor.persistence.UtilDao;
 import com.jobadvisor.persistence.dao.AnnuncioDao;
 import com.jobadvisor.persistence.dao.UtenteDao;
+
 
 @WebServlet("/views/createAd")
 public class CreaAnnuncio extends HttpServlet{
@@ -53,10 +56,9 @@ public class CreaAnnuncio extends HttpServlet{
 		Double longitudine= Double.parseDouble(request.getParameter("lon"));
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ITALIAN);
 		Date date;
-		try {
+		try { 
 			date = format.parse(data);
 			Annuncio annuncio= new Annuncio(categoria,date,descrizione,prezzo,latitudine,longitudine,creatore);
-
 			AnnuncioDao annuncioDao = DatabaseManager.getInstance().getDaoFactory().getAnnuncioDAO();
 			annuncioDao.save(annuncio);
 			response.sendRedirect("/JobAdvisorNew/adsPanel?username="+ request.getParameter("creator"));

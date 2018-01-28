@@ -130,17 +130,12 @@ public class AnnuncioDaoJDBC implements AnnuncioDao {
 	public void update(Annuncio annuncio) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			String update = "update annuncio SET categoria = ?, data_pubblicazione  = ?, descrizione = ?, prezzo = ?, latitudine = ?, longitudine = ?, creatore = ? WHERE id=?";
+			String update = "update annuncio SET categoria = ?, descrizione = ?, prezzo = ? WHERE id=?";
 			PreparedStatement statement = connection.prepareStatement(update);
 			statement.setString(1, annuncio.getCategoria());
-			long secs = annuncio.getData().getTime();
-			statement.setDate(2, new java.sql.Date(secs));
-			statement.setString(3, annuncio.getDescrizione());
-			statement.setDouble(4, annuncio.getPrezzo());
-			statement.setDouble(5, annuncio.getLatitudine());
-			statement.setDouble(6, annuncio.getLongitudine());
-			statement.setString(7, annuncio.getCreator().getUsername());
-			statement.setLong(8, annuncio.getId());
+			statement.setString(2, annuncio.getDescrizione());
+			statement.setDouble(3, annuncio.getPrezzo());
+			statement.setLong(4, annuncio.getId());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());

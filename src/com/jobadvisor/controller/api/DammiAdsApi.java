@@ -3,7 +3,6 @@ package com.jobadvisor.controller.api;
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,7 +14,6 @@ import org.json.simple.JSONObject;
 
 import com.jobadvisor.model.Annuncio;
 import com.jobadvisor.persistence.DAOFactory;
-import com.jobadvisor.persistence.UtilDao;
 
 /**
  * Servlet implementation class DammiAdsApi

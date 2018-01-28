@@ -25,7 +25,7 @@ public class Login extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		HttpSession session = req.getSession();
+		HttpSession session = req.getSession(); 
 		String username = (String) req.getParameter("username");
 		String password = (String) req.getParameter("password");
 		UtenteDao dao = DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
@@ -39,7 +39,7 @@ public class Login extends HttpServlet {
 			}
 		}else {
 			text="login_failed";
-		}
+		} 
 		resp.getWriter().print(text);
 	}
 

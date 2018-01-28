@@ -1,7 +1,6 @@
 package com.jobadvisor.controller;
 
 import java.io.IOException;
-import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -10,23 +9,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import com.jobadvisor.model.Annuncio;
 import com.jobadvisor.persistence.DAOFactory;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONString;
-import org.json.simple.JSONValue;
-
-@WebServlet("/deleteAd")
-public class DeleteAd extends HttpServlet {
+@WebServlet("/updateAd")
+public class UpdateAd extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public DeleteAd() {
+	public UpdateAd() {
 		super();
 	}
 
@@ -34,7 +28,14 @@ public class DeleteAd extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
+		Long id=Long.parseLong(request.getParameter("id"));
+		String category = request.getParameter("category");
+		String description = request.getParameter("description");
+		Double price= Double.parseDouble(request.getParameter("price"));
+		
+		Annuncio annuncio= new Annuncio(category, description,price);
+		annuncio.setId(id);
+		DAOFactory.getDAOFactory(DAOFactory.POSTGRESQL).getAnnuncioDAO().update(annuncio);
 	}
 
 	/**
@@ -42,17 +43,7 @@ public class DeleteAd extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		if(request.getParameter("myCheckboxes")!=null) {
-			String selectedBoxes=request.getParameter("myCheckboxes");
-
-			JSONArray jsonArray = new JSONArray(selectedBoxes);
-
-		    for (int i = 0; i < jsonArray.length(); i++) {
-		        Long id=Long.parseLong(jsonArray.getString(i));
-		        Annuncio annuncio=new Annuncio();
-		        annuncio.setId(id);
-		        DAOFactory.getDAOFactory(DAOFactory.POSTGRESQL).getAnnuncioDAO().delete(annuncio);
-		    } 
-		}
+		doGet(request, response);
 	}
+
 }

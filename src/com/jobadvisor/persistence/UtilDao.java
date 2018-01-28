@@ -17,8 +17,8 @@ public class UtilDao {
 		Connection connection = dataSource.getConnection();
 		try {
 			String delete = "drop SEQUENCE if EXISTS sequenza_id;" 
-					+ "drop table if exists annuncio;"
 					+ "drop table if exists recensione;"
+					+ "drop table if exists annuncio;"
 					+ "drop table if exists utente;";
 			PreparedStatement statement = connection.prepareStatement(delete);
 			statement.executeUpdate();

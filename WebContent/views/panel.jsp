@@ -6,7 +6,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Manage Ads</title>
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
@@ -29,21 +29,29 @@
 		<div class="table-wrapper">
 			<div class="table-title">
 				<div class="row">
-					<div class="col-sm-6">
+					<div class="col-sm-4">
 						<h2>
-							Manage <b>Ads</b>
+							Your <b>Ads</b>
 						</h2>
 					</div>
-					<div class="col-sm-6">
+					<div class="col-sm-4">
+							<form class="form-search form-inline">
+								<input type="text" id="searchInput" class="search-query" placeholder="Search for category..">
+							</form>
+					</div>
+					<div class="col-sm-4">
 						<a id="newAdd" href="#addNewModal" class="btn btn-success"
 							data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add
-								New </span></a> <a href="#deleteAddModal"
+								New </span>
+						</a> 
+						<a href="#deleteAdModal"
 							class="btn btn-danger" data-toggle="modal"><i
-							class="material-icons">&#xE15C;</i> <span>Delete</span></a>
+							class="material-icons">&#xE15C;</i> <span>Delete</span>
+						</a>
 					</div>
 				</div>
 			</div>
-			<table class="table table-striped table-hover">
+			<table id="myTable" class="table table-striped table-hover">
 				<thead>
 					<tr>
 						<th><span class="custom-checkbox"> <input
@@ -61,7 +69,7 @@
 						<tr>
 							<td>
 							<span class="custom-checkbox">
-								<input type="checkbox" id="checkbox1" name="options[]" value="1">
+								<input type="checkbox" id="checkbox1" name="ids[]" value="${annuncio.getId()}">
 								<label for="checkbox1"></label>
 							</span>
 							</td>
@@ -69,11 +77,9 @@
 							<td>${annuncio.getCategoria()}</td>
 							<td>${annuncio.getPrezzo()}</td>
 							<td>${annuncio.getData()}</td>
-							<td><a href="#editEmployeeModal" class="edit"
-								data-toggle="modal"><i class="material-icons"
-									data-toggle="tooltip" title="Edit">&#xE254;</i></a> <a
-								href="#deleteAddModal" class="delete" data-toggle="modal"><i
-									class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+							<td>
+							<a href="#editAdModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a> 
+							<a id="showMyAd" href="#showAdModal" data-toggle="modal"><i style="color:black;" class="fa" data-toggle="tooltip" title="Show">&#xf06e;</i></a>
 							</td>
 						</tr>
 					</c:forEach>
@@ -92,7 +98,7 @@
 			</div>
 		</div>
 	</div>
-	<!-- Edit Modal HTML -->
+	<!-- Add Modal HTML -->
 	<div id="addNewModal" class="modal fade">
 		<div class="modal-dialog">
 			<div id="creationForm" class="modal-content">
@@ -106,8 +112,6 @@
 						<div class="form-group">
 							<label>Category</label> 
 							<input name="category" type="text" class="form-control" id="inputCategory" placeholder="Category..." required>
-							<input name="lat" type="hidden" id="my-lat"> 
-							<input name="lon" type="hidden" id="my-lon">
 							<input name="creator" value="${username}" type="hidden" id="creator">
 						</div>
 						<div class="form-group">
@@ -118,6 +122,8 @@
 						<label id="priceLabel" for="inputPrice">Job-price</label> 
 						<input name="price" type="number" step="0.01" min="5" class="form-control" id="inputPrice" placeholder="Insert a price..." required>
 						</div>
+						<input name="lat" type="hidden" id="my-lat"> 
+						<input name="lon" type="hidden" id="my-lon">
 						<div class="form-group" id="map"></div>
 						<input id="date" name="date" type="hidden">
 					</div>
@@ -128,13 +134,12 @@
 				</form>
 			</div>
 		</div>
-		
 	</div>
 	<!-- Edit Modal HTML -->
-	<div id="editEmployeeModal" class="modal fade">
+	<div id="editAdModal" class="modal fade">
 		<div class="modal-dialog">
-			<div class="modal-content">
-				<form>
+			<div id="creationForm" class="modal-content">
+				<form id="editForm"  method="post" onsubmit="return checkPrice()">
 					<div class="modal-header">
 						<h4 class="modal-title">Edit Ad</h4>
 						<button type="button" class="close" data-dismiss="modal"
@@ -142,35 +147,52 @@
 					</div>
 					<div class="modal-body">
 						<div class="form-group">
-							<label>Category</label> <input type="text" class="form-control"
-								required>
+							<label>Category</label> 
+							<input type="hidden" name="id">
+							<input name="category" type="text" class="form-control" id="inputCategory" required>
 						</div>
 						<div class="form-group">
-							<label>Description</label> <input type="email" class="form-control"
-								required>
+							<label id="descrip-label" for="inputDescription">Description</label>
+						<textarea rows="10" cols="30" name="description" class="form-control" id="inputDescription" required></textarea>
 						</div>
 						<div class="form-group">
-							<label>Job-price</label>
-							<textarea class="form-control" required></textarea>
-						</div>
-						<div class="form-group">
-						<!-- Maps Api-->
+						<label id="priceLabel" for="inputPrice">Job-price</label> 
+						<input name="price" type="number" step="0.01" min="5" class="form-control" id="inputPrice" required>
 						</div>
 					</div>
 					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal"
-							value="Cancel"> <input type="submit" class="btn btn-info"
-							value="Save">
+						<input type="button" class="btn btn-default" data-dismiss="modal"value="Cancel"> 
+							<a href="#confirmEditModal"
+							class="btn btn-success" data-toggle="modal"><i
+							class="material-icons"></i> <span>Save</span></a>
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
-	<!-- Delete Modal HTML -->
-	<div id="deleteAddModal" class="modal fade">
+	<div id="confirmEditModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form id="deleteAdForm">
+					<div class="modal-header">
+						<h4 class="modal-title">Edit Ad</h4>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">
+						<p>Are you sure you want to save these changes?</p>
+					</div>
+					<div class="modal-footer">
+						<input type="hidden" name="id"> 					
+						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel"> 
+						<input id="saveButton" type="button" class="btn btn-success" value="Save Changes">
+					</div>
+			</div>
+		</div>
+	</div>
+	<!-- Delete Modal HTML -->
+	<div id="deleteAdModal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
 					<div class="modal-header">
 						<h4 class="modal-title">Delete Ad</h4>
 						<button type="button" class="close" data-dismiss="modal"
@@ -185,7 +207,42 @@
 					<div class="modal-footer">
 						<input type="hidden" name="id"> 					
 						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel"> 
-						<input type="submit" class="btn btn-danger" value="Delete">
+						<input id="deleteButton" type="button" class="btn btn-danger" value="Delete">
+					</div>
+			</div>
+		</div>
+	</div>
+	<!-- Show Modal HTML -->
+	<div id="showAdModal" class="modal fade">
+		<div class="modal-dialog">
+			<div id="creationForm" class="modal-content">
+				<form id="showForm" method="post">
+					<div class="modal-header">
+						<h4 class="modal-title">Your Ad</h4>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label>Category</label> 
+							<input type="hidden" name="id">
+							<input name="category" type="text" class="form-control" id="inputCategory" readonly>
+						</div>
+						<div class="form-group">
+							<label id="descrip-label" for="inputDescription">Description</label>
+						<textarea rows="10" cols="30" name="description" class="form-control" id="inputDescription" readonly></textarea>
+						</div>
+						<div class="form-group">
+						<label id="priceLabel" for="inputPrice">Job-price</label> 
+						<input name="price" type="number" step="0.01" min="5" class="form-control" id="inputPrice" readonly>
+						</div>
+						<div class="form-group">
+							<label id="dateLabel" for="date">Date of creation:</label>
+							<input id="date" name="date" class="form-control" readonly>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<input type="button" class="btn btn-default" data-dismiss="modal"value="Back"> 
 					</div>
 				</form>
 			</div>

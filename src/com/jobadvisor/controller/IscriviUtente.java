@@ -29,8 +29,7 @@ public class IscriviUtente extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher dispacher = req.getRequestDispatcher("/views/subscribe.jsp");
-		dispacher.forward(req, resp);
+		doPost(req, resp);
 	}
 
 	@Override
@@ -50,16 +49,10 @@ public class IscriviUtente extends HttpServlet {
 		try {
 			date = format.parse(dataNascita);
 			Utente utente= new Utente(username,nome, cognome,sesso,date,tipo,email,telefono);
-
 			UtenteDao utenteDao = DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
 			utenteDao.save(utente);
 			utenteDao.setPassword(utente, password);
-
 			req.setAttribute("utente", utente);
-
-			RequestDispatcher dispacher = req.getRequestDispatcher("/views/subscribe.jsp");
-			dispacher.forward(req, resp);
-
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

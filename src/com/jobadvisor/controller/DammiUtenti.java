@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jobadvisor.persistence.dao.UtenteDao;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
+import com.jobadvisor.persistence.dao.UtenteDao;
 import com.jobadvisor.model.Utente;
 import com.jobadvisor.persistence.DatabaseManager;
 
@@ -27,10 +29,9 @@ public class DammiUtenti extends HttpServlet {
 
 		UtenteDao dao = DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
 		List<Utente> utenti= dao.findAll();
-		req.setAttribute("utenti", utenti);
-
-		RequestDispatcher dispacher = req.getRequestDispatcher("report/studenti.jsp");
-		dispacher.forward(req, resp);
+		req.getSession().setAttribute("utenti", utenti);
+		RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher("/views/usersPanel.jsp");
+		dispatcher.forward(req, resp);
 	}
 
 }

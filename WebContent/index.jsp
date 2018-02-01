@@ -10,14 +10,6 @@ prefix="c" %>
 
 <head>
 
-<style type="text/css">
-#logout,#ads_panel{
-	color: rgba(255, 255, 255, 0.7);
-	font-family: sans-serif;
-	font-size: 1.3rem;
-}
-</style>
-
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -72,7 +64,7 @@ prefix="c" %>
 					<hr>
 				</div>
 				<div class="col-lg-8 mx-auto">
-					<p class="text-faded mb-5">JobAdvisor offers you the
+					<p id="myp" class="text-faded mb-5">JobAdvisor offers you the
 						opportunity to publish your ad if you are a pro, but also to seek
 						pro or companies in your area that can solve your problem!</p>
 					<a id="button-search"
@@ -125,7 +117,7 @@ prefix="c" %>
 					class="btn btn-lg btn-primary btn-block" type="submit">Login
 				</button>
 				<div class="dropdown-divider"></div>
-				  <a class="dropdown-item" href="/JobAdvisorNew/subscribe">New around here? Sign up</a>
+				  <a class="dropdown-item" href="/JobAdvisorNew/views/subscription.jsp">New around here? Sign up</a>
 		</form>
 	</div>
 	<!-- END LOGIN HTML -->

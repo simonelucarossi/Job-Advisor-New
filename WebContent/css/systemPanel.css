@@ -1,0 +1,44 @@
+@charset "ISO-8859-1";
+
+body {
+  padding-top: 54px;
+}
+
+@media (min-width: 992px) {
+  body {
+    padding-top: 56px;
+  }
+}
+
+.pagination {
+  margin-bottom: 15px;
+}
+
+#brand-site {
+	color: white;
+}
+
+#logo-site {
+    height: 50px;
+   
+}
+
+#site-title {
+	font-size: 21px;
+	color: white;
+	opacity: 0.7;
+}
+
+#site-title:hover {
+	font-size: 21px;
+	color: white;
+	opacity: 0.9;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+	font-size: 20px;
+}
+.img-fluid.rounded.mb-3.mb-md-0{
+	 max-width:100%;
+	 max-height:100%;
+}

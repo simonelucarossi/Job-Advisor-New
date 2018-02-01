@@ -38,5 +38,17 @@
 		<url-pattern>/api/annuncio/*</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<description></description>
+		<display-name>DammiUserAPI</display-name>
+
+		<servlet-name>DammiUserAPI</servlet-name>
+		<servlet-class>com.jobadvisor.controller.api.DammiUserApi</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DammiUserAPI</servlet-name>
+		<url-pattern>/api/user/*</url-pattern>
+	</servlet-mapping>
+	
 	
 </web-app>

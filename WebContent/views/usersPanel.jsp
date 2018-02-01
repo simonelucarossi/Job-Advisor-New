@@ -7,7 +7,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Manage Ads</title>
+<title>Manage Users</title>
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 <link rel="stylesheet"
@@ -15,12 +15,11 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="/JobAdvisorNew/css/panel.css">
+<link rel="stylesheet" type="text/css" href="/JobAdvisorNew/css/usersPanel.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="/JobAdvisorNew/js/panel.js"></script>
+<script src="/JobAdvisorNew/js/usersPanel.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDe9jibJf963yX2fZCd6FLxYJzTljlhzhc&callback=initMap"></script>
 </head>
 <body>
 	<div class="container">
@@ -35,15 +34,15 @@
 					</div>
 					<div class="col-sm-4">
 							<form class="form-search form-inline">
-								<input type="text" id="searchInput" class="search-query" placeholder="Search for category..">
+								<input type="text" id="searchInput" class="search-query" placeholder="Search for name..">
 							</form>
 					</div>
 					<div class="col-sm-4">
-						<a id="newAdd" href="#addNewModal" class="btn btn-success"
+						<a id="newUser" href="#addNewModal" class="btn btn-success"
 							data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add
 								New </span>
 						</a> 
-						<a href="#deleteAdModal"
+						<a href="#deleteUserModal"
 							class="btn btn-danger" data-toggle="modal"><i
 							class="material-icons">&#xE15C;</i> <span>Delete</span>
 						</a>
@@ -56,27 +55,32 @@
 						<th><span class="custom-checkbox"> <input
 								type="checkbox" id="selectAll"> <label for="selectAll"></label>
 						</span></th>
-						<th>ID</th>
-						<th>Category</th>
-						<th>Price</th>
+						<th>Username</th>
+						<th>Name</th>
+						<th>Occupation</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${annunci}" var="annuncio">
+					<c:forEach items="${utenti}" var="utente">
 						<tr>
 							<td>
-							<span class="custom-checkbox">
-								<input type="checkbox" id="checkbox1" name="ids[]" value="${annuncio.getId()}">
-								<label for="checkbox1"></label>
-							</span>
+							<c:if test="${utente.getTipo() != 'Amministratore' }">
+								<span class="custom-checkbox">
+									<input type="checkbox" id="checkbox1" name="ids[]" value="${utente.getUsername()}">
+									<label for="checkbox1"></label>
+								</span>
+							</c:if>
+							<c:if test="${utente.getTipo() == 'Amministratore' }">
+								<strong id="admin">ADMIN</strong>
+							</c:if>
 							</td>
-							<td>${annuncio.getId()}</td>
-							<td>${annuncio.getCategoria()}</td>
-							<td>${annuncio.getPrezzo()}</td>
+							<td>${utente.getUsername()}</td>
+							<td>${utente.getNomeCompleto()}</td>
+							<td>${utente.getTipo()}</td>
 							<td>
-							<a href="#editAdModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a> 
-							<a id="showMyAd" href="#showAdModal" data-toggle="modal"><i style="color:black;" class="fa" data-toggle="tooltip" title="Show">&#xf06e;</i></a>
+							<a href="#editUserModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a> 
+							<a id="showMyUser" href="#showUserModal" data-toggle="modal"><i style="color:black;" class="fa" data-toggle="tooltip" title="Show">&#xf06e;</i></a>
 							</td>
 						</tr>
 					</c:forEach>
@@ -99,7 +103,7 @@
 	<div id="addNewModal" class="modal fade">
 		<div class="modal-dialog">
 			<div id="creationForm" class="modal-content">
-				<form action="views/createAd" method="post" onsubmit="return checkForm()">
+				<form id="createForm">
 					<div class="modal-header">
 						<h4 class="modal-title">Add New</h4>
 						<button type="button" class="close" data-dismiss="modal"
@@ -107,22 +111,98 @@
 					</div>
 					<div class="modal-body">
 						<div class="form-group">
-							<label>Category</label> 
-							<input name="category" type="text" class="form-control" id="inputCategory" placeholder="Category..." required>
-							<input name="creator" value="${username}" type="hidden" id="creator">
+							<label for="name" class="cols-sm-2 control-label">Name</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<input type="text" class="form-control" name="nome" id="name"  placeholder="Enter your Name" required />
+								</div>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label for="surname" class="cols-sm-2 control-label">Surname</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<input type="text" class="form-control" name="cognome" id="surname"  placeholder="Enter your Surname" required/>
+								</div>
+							</div>
 						</div>
 						<div class="form-group">
-							<label id="descrip-label" for="inputDescription">Description</label>
-						<textarea rows="10" cols="30" name="description" class="form-control" id="inputDescription" required></textarea>
+							<label for="gender" class="cols-sm-2 control-label">Gender</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<select id="gender" name="sesso"
+										class="form-control" required>
+										<option value="M">Male</option>
+										<option value="F">Female</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label for="date" class="cols-sm-2 control-label">Birth date</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<input id="date" name="dataNascita" type="date" class="form-control" required>
+								</div>
+							</div>
 						</div>
 						<div class="form-group">
-						<label id="priceLabel" for="inputPrice">Job-price</label> 
-						<input name="price" type="number" step="0.01" min="5" class="form-control" id="inputPrice" placeholder="Insert a price..." required>
+							<label for="kind" class="cols-sm-2 control-label">Kind of account</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<select
+										id="kind" name="tipo" class="form-control" required>
+										<option value="Cliente">Customer</option>
+										<option value="Professionista">Professional</option>
+									</select>		
+								</div>
+							</div>
 						</div>
-						<input name="lat" type="hidden" id="my-lat"> 
-						<input name="lon" type="hidden" id="my-lon">
-						<div class="form-group" id="map"></div>
-						<input id="date" name="date" type="hidden">
+						<div class="form-group">
+							<label for="phone" class="cols-sm-2 control-label">Phone</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<input id="phone" name="telefono" type="tel" class="form-control" required>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="email" class="cols-sm-2 control-label">Your Email</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<input type="text" class="form-control" name="email" id="email"  placeholder="Enter your Email" required/>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="username" class="cols-sm-2 control-label">Username</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<input type="text" class="form-control" name="username" id="username"  placeholder="Enter your Username" required/>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="password" class="cols-sm-2 control-label">Password</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<input type="password" class="form-control" name="password" id="password"  placeholder="Enter your Password"/>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="confirm" class="cols-sm-2 control-label">Confirm Password</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<input type="password" class="form-control" name="confirm" id="confirm"  placeholder="Confirm your Password"/>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal"value="Cancel"> 
@@ -133,28 +213,47 @@
 		</div>
 	</div>
 	<!-- Edit Modal HTML -->
-	<div id="editAdModal" class="modal fade">
+	<div id="editUserModal" class="modal fade">
 		<div class="modal-dialog">
 			<div id="creationForm" class="modal-content">
 				<form id="editForm"  method="post" onsubmit="return checkPrice()">
 					<div class="modal-header">
-						<h4 class="modal-title">Edit Ad</h4>
+						<h4 class="modal-title">Edit account</h4>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">
-						<div class="form-group">
-							<label>Category</label> 
-							<input type="hidden" name="id">
-							<input name="category" type="text" class="form-control" id="inputCategory" required>
+					<div class="form-group">
+							<label>Username</label> 
+							<input name="username" type="text" class="form-control" id="inputUsername">
 						</div>
 						<div class="form-group">
-							<label id="descrip-label" for="inputDescription">Description</label>
-						<textarea rows="10" cols="30" name="description" class="form-control" id="inputDescription" required></textarea>
+							<label>Name:</label> 
+							<input name="name" type="text" class="form-control" id="inputName">
 						</div>
 						<div class="form-group">
-						<label id="priceLabel" for="inputPrice">Job-price</label> 
-						<input name="price" type="number" step="0.01" min="5" class="form-control" id="inputPrice" required>
+							<label>Surname:</label> 
+							<input name="surname" type="text" class="form-control" id="inputSurname">
+						</div>
+						<div class="form-group">
+							<label>Birth date:</label> 
+							<input name="date" type="text" class="form-control" id="inputDate">
+						</div>
+						<div class="form-group">
+							<label>Occupation:</label> 
+							<input name="name" type="text" class="form-control" id="inputKind">
+						</div>
+						<div class="form-group">
+							<label>Email:</label> 
+							<input name="email" type="text" class="form-control" id="inputEmail">
+						</div>
+						<div class="form-group">
+							<label>Phone:</label> 
+							<input name="phone" type="text" class="form-control" id="inputPhone">
+						</div>
+						<div class="form-group">
+							<label>Password:</label> 
+							<input name="password" type="text" class="form-control" id="inputPassword">
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -171,7 +270,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 					<div class="modal-header">
-						<h4 class="modal-title">Edit Ad</h4>
+						<h4 class="modal-title">Edit account</h4>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
 					</div>
@@ -187,11 +286,11 @@
 		</div>
 	</div>
 	<!-- Delete Modal HTML -->
-	<div id="deleteAdModal" class="modal fade">
+	<div id="deleteUserModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
 					<div class="modal-header">
-						<h4 class="modal-title">Delete Ad</h4>
+						<h4 class="modal-title">Delete account/accounts</h4>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
 					</div>
@@ -210,12 +309,12 @@
 		</div>
 	</div>
 	<!-- Show Modal HTML -->
-	<div id="showAdModal" class="modal fade">
+	<div id="showUserModal" class="modal fade">
 		<div class="modal-dialog">
 			<div id="creationForm" class="modal-content">
 				<form id="showForm" method="post">
 					<div class="modal-header">
-						<h4 class="modal-title">Your Ad</h4>
+						<h4 class="modal-title">User account properties</h4>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
 					</div>
@@ -223,19 +322,19 @@
 						<div class="form-group">
 							<label>Category</label> 
 							<input type="hidden" name="id">
-							<input name="category" type="text" class="form-control" id="inputCategory" readonly>
+							<input name="category" type="text" class="form-control" id="category" readonly>
 						</div>
 						<div class="form-group">
 							<label id="descrip-label" for="inputDescription">Description</label>
-						<textarea rows="10" cols="30" name="description" class="form-control" id="inputDescription" readonly></textarea>
+						<textarea rows="10" cols="30" name="description" class="form-control" id="description" readonly></textarea>
 						</div>
 						<div class="form-group">
 						<label id="priceLabel" for="inputPrice">Job-price</label> 
-						<input name="price" type="number" step="0.01" min="5" class="form-control" id="inputPrice" readonly>
+						<input name="price" type="number" step="0.01" min="5" class="form-control" id="price" readonly>
 						</div>
 						<div class="form-group">
 							<label id="dateLabel" for="date">Date of creation:</label>
-							<input id="date" name="date" class="form-control" readonly>
+							<input id="data" name="date" class="form-control" readonly>
 						</div>
 					</div>
 					<div class="modal-footer">

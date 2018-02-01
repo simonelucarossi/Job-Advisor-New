@@ -4,17 +4,19 @@
 
 $(document).ready(function () {
 
-		$("body").fadeIn(1000);
+		$("body").fadeIn(500);
 	
 		$("#form-search").hide();
 		$("#login-box").hide();
 		$("#fade-box").hide();
 
+		$("#myp").slideDown("slow");
+		
 		$("#login-img").on('click', function() {
 			$("#usernameL").val('');
 			$("#passwordL").val('');
-			$("#login-box").show("slow");
-			$("#fade-box").show("slow");
+			$("#login-box").slideDown();
+			$("#fade-box").slideDown();
 		});
 
 		$("#exit-button").click(function() {

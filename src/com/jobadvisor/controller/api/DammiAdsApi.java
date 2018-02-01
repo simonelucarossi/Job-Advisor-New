@@ -54,6 +54,7 @@ public class DammiAdsApi extends HttpServlet {
 		doGet(request, response);
 	}
 
+	@SuppressWarnings("unchecked")
 	protected String makeAnnunciJson(List<Annuncio> annunci) {
 
 		JSONArray  list = new JSONArray();

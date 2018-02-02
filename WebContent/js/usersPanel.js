@@ -25,6 +25,16 @@ $(document).ready(function() {
 		}
 	});
 	
+	 $("#confirm").keyup( function checkPasswordMatch() {
+		    var password = $("#password").val();
+		    var confirmPassword = $("#confirm").val();
+
+		    if (password != confirmPassword)
+		        $("#passDiv").html("Passwords do not match!").css('color', 'red');
+		    else
+		        $("#passDiv").html("Passwords match!").css('color', 'green');
+		});
+	
 	 $('#createForm').on('submit', function (e) {
          e.preventDefault();
 
@@ -63,18 +73,53 @@ $(document).ready(function() {
 	    e.preventDefault(); 
 	});
 	
+	$("#banButton").click(function(e) {
+		var myCheckboxes = [];
+		$(":checkbox").each(function() {
+			var ischecked = $(this).is(":checked");
+	        if (ischecked) {
+	            myCheckboxes.push($(this).val());
+	        }
+		});
+		var today = new Date();
+		var dd = today.getDate();
+		var mm = today.getMonth()+1; 
+		
+		var yyyy = today.getFullYear();
+		if(dd<10){dd='0'+dd} 
+		if(mm<10){mm='0'+mm} 
+		today = yyyy+'-'+mm+'-'+dd; 
+		
+		$.ajax({
+	           type: "POST",
+	           url: "/JobAdvisorNew/banUser",
+	           dataType: 'json',
+	           data: {
+	        	   myCheckboxes: JSON.stringify(myCheckboxes),
+	        	   time : $('#banTime').val(),
+	        	   date : today
+	           },
+	           error: function (data) {
+	        	   location.reload();
+	           }
+	         });
+
+	    e.preventDefault(); 
+	});
+	
 	$('.edit').click(function(e) {
 		 var username= $(this).closest("tr").find("td").eq(1).text();
 		 $.ajax({
 			 method: "GET",
 				url: "/JobAdvisorNew/api/user/" + username,
-				dataType: "json",
+				dataType: 'json',
 				success: function (result) {
 					$('input[name=username]').val(username);
 					$('input[name=name]').val(result.nome);
-					$('textarea[name=surname]').val(result.cognome);
+					$('input[name=surname]').val(result.cognome);
+					$('input[name=gender]').val(result.sesso);
 					$('input[name=data]').val(result.data_nascita);
-					$('input[name=occupation]').val(result.tipo);
+					$('input[name=tipo]').val(result.tipo);
 					$('input[name=email]').val(result.email);
 					$('input[name=phone]').val(result.telefono);
 					$('input[name=password]').val(result.password);
@@ -92,21 +137,28 @@ $(document).ready(function() {
 		 });
 	});
 	
-//	$("#showMyUser").click(function(e) {
-//		 var username = $(this).closest("tr").find("td").eq(1).text();
-//		 $.ajax({
-//			 method: "GET",
-//				url: "/JobAdvisorNew/api/user/" + username,
-//				dataType: "json",
-//				success: function (result) {
-//					$('input[name=nome]').val(id);
-//					$('input[name=cognome]').val(result.categoria);
-//					$('textarea[name=description]').val(result.descrizione);
-//					$('input[name=price]').val(result.prezzo);
-//					$('input[name=date]').val(result.data);
-//	           }
-//	         });
-//	});
+	$("td:last-child").click(function(e) {
+		 var username = $(this).closest("tr").find("td").eq(1).text();
+		 $.ajax({
+			 method: "GET",
+				url: "/JobAdvisorNew/api/user/" + username,
+				dataType: 'json',
+				success: function (result) {
+					$('input[name=username]').val(username);
+					$('input[name=name]').val(result.nome);
+					$('input[name=surname]').val(result.cognome);
+					if(result.sesso === "M")
+						$('input[name=gender]').val("Male");
+					else
+						$('input[name=gender]').val("Female");	
+					$('input[name=data]').val(result.data_nascita);
+					$('input[name=tipo]').val(result.tipo);
+					$('input[name=email]').val(result.email);
+					$('input[name=phone]').val(result.telefono);
+					$('input[name=password]').val(result.password);
+	           }
+	         });
+	});
 	
 	$("#searchInput").keyup(function () {
 	    //split the current value of searchInput
@@ -141,3 +193,4 @@ $(document).ready(function() {
 	});
 	
 });
+

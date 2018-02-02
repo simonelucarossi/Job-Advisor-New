@@ -181,7 +181,7 @@ $(document).ready(function() {
 		 });
 	});
 	
-	$("#showMyAd").click(function(e) {
+	$("td:last-child").click(function(e) {
 		 var id = $(this).closest("tr").find("td").eq(1).text();
 		 $.ajax({
 			 method: "GET",

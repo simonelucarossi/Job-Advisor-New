@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,7 +14,6 @@ import com.jobadvisor.model.Utente;
 import com.jobadvisor.persistence.dao.AnnuncioDao;
 import com.jobadvisor.persistence.dao.RecensioneDao;
 import com.jobadvisor.persistence.dao.UtenteDao;
-
 
 public class UtenteDaoJDBC implements UtenteDao {
 
@@ -40,7 +40,7 @@ public class UtenteDaoJDBC implements UtenteDao {
 			statement.setString(8, utente.getTelefono());
 			statement.executeUpdate();
 			updateReferences(utente, connection);
-			
+
 		} catch (SQLException e) {
 			if (connection != null) {
 				try {
@@ -108,6 +108,11 @@ public class UtenteDaoJDBC implements UtenteDao {
 				utente.setTipo(result.getString("tipo"));
 				utente.setEmail(result.getString("email"));
 				utente.setTelefono(result.getString("telefono"));
+				utente.setPassword(result.getString("password"));
+				if (!utente.getTipo().equals("Amministratore")) {
+					long end = result.getDate("fineBan").getTime();
+					utente.setFineBan(new java.util.Date(end));
+				}
 			}
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -173,7 +178,6 @@ public class UtenteDaoJDBC implements UtenteDao {
 			statement.setString(7, utente.getTelefono());
 			statement.setString(8, utente.getUsername());
 			statement.executeUpdate();
-			updateReferences(utente, connection);
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
 		} finally {
@@ -236,6 +240,27 @@ public class UtenteDaoJDBC implements UtenteDao {
 	}
 
 	@Override
+	public void setBan(Utente utente, Date date) {
+		Connection connection = this.dataSource.getConnection();
+		try {
+			String update = "update utente SET fineBan = ? WHERE username=?";
+			PreparedStatement statement = connection.prepareStatement(update);
+			long secs = utente.getFineBan().getTime();
+			statement.setDate(1, new java.sql.Date(secs));
+			statement.setString(2, utente.getUsername());
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			}
+		}
+	}
+
+	@Override
 	public UtenteCredenziali findByPrimaryKeyCredential(String username) {
 		Utente utente = findByPrimaryKey(username);
 		UtenteCredenziali utenteCred = null;
@@ -249,6 +274,7 @@ public class UtenteDaoJDBC implements UtenteDao {
 			utenteCred.setTipo(utente.getTipo());
 			utenteCred.setEmail(utente.getEmail());
 			utenteCred.setTelefono(utente.getTelefono());
+			utenteCred.setFineBan(utente.getFineBan());
 		}
 		return utenteCred;
 	}

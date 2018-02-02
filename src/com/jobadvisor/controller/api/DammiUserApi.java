@@ -33,7 +33,7 @@ public class DammiUserApi extends HttpServlet {
 		Utente utente= DAOFactory.getDAOFactory(DAOFactory.POSTGRESQL).getUtenteDAO().findByPrimaryKey(username);
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");
-		response.getWriter().write(makeUtenteJson(utente)); 
+		response.getWriter().write(makeUtenteJson(utente));
 	}
 
 	/**
@@ -50,7 +50,7 @@ public class DammiUserApi extends HttpServlet {
 		obj.put("nome", utente.getNome());
 		obj.put("cognome", utente.getCognome());
 		obj.put("sesso", utente.getSesso());
-		obj.put("data_nascita", utente.getDataNascita());
+		obj.put("data_nascita", utente.getDataNascita().toString());
 		obj.put("email", utente.getEmail());
 		obj.put("telefono", utente.getTelefono());
 		obj.put("tipo", utente.getTipo());

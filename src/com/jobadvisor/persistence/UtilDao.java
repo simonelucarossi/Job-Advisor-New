@@ -44,7 +44,7 @@ public class UtilDao {
 			String create = "create SEQUENCE sequenza_id;"
 					+ "create table utente(\"username\" VARCHAR(255) primary key,nome VARCHAR(255),cognome VARCHAR(255),"
 					+ "sesso VARCHAR(1),data_nascita DATE,tipo VARCHAR(255),email VARCHAR(255),telefono VARCHAR(255)"
-					+ ",password VARCHAR(255));"
+					+ ",password VARCHAR(255),fineBan DATE);"
 					
 					+ "create table annuncio(\"id\" bigint primary key,categoria VARCHAR(255),data_pubblicazione DATE,"
 					+ "descrizione VARCHAR(500),prezzo DECIMAL,"

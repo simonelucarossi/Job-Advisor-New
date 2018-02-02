@@ -12,43 +12,54 @@
 	href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+ <link href="/JobAdvisorNew/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="/JobAdvisorNew/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="/JobAdvisorNew/css/usersPanel.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="/JobAdvisorNew/js/usersPanel.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="/JobAdvisorNew/vendor/jquery/jquery.min.js"></script>
+<script src="/JobAdvisorNew/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-	<div class="container">
-		<div class="table-wrapper">
-			<div class="table-title">
-				<div class="row">
-					<div class="col-sm-4">
-						<a id="brand-site" class="navbar-brand js-scroll-trigger" href="/JobAdvisorNew"> 
-							<img id="logo-site" src="img/gps.png">
-							<strong id="site-title">JOB ADVISOR</strong>
-						</a>
-					</div>
-					<div class="col-sm-4">
-							<form class="form-search form-inline">
-								<input type="text" id="searchInput" class="search-query" placeholder="Search for name..">
-							</form>
-					</div>
-					<div class="col-sm-4">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+     <div class="container">
+				<a id="brand-site" class="navbar-brand js-scroll-trigger" href="/JobAdvisorNew"> 
+					<img id="logo-site" src="img/gps.png">
+					<strong id="site-title">JOB ADVISOR</strong>
+				</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+		          <span class="navbar-toggler-icon"></span>
+		        </button>
+		        <div class="collapse navbar-collapse" id="navbarResponsive">
+		          <ul class="navbar-nav ml-auto">
+		            <li class="nav-item">
+			          	<form class="form-search form-inline">
+							<input type="text" id="searchInput" class="search-query" placeholder="Search for name..">
+						</form>
+		        	</li>
+		        	 <li class="nav-item">
 						<a id="newUser" href="#addNewModal" class="btn btn-success"
 							data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add
 								New </span>
 						</a> 
-						<a href="#deleteUserModal"
-							class="btn btn-danger" data-toggle="modal"><i
-							class="material-icons">&#xE15C;</i> <span>Delete</span>
+		        	</li>
+		        	 <li class="nav-item">
+			          	<a href="#banUserModal"
+						class="btn btn-warning" data-toggle="modal"><i
+						class="fa">&#xf023;</i> <span>Ban</span>
 						</a>
-					</div>
-				</div>
+		        	</li>
+		        	<li class="nav-item">
+			          	<a href="#deleteUserModal"
+						class="btn btn-danger" data-toggle="modal"><i
+						class="material-icons">&#xE15C;</i> <span>Delete</span>
+						</a>
+		        	</li>
+		          </ul>
 			</div>
+			</div>
+    </nav>
 			<table id="myTable" class="table table-striped table-hover">
 				<thead>
 					<tr>
@@ -67,7 +78,7 @@
 							<td>
 							<c:if test="${utente.getTipo() != 'Amministratore' }">
 								<span class="custom-checkbox">
-									<input type="checkbox" id="checkbox1" name="ids[]" value="${utente.getUsername()}">
+									<input type="checkbox" id="checkbox1" value="${utente.getUsername()}">
 									<label for="checkbox1"></label>
 								</span>
 							</c:if>
@@ -203,6 +214,7 @@
 								</div>
 							</div>
 						</div>
+						<div id="passDiv" class="form-group"></div>
 					</div>
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal"value="Cancel"> 
@@ -223,37 +235,32 @@
 							aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">
-					<div class="form-group">
-							<label>Username</label> 
-							<input name="username" type="text" class="form-control" id="inputUsername">
-						</div>
 						<div class="form-group">
+							<input name="username" type="hidden" class="form-control" >
 							<label>Name:</label> 
-							<input name="name" type="text" class="form-control" id="inputName">
+							<input name="name" type="text" class="form-control">
 						</div>
 						<div class="form-group">
 							<label>Surname:</label> 
-							<input name="surname" type="text" class="form-control" id="inputSurname">
+							<input name="surname" type="text" class="form-control" >
+							<input name="gender" type="hidden" class="form-control" >
+							<input name="tipo" type="hidden" class="form-control" >
 						</div>
 						<div class="form-group">
 							<label>Birth date:</label> 
-							<input name="date" type="text" class="form-control" id="inputDate">
-						</div>
-						<div class="form-group">
-							<label>Occupation:</label> 
-							<input name="name" type="text" class="form-control" id="inputKind">
+							<input name="data" type="text" class="form-control">
 						</div>
 						<div class="form-group">
 							<label>Email:</label> 
-							<input name="email" type="text" class="form-control" id="inputEmail">
+							<input name="email" type="text" class="form-control">
 						</div>
 						<div class="form-group">
 							<label>Phone:</label> 
-							<input name="phone" type="text" class="form-control" id="inputPhone">
+							<input name="phone" type="text" class="form-control">
 						</div>
 						<div class="form-group">
 							<label>Password:</label> 
-							<input name="password" type="text" class="form-control" id="inputPassword">
+							<input name="password" type="text" class="form-control">
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -281,6 +288,36 @@
 						<input type="hidden" name="id"> 					
 						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel"> 
 						<input id="saveButton" type="button" class="btn btn-success" value="Save Changes">
+					</div>
+			</div>
+		</div>
+	</div>
+	<!-- Ban Modal HTML -->
+	<div id="banUserModal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Ban account/accounts</h4>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">
+						<p>Are you sure you want to ban these Users?</p>
+						<p class="text-warning">
+							<strong>The will be added to "black list"<br>Please insert time of ban below:</strong>
+						</p>
+						<select id="banTime" name="time"
+							class="form-control" required>
+							<option value="1">1 day</option>
+							<option value="5">5 days</option>
+							<option value="15">15 days</option>
+							<option value="30">30 days</option>
+						</select>
+					</div>
+					<div class="modal-footer">
+						<input type="hidden" name="id"> 					
+						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel"> 
+						<input id="banButton" type="button" class="btn btn-warning" value="Ban">
 					</div>
 			</div>
 		</div>
@@ -320,21 +357,40 @@
 					</div>
 					<div class="modal-body">
 						<div class="form-group">
-							<label>Category</label> 
-							<input type="hidden" name="id">
-							<input name="category" type="text" class="form-control" id="category" readonly>
+							<label>Username:</label> 
+							<input name="username" type="text" class="form-control"  readonly>
+						</div>					
+						<div class="form-group">
+							<label>Name:</label> 
+							<input name="name" type="text" class="form-control" readonly>
 						</div>
 						<div class="form-group">
-							<label id="descrip-label" for="inputDescription">Description</label>
-						<textarea rows="10" cols="30" name="description" class="form-control" id="description" readonly></textarea>
+							<label>Surname:</label> 
+							<input name="surname" type="text" class="form-control" readonly>
 						</div>
 						<div class="form-group">
-						<label id="priceLabel" for="inputPrice">Job-price</label> 
-						<input name="price" type="number" step="0.01" min="5" class="form-control" id="price" readonly>
+							<label>Gender:</label> 
+							<input name="gender" type="text" class="form-control" readonly>
+						</div>	
+						<div class="form-group">
+							<label>Birth date:</label> 
+							<input name="data" type="text" class="form-control" readonly>
 						</div>
 						<div class="form-group">
-							<label id="dateLabel" for="date">Date of creation:</label>
-							<input id="data" name="date" class="form-control" readonly>
+							<label>Occupation:</label> 
+							<input name="tipo" type="text" class="form-control" id="inputUsername" readonly>
+						</div>	
+						<div class="form-group">
+							<label>Email:</label> 
+							<input name="email" type="text" class="form-control" id="inputEmail" readonly>
+						</div>
+						<div class="form-group">
+							<label>Phone:</label> 
+							<input name="phone" type="text" class="form-control" id="inputPhone" readonly>
+						</div>
+						<div class="form-group">
+							<label>Password:</label> 
+							<input name="password" type="text" class="form-control" id="inputPassword" readonly>
 						</div>
 					</div>
 					<div class="modal-footer">

@@ -12,6 +12,7 @@ public class Utente {
 	private String cognome;
 	private String sesso;
 	private Date dataNascita;
+	private Date fineBan;
 	private String tipo;
 	private String email;
 	private String telefono;
@@ -149,5 +150,13 @@ public class Utente {
 
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
+	}
+
+	public Date getFineBan() {
+		return fineBan;
+	}
+
+	public void setFineBan(Date fineBan) {
+		this.fineBan = fineBan;
 	}
 }

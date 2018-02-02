@@ -38,12 +38,19 @@ $(document).ready(function () {
 		           data: $("#login-form").serialize(),
 		           success: function(response)
 		           {
+		        	 $("#message").remove();
 		        	if(response == "login_failed"){
 		        		$("#usernameL").val('');
 		        		$("#passwordL").val('');
 		        		$("#login-box").show("slow");
 		        		$("#fade-box").show("slow");
-		        		$("#logo-site-login").after("<p style=\"color:red;\">Incorrect username or password!</p>");
+		        		$("#logo-site-login").after("<p id=\"message\" style=\"color:red;\">Incorrect username or password!</p>");
+		        	}else if(response == "user_banned"){
+		        		$("#usernameL").val('');
+		        		$("#passwordL").val('');
+		        		$("#login-box").show("slow");
+		        		$("#fade-box").show("slow");
+		        		$("#logo-site-login").after("<p id=\"message\" style=\"color:red;\">You are still banned!</p>");
 		        	}else{
 		        		document.location.href="index.jsp";
 		        	}

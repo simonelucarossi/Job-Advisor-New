@@ -6,23 +6,14 @@ $(document).ready(function() {
 
 	$('[data-toggle="tooltip"]').tooltip();
 
-	var checkbox = $('table tbody input[type="checkbox"]');
-	$("#selectAll").click(function() {
-		if (this.checked) {
-			checkbox.each(function() {
-				this.checked = true;
-			});
-		} else {
-			checkbox.each(function() {
-				this.checked = false;
-			});
-		}
+	$('#selectAll').click(function(e){
+	    var table= $(e.target).closest('table');
+	    $('td input:checkbox',table).prop('checked',this.checked);
 	});
 	
-	checkbox.click(function() {
-		if (!this.checked) {
-			$("#selectAll").prop("checked", false);
-		}
+	$('#selectAllList').click(function(e){
+	    var table= $(e.target).closest('table');
+	    $('td input:checkbox',table).prop('checked',this.checked);
 	});
 	
 	 $("#confirm").keyup( function checkPasswordMatch() {
@@ -190,6 +181,49 @@ $(document).ready(function() {
 	    $(this).unbind('focus');
 	}).css({
 	    "color": "#C0C0C0"
+	});
+	
+	$('#blackListButton').click(function name() {
+		 $.ajax({
+			 method: "GET",
+				url: "/JobAdvisorNew/getBanned",
+				dataType: 'json',
+				success: function (response) {
+					$('#blackList').find("tr:gt(0)").remove();
+					$.each(response, function(i, item) {
+				        var $tr = $('<tr>').append(
+				        	$("<td>").html('<span class="custom-checkbox"> <input type="checkbox" id="checkbox1"> <label for="checkbox1"></label></span>'),	
+				        	$('<td>').text(item.username),
+				            $('<td>').text(item.fineBan)
+				        ); 
+				       $('#blackList').append($tr);
+				       $('tr:last').find(":checkbox").val(item.username);
+				    });
+	           }
+	         });
+	});
+
+	$("#deleteFromList").click(function(e) {
+		var myCheckboxes = [];
+		$("#modalContent").find(":checkbox").each(function() {
+			var ischecked = $(this).is(":checked");
+	        if (ischecked) {
+	            myCheckboxes.push($(this).val());
+	        }
+		});
+	    $.ajax({
+	           type: "POST",
+	           url: "/JobAdvisorNew/eraseBan",
+	           dataType: 'json',
+	           data: {
+	        	   myCheckboxes: JSON.stringify(myCheckboxes)
+	           },
+	           error: function (data) {
+	        	   location.reload();
+	           }
+	         });
+
+	    e.preventDefault(); 
 	});
 	
 });

@@ -23,4 +23,6 @@ public interface UtenteDao {
 	public UtenteCredenziali findByPrimaryKeyCredential(String username);
 
 	public void setBan(Utente utente, Date date);
+
+	public List<Utente> findAllByBan();
 }

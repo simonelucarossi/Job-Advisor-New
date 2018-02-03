@@ -4,9 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.TimeZone;
 
 import com.jobadvisor.model.Annuncio;
 import com.jobadvisor.model.Recensione;
@@ -26,8 +29,9 @@ public class UtenteDaoJDBC implements UtenteDao {
 	@Override
 	public void save(Utente utente) {
 		Connection connection = this.dataSource.getConnection();
+		DateFormat df=new SimpleDateFormat();
 		try {
-			String insert = "insert into utente(username, nome, cognome , sesso, data_nascita, tipo, email, telefono) values (?,?,?,?,?,?,?,?)";
+			String insert = "insert into utente(username, nome, cognome , sesso, data_nascita, tipo, email, telefono, fineBan) values (?,?,?,?,?,?,?,?,?)";
 			PreparedStatement statement = connection.prepareStatement(insert);
 			statement.setString(1, utente.getUsername());
 			statement.setString(2, utente.getNome());
@@ -38,6 +42,8 @@ public class UtenteDaoJDBC implements UtenteDao {
 			statement.setString(6, utente.getTipo());
 			statement.setString(7, utente.getEmail());
 			statement.setString(8, utente.getTelefono());
+			df.setTimeZone(TimeZone.getTimeZone("GMT"));
+			statement.setDate(9, new java.sql.Date(0));
 			statement.executeUpdate();
 			updateReferences(utente, connection);
 
@@ -277,6 +283,42 @@ public class UtenteDaoJDBC implements UtenteDao {
 			utenteCred.setFineBan(utente.getFineBan());
 		}
 		return utenteCred;
+	}
+
+	@Override
+	public List<Utente> findAllByBan() {
+		Connection connection = this.dataSource.getConnection();
+		List<Utente> utenti = new LinkedList<>();
+		try {
+			Utente utente;
+			PreparedStatement statement;
+			String query = "select * from utente WHERE fineBan > '1970-01-01'";
+			statement = connection.prepareStatement(query);
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				utente = new UtenteProxy(dataSource);
+				utente.setUsername(result.getString("username"));
+				utente.setNome(result.getString("nome"));
+				utente.setCognome(result.getString("cognome"));
+				utente.setSesso(result.getString("sesso"));
+				long secs = result.getDate("data_nascita").getTime();
+				utente.setDataNascita(new java.util.Date(secs));
+				utente.setTipo(result.getString("tipo"));
+				utente.setEmail(result.getString("email"));
+				utente.setTelefono(result.getString("telefono"));
+				utente.setFineBan(result.getDate("fineBan"));
+				utenti.add(utente);
+			}
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			}
+		}
+		return utenti;
 	}
 
 }

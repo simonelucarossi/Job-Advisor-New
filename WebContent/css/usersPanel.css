@@ -302,7 +302,6 @@ form.form-search:before {
 
 #logo-site {
     height: 50px;
-   
 }
 
 #site-title {
@@ -321,14 +320,30 @@ form.form-search:before {
 }
 
 li{
-	margin-right:20px;
+	margin-left:40px;
 }
 
 }
 body {
     padding-top: 54px;
 }
-table{
-	margin-top: 1.5rem;
+#myTable{
+	margin-top: 5rem;
 }
 
+#deleteUser{
+	color:red;
+}
+
+#newUser{
+	color:#00ff00;
+}
+#banUser{
+	color:yellow;
+}
+#blackListButton{
+	color:white;
+}
+label{
+	 width: 18px;
+}

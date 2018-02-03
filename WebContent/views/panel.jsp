@@ -67,8 +67,8 @@
 						<tr>
 							<td>
 							<span class="custom-checkbox">
-								<input type="checkbox" id="checkbox1" name="ids[]" value="${annuncio.getId()}">
-								<label for="checkbox1"></label>
+								<input type="checkbox" id="${annuncio.getId()}" name="ids[]" value="${annuncio.getId()}">
+								<label for="${annuncio.getId()}"></label>
 							</span>
 							</td>
 							<td>${annuncio.getId()}</td>

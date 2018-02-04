@@ -99,7 +99,7 @@
 	<div id="addNewModal" class="modal fade">
 		<div class="modal-dialog">
 			<div id="creationForm" class="modal-content">
-				<form action="views/createAd" method="post" onsubmit="return checkForm()">
+				<form id="addForm">
 					<div class="modal-header">
 						<h4 class="modal-title">Add New</h4>
 						<button type="button" class="close" data-dismiss="modal"

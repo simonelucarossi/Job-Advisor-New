@@ -107,19 +107,7 @@
 					</c:forEach>
 				</tbody>
 			</table>
-		<!--<div class="clearfix">
-				<div class="hint-text">
-					Showing <b>5</b> out of <b>25</b> entries
-				</div>
-				<ul class="pagination">
-					<li class="page-item disabled"><a href="#">Previous</a></li>
-					<li class="page-item active"><a href="#" class="page-link">1</a></li>
-					<li class="page-item"><a href="#" class="page-link">2</a></li>
-					<li class="page-item"><a href="#" class="page-link">Next</a></li>
-				</ul>
-			</div>	-->
-		</div>
-	</div>
+		
 	<!-- Add Modal HTML -->
 	<div id="addNewModal" class="modal fade">
 		<div class="modal-dialog">
@@ -312,9 +300,9 @@
 							aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">
-						<p>Are you sure you want to ban these Users?</p>
+						<p>For how much time the user/s will be banned?</p>
 						<p class="text-warning">
-							<strong>The will be added to "black list"<br>Please insert time of ban below:</strong>
+							<strong>Please insert time of ban below:</strong>
 						</p>
 						<select id="banTime" name="time"
 							class="form-control" required>
@@ -323,6 +311,28 @@
 							<option value="15">15 days</option>
 							<option value="30">30 days</option>
 						</select>
+					</div>
+					<div class="modal-footer">
+						<input type="hidden" name="id"> 					
+						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel"> 
+						<a class="btn btn-success" data-toggle="modal"  href="#confirmBanModal">Next</a>
+					</div>
+			</div>
+		</div>
+	</div>
+	<div id="confirmBanModal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Confirm operation</h4>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">
+						<p>Are you sure you want to ban these Users?</p>
+						<p class="text-warning">
+							<strong>The will be added to "black list"</strong>
+						</p>
 					</div>
 					<div class="modal-footer">
 						<input type="hidden" name="id"> 					
@@ -445,7 +455,7 @@
 			</div>
 		</div>
 	</div>
-		<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">

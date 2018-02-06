@@ -39,24 +39,21 @@ public class Login extends HttpServlet {
 		String text = "success_login";
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 		Date today = new Date();
-		if (utente != null && utente.getTipo().equals("Amministratore")) {
+		if (utente != null && password.equals(utente.getPassword()) && utente.getTipo().equals("Amministratore")) {
+				session.setAttribute("username", username);
+				session.setAttribute("utente", utente);
+		} else if (utente != null && password.equals(utente.getPassword()) && today.after(utente.getFineBan())) {
 			if (password.equals(utente.getPassword())) {
 				session.setAttribute("username", username);
 				session.setAttribute("utente", utente);
 			}
-		}else if(utente != null){	// && today.after(utente.getFineBan())
-			if (password.equals(utente.getPassword())) {
-				session.setAttribute("username", username);
-				session.setAttribute("utente", utente);
-			}
-		}
-		else if(utente!=null && today.before(utente.getFineBan())) {
+		} else if (utente != null && !password.equals(utente.getPassword()) || utente==null) {
+			text = "login_failed";
+		}else if (utente != null && today.before(utente.getFineBan())) {
 			text = "user_banned";
-		}else if(utente == null) {
-			text="login_failed";
 		}
 		resp.getWriter().print(text);
 
-}
-	
+	}
+
 }

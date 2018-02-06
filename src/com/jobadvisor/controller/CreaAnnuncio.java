@@ -61,7 +61,6 @@ public class CreaAnnuncio extends HttpServlet{
 			Annuncio annuncio= new Annuncio(categoria,date,descrizione,prezzo,latitudine,longitudine,creatore);
 			AnnuncioDao annuncioDao = DatabaseManager.getInstance().getDaoFactory().getAnnuncioDAO();
 			annuncioDao.save(annuncio);
-			response.sendRedirect("/JobAdvisorNew/adsPanel?username="+ request.getParameter("creator"));
 
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block

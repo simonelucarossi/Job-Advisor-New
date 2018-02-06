@@ -10,15 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
-import com.jobadvisor.persistence.dao.UtenteDao;
-import com.jobadvisor.model.Utente;
+import com.jobadvisor.persistence.dao.AnnuncioDao;
+import com.jobadvisor.model.Annuncio;
 import com.jobadvisor.persistence.DatabaseManager;
 
-@WebServlet("/allUsers")
-public class DammiUtenti extends HttpServlet {
+@WebServlet("/allAds")
+public class DammiAds extends HttpServlet {
 	/**
 	 * 
 	 */
@@ -27,10 +25,10 @@ public class DammiUtenti extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		UtenteDao dao = DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
-		List<Utente> utenti= dao.findAll();
-		req.getSession().setAttribute("utenti", utenti);
-		RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher("/views/usersPanel.jsp");
+		AnnuncioDao dao = DatabaseManager.getInstance().getDaoFactory().getAnnuncioDAO();
+		List<Annuncio> annunci= dao.findAll();
+		req.getSession().setAttribute("annunci", annunci);
+		RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher("/views/adsPanel.jsp");
 		dispatcher.forward(req, resp);
 	}
 

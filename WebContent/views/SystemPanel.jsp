@@ -54,7 +54,7 @@
         <div class="col-md-5">
           <h3>Manage Users</h3>
           <p>By the button below you can access to users management panel. Here you can choose any basic operation to execute on user's accounts, for example: creating and deleting accounts,or simply editing some features or blocking access to the web site.</p>
-          <a class="btn btn-primary" href="/JobAdvisorNew/users">Users Panel</a>
+          <a class="btn btn-primary" href="/JobAdvisorNew/allUsers">Users Panel</a>
         </div>
       </div>
       <!-- /.row -->
@@ -70,7 +70,7 @@
         <div class="col-md-5">
           <h3>Manage Ads</h3>
           <p>Using the button below you can access to management panel for Ads. In these section you can decide to search for an Ad in the Web site and then to edit its content or just to delete the Ad.</p>
-          <a class="btn btn-primary" href="#">Ads Panel</a>
+          <a class="btn btn-primary" href="/JobAdvisorNew/allAds">Ads Panel</a>
         </div>
       </div>
       <!-- /.row -->

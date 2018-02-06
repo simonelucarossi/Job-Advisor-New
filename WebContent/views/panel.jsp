@@ -67,8 +67,8 @@
 						<tr>
 							<td>
 							<span class="custom-checkbox">
-								<input type="checkbox" id="checkbox1" name="ids[]" value="${annuncio.getId()}">
-								<label for="checkbox1"></label>
+								<input type="checkbox" id="${annuncio.getId()}" name="ids[]" value="${annuncio.getId()}">
+								<label for="${annuncio.getId()}"></label>
 							</span>
 							</td>
 							<td>${annuncio.getId()}</td>
@@ -99,7 +99,7 @@
 	<div id="addNewModal" class="modal fade">
 		<div class="modal-dialog">
 			<div id="creationForm" class="modal-content">
-				<form action="views/createAd" method="post" onsubmit="return checkForm()">
+				<form id="addForm">
 					<div class="modal-header">
 						<h4 class="modal-title">Add New</h4>
 						<button type="button" class="close" data-dismiss="modal"

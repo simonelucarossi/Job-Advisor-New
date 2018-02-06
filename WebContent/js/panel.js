@@ -129,6 +129,20 @@ $(document).ready(function() {
 		}
 	});
 	
+	$('#addForm').submit(function() {
+		event.preventDefault();
+		if(checkForm()){
+			$.ajax({
+				method: "POST",
+				url: "/JobAdvisorNew/views/createAd",
+				data:$("#addForm").serialize(),
+				success: function () {
+					location.reload();
+				}
+			});
+		}
+	});
+	
 	$("#newAdd").click(function name() {
 		setTimeout(loadWithDelay,2000 );
 	});
@@ -141,6 +155,7 @@ $(document).ready(function() {
 	            myCheckboxes.push($(this).val());
 	        }
 		});
+		myCheckboxes.shift();
 	    $.ajax({
 	           type: "POST",
 	           url: "/JobAdvisorNew/deleteAd",
@@ -163,10 +178,10 @@ $(document).ready(function() {
 				url: "/JobAdvisorNew/api/annuncio/" + id,
 				dataType: "json",
 				success: function (result) {
-					$('input[name=id]').val(id);
-					$('input[name=category]').val(result.categoria);
-					$('textarea[name=description]').val(result.descrizione);
-					$('input[name=price]').val(result.prezzo);
+					$('#editForm input[name=id]').val(id);
+					$('#editForm input[name=category]').val(result.categoria);
+					$('#editForm textarea[name=description]').val(result.descrizione);
+					$('#editForm input[name=price]').val(result.prezzo);
 	           }
 	         });
 		 $("#saveButton").click(function name() {
@@ -188,11 +203,11 @@ $(document).ready(function() {
 				url: "/JobAdvisorNew/api/annuncio/" + id,
 				dataType: "json",
 				success: function (result) {
-					$('input[name=id]').val(id);
-					$('input[name=category]').val(result.categoria);
-					$('textarea[name=description]').val(result.descrizione);
-					$('input[name=price]').val(result.prezzo);
-					$('input[name=date]').val(result.data);
+					$('#showForm input[name=id]').val(id);
+					$('#showForm input[name=category]').val(result.categoria);
+					$('#showForm textarea[name=description]').val(result.descrizione);
+					$('#showForm input[name=price]').val(result.prezzo);
+					$('#showForm input[name=date]').val(result.data);
 	           }
 	         });
 	});

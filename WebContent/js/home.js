@@ -3,7 +3,6 @@
  */
 
 $(document).ready(function () {
-
 		$("body").fadeIn(500);
 	
 		$("#form-search").hide();
@@ -50,7 +49,7 @@ $(document).ready(function () {
 		        		$("#passwordL").val('');
 		        		$("#login-box").show("slow");
 		        		$("#fade-box").show("slow");
-		        		$("#logo-site-login").after("<p id=\"message\" style=\"color:red;\">You are still banned!</p>");
+		        		$("#logo-site-login").after("<p id=\"message\" style=\"color:red;\">Sorry but you cannot access!</p>");
 		        	}else{
 		        		document.location.href="index.jsp";
 		        	}
@@ -60,4 +59,16 @@ $(document).ready(function () {
 		    e.preventDefault(); // avoid to execute the actual submit of the form.
 		});
 	
+});
+
+window.addEventListener('load', function() {
+
+	  function updateOnlineStatus(event) {
+	    var condition = navigator.onLine ? "online" : "offline";
+
+	    alert('you are ${condition}');
+
+	  }
+	  window.addEventListener('online',  updateOnlineStatus);
+	  window.addEventListener('offline', updateOnlineStatus);
 });

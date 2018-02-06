@@ -12,44 +12,54 @@
 	href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="/JobAdvisorNew/css/panel.css">
+<link href="/JobAdvisorNew/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="/JobAdvisorNew/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/JobAdvisorNew/css/adsPanel.css">        
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="/JobAdvisorNew/js/AdsPanel.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDe9jibJf963yX2fZCd6FLxYJzTljlhzhc&callback=initMap"></script>
+<script src="/JobAdvisorNew/js/panel.js"></script>
+<script src="/JobAdvisorNew/vendor/jquery/jquery.min.js"></script>
+<script src="/JobAdvisorNew/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-	<div class="container">
-		<div class="table-wrapper">
-			<div class="table-title">
-				<div class="row">
-					<div class="col-sm-4">
-						<a id="brand-site" class="navbar-brand js-scroll-trigger" href="/JobAdvisorNew"> 
-							<img id="logo-site" src="img/gps.png">
-							<strong id="site-title">JOB ADVISOR</strong>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+     <div class="container">
+				<a id="brand-site" class="navbar-brand js-scroll-trigger" href="/JobAdvisorNew"> 
+					<img id="logo-site" src="img/gps.png">
+					<strong id="site-title">JOB ADVISOR</strong>
+				</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+		          <span class="navbar-toggler-icon"></span>
+		        </button>
+		        <div class="collapse navbar-collapse" id="navbarResponsive">
+		          <ul class="navbar-nav ml-auto">
+		            <li class="nav-item">
+			          	<form class="form-search form-inline">
+							<input type="text" id="searchInput" class="search-query" placeholder="Search for name..">
+						</form>
+		        	</li>
+		        	<li class="nav-item">
+			          	<a style="color:red;" href="#deleteAdModal"
+						class="btn btn-default" data-toggle="modal"><i
+						class="fa fa-minus-circle"></i> <span>Delete</span>
 						</a>
-					</div>
-					<div class="col-sm-4">
-							<form class="form-search form-inline">
-								<input type="text" id="searchInput" class="search-query" placeholder="Search for category..">
-							</form>
-					</div>
-					<div class="col-sm-4">
-						<a id="newAdd" href="#addNewModal" class="btn btn-success"
-							data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add
+		        	</li>
+		        	 <li class="nav-item">
+						<a id="newAdd" style="color:#00ff00;" href="#addNewModal" class="btn btn-default"
+							data-toggle="modal"><i class="fa fa-plus-circle"></i> <span>Add
 								New </span>
 						</a> 
-						<a href="#deleteAdModal"
-							class="btn btn-danger" data-toggle="modal"><i
-							class="material-icons">&#xE15C;</i> <span>Delete</span>
-						</a>
-					</div>
-				</div>
+		        	</li>
+		        	<li class="nav-item">
+			          	<a class="btn btn-default" data-toggle="modal"  href="#logoutModal">
+			            <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+		        	</li>
+		          </ul>
 			</div>
+			</div>
+</nav>
+    <div class="table-responsive">
 			<table id="myTable" class="table table-striped table-hover">
 				<thead>
 					<tr>
@@ -57,8 +67,8 @@
 								type="checkbox" id="selectAll"> <label for="selectAll"></label>
 						</span></th>
 						<th>ID</th>
+						<th>Author</th>
 						<th>Category</th>
-						<th>Price</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
@@ -67,13 +77,13 @@
 						<tr>
 							<td>
 							<span class="custom-checkbox">
-								<input type="checkbox" id="checkbox1" name="ids[]" value="${annuncio.getId()}">
-								<label for="checkbox1"></label>
+								<input type="checkbox" id="${annuncio.getId()}" name="ids[]" value="${annuncio.getId()}">
+								<label for="${annuncio.getId()}"></label>
 							</span>
 							</td>
 							<td>${annuncio.getId()}</td>
+							<td>${annuncio.getCreator().getNomeCompleto()}</td>
 							<td>${annuncio.getCategoria()}</td>
-							<td>${annuncio.getPrezzo()}</td>
 							<td>
 							<a href="#editAdModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a> 
 							<a id="showMyAd" href="#showAdModal" data-toggle="modal"><i style="color:black;" class="fa" data-toggle="tooltip" title="Show">&#xf06e;</i></a>
@@ -82,24 +92,12 @@
 					</c:forEach>
 				</tbody>
 			</table>
-		<!--<div class="clearfix">
-				<div class="hint-text">
-					Showing <b>5</b> out of <b>25</b> entries
-				</div>
-				<ul class="pagination">
-					<li class="page-item disabled"><a href="#">Previous</a></li>
-					<li class="page-item active"><a href="#" class="page-link">1</a></li>
-					<li class="page-item"><a href="#" class="page-link">2</a></li>
-					<li class="page-item"><a href="#" class="page-link">Next</a></li>
-				</ul>
-			</div>	-->
-		</div>
-	</div>
+    </div>
 	<!-- Add Modal HTML -->
 	<div id="addNewModal" class="modal fade">
 		<div class="modal-dialog">
 			<div id="creationForm" class="modal-content">
-				<form action="views/createAd" method="post" onsubmit="return checkForm()">
+				<form id="addForm">
 					<div class="modal-header">
 						<h4 class="modal-title">Add New</h4>
 						<button type="button" class="close" data-dismiss="modal"
@@ -108,16 +106,16 @@
 					<div class="modal-body">
 						<div class="form-group">
 							<label>Category</label> 
-							<input name="category" type="text" class="form-control" id="inputCategory" placeholder="Category..." required>
+							<input name="category" type="text" class="form-control"  placeholder="Category..." required>
 							<input name="creator" value="${username}" type="hidden" id="creator">
 						</div>
 						<div class="form-group">
 							<label id="descrip-label" for="inputDescription">Description</label>
-						<textarea rows="10" cols="30" name="description" class="form-control" id="inputDescription" required></textarea>
+						<textarea rows="10" cols="30" name="description" class="form-control" required></textarea>
 						</div>
 						<div class="form-group">
 						<label id="priceLabel" for="inputPrice">Job-price</label> 
-						<input name="price" type="number" step="0.01" min="5" class="form-control" id="inputPrice" placeholder="Insert a price..." required>
+						<input id="inputPrice" name="price" type="number" step="0.01" min="5" class="form-control" placeholder="Insert a price..." required>
 						</div>
 						<input name="lat" type="hidden" id="my-lat"> 
 						<input name="lon" type="hidden" id="my-lon">
@@ -136,7 +134,7 @@
 	<div id="editAdModal" class="modal fade">
 		<div class="modal-dialog">
 			<div id="creationForm" class="modal-content">
-				<form id="editForm"  method="post" onsubmit="return checkPrice()">
+				<form id="editForm" onsubmit="return checkPrice()">
 					<div class="modal-header">
 						<h4 class="modal-title">Edit Ad</h4>
 						<button type="button" class="close" data-dismiss="modal"
@@ -146,15 +144,15 @@
 						<div class="form-group">
 							<label>Category</label> 
 							<input type="hidden" name="id">
-							<input name="category" type="text" class="form-control" id="inputCategory" required>
+							<input name="category" type="text" class="form-control" required>
 						</div>
 						<div class="form-group">
 							<label id="descrip-label" for="inputDescription">Description</label>
-						<textarea rows="10" cols="30" name="description" class="form-control" id="inputDescription" required></textarea>
+						<textarea rows="10" cols="30" name="description" class="form-control" required></textarea>
 						</div>
 						<div class="form-group">
 						<label id="priceLabel" for="inputPrice">Job-price</label> 
-						<input name="price" type="number" step="0.01" min="5" class="form-control" id="inputPrice" required>
+						<input name="price" type="number" step="0.01" min="5" class="form-control" required>
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -245,5 +243,22 @@
 			</div>
 		</div>
 	</div>
+	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" href="/JobAdvisorNew/logout">Logout</a>
+          </div>
+        </div>
+      </div>
+      </div>
 </body>
 </html>

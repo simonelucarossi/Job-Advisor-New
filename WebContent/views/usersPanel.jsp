@@ -12,9 +12,9 @@
 	href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/icon?family=Material+Icons">
- <link href="/JobAdvisorNew/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="/JobAdvisorNew/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="/JobAdvisorNew/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="/JobAdvisorNew/css/usersPanel.css">
+<link rel="stylesheet" type="text/css" href="/JobAdvisorNew/css/usersPanel.css">        
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="/JobAdvisorNew/js/usersPanel.js"></script>
@@ -38,23 +38,33 @@
 							<input type="text" id="searchInput" class="search-query" placeholder="Search for name..">
 						</form>
 		        	</li>
-		        	 <li class="nav-item">
-						<a id="newUser" href="#addNewModal" class="btn btn-success"
-							data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add
-								New </span>
-						</a> 
+		        	<li class="nav-item">
+			          	<a id="deleteUser" href="#deleteUserModal"
+						class="btn btn-default" data-toggle="modal"><i
+						class="fa fa-minus-circle"></i> <span>Delete</span>
+						</a>
 		        	</li>
 		        	 <li class="nav-item">
-			          	<a href="#banUserModal"
-						class="btn btn-warning" data-toggle="modal"><i
+			          	<a id="banUser" href="#banUserModal"
+						class="btn btn-default" data-toggle="modal"><i
 						class="fa">&#xf023;</i> <span>Ban</span>
 						</a>
 		        	</li>
+		        	 <li class="nav-item">
+						<a id="newUser" href="#addNewModal" class="btn btn-default"
+							data-toggle="modal"><i class="fa fa-plus-circle"></i> <span>Add
+								New </span>
+						</a> 
+		        	</li>
 		        	<li class="nav-item">
-			          	<a href="#deleteUserModal"
-						class="btn btn-danger" data-toggle="modal"><i
-						class="material-icons">&#xE15C;</i> <span>Delete</span>
+			          	<a id="blackListButton" href="#blackListModal"
+						class="btn btn-default" data-toggle="modal"><i class="fa fa-user-times"></i>
+						 <span>Black list</span>
 						</a>
+		        	</li>
+		        	<li class="nav-item">
+			          	<a class="btn btn-default" data-toggle="modal"  href="#logoutModal">
+			            <i class="fa fa-fw fa-sign-out"></i>Logout</a>
 		        	</li>
 		          </ul>
 			</div>
@@ -78,8 +88,8 @@
 							<td>
 							<c:if test="${utente.getTipo() != 'Amministratore' }">
 								<span class="custom-checkbox">
-									<input type="checkbox" id="checkbox1" value="${utente.getUsername()}">
-									<label for="checkbox1"></label>
+									<input type="checkbox" id="${utente.getUsername()}" value="${utente.getUsername()}">
+									<label for="${utente.getUsername()}"></label>
 								</span>
 							</c:if>
 							<c:if test="${utente.getTipo() == 'Amministratore' }">
@@ -97,19 +107,7 @@
 					</c:forEach>
 				</tbody>
 			</table>
-		<!--<div class="clearfix">
-				<div class="hint-text">
-					Showing <b>5</b> out of <b>25</b> entries
-				</div>
-				<ul class="pagination">
-					<li class="page-item disabled"><a href="#">Previous</a></li>
-					<li class="page-item active"><a href="#" class="page-link">1</a></li>
-					<li class="page-item"><a href="#" class="page-link">2</a></li>
-					<li class="page-item"><a href="#" class="page-link">Next</a></li>
-				</ul>
-			</div>	-->
-		</div>
-	</div>
+		
 	<!-- Add Modal HTML -->
 	<div id="addNewModal" class="modal fade">
 		<div class="modal-dialog">
@@ -201,7 +199,7 @@
 							<label for="password" class="cols-sm-2 control-label">Password</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<input type="password" class="form-control" name="password" id="password"  placeholder="Enter your Password"/>
+									<input type="password" class="form-control" name="password" id="password"  placeholder="Enter your Password" required/>
 								</div>
 							</div>
 						</div>
@@ -210,7 +208,7 @@
 							<label for="confirm" class="cols-sm-2 control-label">Confirm Password</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<input type="password" class="form-control" name="confirm" id="confirm"  placeholder="Confirm your Password"/>
+									<input type="password" class="form-control" name="confirm" id="confirm"  placeholder="Confirm your Password" required/>
 								</div>
 							</div>
 						</div>
@@ -302,9 +300,9 @@
 							aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">
-						<p>Are you sure you want to ban these Users?</p>
+						<p>For how much time the user/s will be banned?</p>
 						<p class="text-warning">
-							<strong>The will be added to "black list"<br>Please insert time of ban below:</strong>
+							<strong>Please insert time of ban below:</strong>
 						</p>
 						<select id="banTime" name="time"
 							class="form-control" required>
@@ -313,6 +311,28 @@
 							<option value="15">15 days</option>
 							<option value="30">30 days</option>
 						</select>
+					</div>
+					<div class="modal-footer">
+						<input type="hidden" name="id"> 					
+						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel"> 
+						<a class="btn btn-success" data-toggle="modal"  href="#confirmBanModal">Next</a>
+					</div>
+			</div>
+		</div>
+	</div>
+	<div id="confirmBanModal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Confirm operation</h4>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">
+						<p>Are you sure you want to ban these Users?</p>
+						<p class="text-warning">
+							<strong>The will be added to "black list"</strong>
+						</p>
 					</div>
 					<div class="modal-footer">
 						<input type="hidden" name="id"> 					
@@ -400,5 +420,57 @@
 			</div>
 		</div>
 	</div>
+	<!-- Black List Modal HTML -->
+	<div id="blackListModal" class="modal fade">
+		<div class="modal-dialog">
+			<div id="modalContent" class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Black list</h4>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">
+						<p>The following list shows all banned accounts</p>
+						<table id="blackList" class="table">
+						  <thead>
+						    <tr>
+								<th scope="col">
+									<span class="custom-checkbox"> 
+										<input type="checkbox" id="selectAllList"> <label for="selectAllList"></label>
+									</span>
+								</th>
+								<th scope="col">Username</th>
+								<th scope="col">End of ban</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+						  </tbody>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<input type="hidden" name="id"> 					
+						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel"> 
+						<input id="deleteFromList" type="button" class="btn btn-danger" value="Delete">
+					</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" href="/JobAdvisorNew/logout">Logout</a>
+          </div>
+        </div>
+      </div>
+      </div>
 </body>
 </html>

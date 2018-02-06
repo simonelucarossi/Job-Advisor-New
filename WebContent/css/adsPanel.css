@@ -17,7 +17,7 @@ body {
 
 .table-title {
 	padding-bottom: 15px;
-	background: #2e2f2f;
+	background: #435d7d;
 	color: #fff;
 	padding: 16px 30px;
 	margin: -20px -25px 10px;
@@ -302,6 +302,7 @@ form.form-search:before {
 
 #logo-site {
     height: 50px;
+   
 }
 
 #site-title {
@@ -315,35 +316,8 @@ form.form-search:before {
 	color: white;
 	opacity: 0.9;
 }
-#admin{
-	color:red;
+
+.table-responsive {
+    margin-top: 5rem;
 }
 
-li{
-	margin-left:40px;
-}
-
-}
-body {
-    padding-top: 54px;
-}
-#myTable{
-	margin-top: 5rem;
-}
-
-#deleteUser{
-	color:red;
-}
-
-#newUser{
-	color:#00ff00;
-}
-#banUser{
-	color:yellow;
-}
-#blackListButton{
-	color:white;
-}
-#myTable label{
-	 width: 18px;
-}

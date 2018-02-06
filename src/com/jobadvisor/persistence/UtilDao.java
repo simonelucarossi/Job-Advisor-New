@@ -51,7 +51,7 @@ public class UtilDao {
 					+ "latitudine DECIMAL,longitudine DECIMAL,creatore VARCHAR(255) REFERENCES utente(\"username\"));"
 					
 					+ "create table recensione(\"id\" bigint primary key,data_creazione DATE,"
-					+ " creatore VARCHAR(255) REFERENCES utente(\"username\"),annuncio bigint REFERENCES annuncio(\"id\"));";
+					+ "titolo VARCHAR(255), testo VARCHAR(1000), creatore VARCHAR(255) REFERENCES utente(\"username\"),annuncio bigint REFERENCES annuncio(\"id\"), valutazione VARCHAR(5));";
 
 			PreparedStatement statement = connection.prepareStatement(create);
 			statement.executeUpdate();

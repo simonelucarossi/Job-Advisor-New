@@ -40,6 +40,20 @@
 	
 	<servlet>
 		<description></description>
+		<display-name>DammiReviewAPI</display-name>
+
+		<servlet-name>DammiReviewAPI</servlet-name>
+		<servlet-class>com.jobadvisor.controller.api.DammiReviewApi</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DammiReviewAPI</servlet-name>
+		<url-pattern>/api/review/*</url-pattern>
+	</servlet-mapping>
+	
+	
+	
+	<servlet>
+		<description></description>
 		<display-name>DammiUserAPI</display-name>
 
 		<servlet-name>DammiUserAPI</servlet-name>

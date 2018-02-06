@@ -8,14 +8,22 @@ public class Recensione {
 	private Long id;
 	private Date data;
 	private String creatore;
+	private String titolo;
+	private String testo;
 	private Long annuncio;
+	private String valutazione;
 
 	public Recensione() {
 	}
 
-	public Recensione(Long id, Date d) {
+	public Recensione(Long id, Date d, String titolo, String testo,String creatore, Long idAds, String valutazione) {
 		this.id=id;
 		this.data=d;
+		this.creatore = creatore;
+		this.titolo = titolo;
+		this.testo = testo;
+		this.annuncio = idAds;
+		this.valutazione = valutazione;
 	}
 
 	public Long getId() {
@@ -47,6 +55,24 @@ public class Recensione {
 	public void setCreatore(String creatore) {
 		this.creatore = creatore;
 	}
+	
+	
+
+	public String getTitolo() {
+		return titolo;
+	}
+
+	public void setTitolo(String titolo) {
+		this.titolo = titolo;
+	}
+
+	public String getTesto() {
+		return testo;
+	}
+
+	public void setTesto(String testo) {
+		this.testo = testo;
+	}
 
 	public Long getAnnuncio() {
 		return annuncio;
@@ -55,5 +81,15 @@ public class Recensione {
 	public void setAnnuncio(Long annuncio) {
 		this.annuncio = annuncio;
 	}
+
+	public String getValutazione() {
+		return valutazione;
+	}
+
+	public void setValutazione(String valutazione) {
+		this.valutazione = valutazione;
+	}
+	
+	
 
 }

@@ -31,6 +31,9 @@ public class DammiAdsRicerca extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		DAOFactory.getDAOFactory(DAOFactory.POSTGRESQL).getUtilDAO().dropDatabase();
+//		DAOFactory.getDAOFactory(DAOFactory.POSTGRESQL).getUtilDAO().createDatabase();
+		
 		String category = request.getParameter("category");
 		List<Annuncio> annunci = DAOFactory.getDAOFactory(DAOFactory.POSTGRESQL).getAnnuncioDAO().findAllByCategory(category);
 		request.setAttribute("annunci", annunci);

@@ -34,8 +34,6 @@ public class DammiAdsApi extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		
 		String category = request.getParameter("category");
 		System.out.println(category);
 		List<Annuncio> annunci = DAOFactory.getDAOFactory(DAOFactory.POSTGRESQL).getAnnuncioDAO().findAllByCategory(category);
@@ -70,6 +68,9 @@ public class DammiAdsApi extends HttpServlet {
 			obj.put("creatore", creatore);
 			obj.put("latitudine", annuncio.getLatitudine());
 			obj.put("longitudine", annuncio.getLongitudine());
+			
+			double stats = DAOFactory.getDAOFactory(DAOFactory.POSTGRESQL).getRecensioneDAO().StatsByAdsPrimaryKey(annuncio.getId());
+			obj.put("valutazione", stats);
 
 			list.add(obj);
 		}

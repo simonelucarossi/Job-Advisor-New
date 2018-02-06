@@ -554,11 +554,22 @@ h1 {
 	color: #f39c12;
 }
 
-@media ( max-width : 992px) {
+@media(max-height: 660px) {
+	.container-site {
+		position: relative;
+		min-height: 100%;
+	}
+}
+
+@media(min-height: 660px) {
 	.container-site {
 		position: relative;
 		height: 100%;
 	}
+}
+
+@media ( max-width : 992px) {
+	
 	header.masthead {
 		height: 93%;
 		background-image:

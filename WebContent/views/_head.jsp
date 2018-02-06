@@ -47,5 +47,11 @@
 <jsp:include page="_handlebarsTemplates.jsp"></jsp:include>
 
 
+<!-- This is for stars of Reviews -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/css/star-rating.min.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/js/star-rating.min.js"></script>
+
+
+
 
 </head>

@@ -109,10 +109,10 @@ public class UtenteDaoJDBC implements UtenteDao {
 				utente.setEmail(result.getString("email"));
 				utente.setTelefono(result.getString("telefono"));
 				utente.setPassword(result.getString("password"));
-				if (!utente.getTipo().equals("Amministratore")) {
+				/*if (!utente.getTipo().equals("Amministratore")) {
 					long end = result.getDate("fineBan").getTime();
 					utente.setFineBan(new java.util.Date(end));
-				}
+				}*/
 			}
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());

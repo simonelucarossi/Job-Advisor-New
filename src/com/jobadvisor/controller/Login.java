@@ -44,7 +44,7 @@ public class Login extends HttpServlet {
 				session.setAttribute("username", username);
 				session.setAttribute("utente", utente);
 			}
-		}else if(utente != null && today.after(utente.getFineBan())){
+		}else if(utente != null){	// && today.after(utente.getFineBan())
 			if (password.equals(utente.getPassword())) {
 				session.setAttribute("username", username);
 				session.setAttribute("utente", utente);

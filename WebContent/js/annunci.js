@@ -86,5 +86,31 @@ $(document).ready(function() {
 		if($map.length > 0) {
 			GMaps.initialize($map);
 		}
+		
+			var $recensioni = $(".js-roriva");
+			var source2 = $("#review-details").html();
+			var template2 = Handlebars.compile(source2);
+			var url2 = window.location.pathname;
+			var id2 = url.substring(url2.lastIndexOf('/') + 1);
+
+			var result2 = $.ajax({
+				method: "GET",
+				url: "/JobAdvisorNew/api/review/" + id2,
+				dataType: "json"
+			});
+
+			result2.done(function(recensioni) {
+				recensioni.forEach(function(recensione) {
+					$recensioni.append(template2(recensione));
+				});
+			});
 	});
 });
+
+
+
+
+/* REVIEW BOX OF ANNUNCIO */
+$('input.my_class').rating({
+	  clearable: true
+	});

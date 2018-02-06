@@ -8,6 +8,10 @@ public interface RecensioneDao {
 	public void save(Recensione recensione); // Create
 
 	public Recensione findByPrimaryKey(Long id); // Retrieve
+	
+	public List<Recensione> findAllByAdsPrimaryKey(Long id); // Retrieve
+	
+	public double StatsByAdsPrimaryKey(Long id);
 
 	public List<Recensione> findAll();
 

@@ -42,7 +42,7 @@ $(document).ready(function() {
 					location.reload();
 	           },
 	           error: function (data) {
-	        	  alert("Addio");
+	        	  alert("Error");
 	           }
 	         });
 
@@ -53,7 +53,6 @@ $(document).ready(function() {
 	$('.editReview').click(function(e) {
 		 var idTmp = $(this).closest("tr").find("td").eq(1).text();
 		 var idAdsTmp = $(this).closest("tr").find("td").eq(5).text();
-		 alert(idTmp);
 		 $.ajax({
 			 method: "GET",
 				url: "/JobAdvisorNew/api/singleReview/" + idTmp,
@@ -67,7 +66,6 @@ $(document).ready(function() {
 	           }
 	         });
 		 $("#saveButton").click(function name() {
-			 alert($('#editForm input[name=idAds]').val());
 			
 			 $.ajax({
 				 method: "POST",

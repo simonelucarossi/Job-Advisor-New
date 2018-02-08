@@ -171,6 +171,8 @@ $(document).ready(function() {
 	    e.preventDefault(); 
 	});
 	
+	 
+	
 	$('.edit').click(function(e) {
 		 var id = $(this).closest("tr").find("td").eq(1).text();
 		 $.ajax({
@@ -196,6 +198,8 @@ $(document).ready(function() {
 		 });
 	});
 	
+	
+	
 	$("td:last-child").click(function(e) {
 		 var id = $(this).closest("tr").find("td").eq(1).text();
 		 $.ajax({
@@ -211,6 +215,8 @@ $(document).ready(function() {
 	           }
 	         });
 	});
+	
+	
 	
 	$("#searchInput").keyup(function () {
 	    //split the current value of searchInput

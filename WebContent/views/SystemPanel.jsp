@@ -86,7 +86,7 @@
         <div class="col-md-5">
           <h3>Manage Reviews</h3>
           <p>Here you can access to Reviews panel. The panel shows all existing reviews on the web site, and it gives the opportunity to show reviews' content, that can be edited or deleted.</p>
-          <a class="btn btn-primary" href="#">Reviews Panel</a>
+          <a class="btn btn-primary" href="/JobAdvisorNew/allReviews">Reviews Panel</a>
         </div>
       </div>
       <!-- /.row -->

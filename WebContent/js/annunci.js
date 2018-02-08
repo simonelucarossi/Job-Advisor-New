@@ -35,6 +35,7 @@ $(document).ready(function() {
 	}
 
 	$(".js-sorting").click(function(ev) {
+		$(".js-annunci").empty();
 		var $this = $(this);
 
 		var sorting = $this.data("sorting");
@@ -42,16 +43,18 @@ $(document).ready(function() {
 
 		if(order == "asc") {
 			$this.data("order", "desc");
-			$this.html($this.data("label") + " (decrescente)");
+			$this.html($this.data("label") + " (asc)");
 		} else {
 			$this.data("order", "asc");
-			$this.html($this.data("label") + " (ascendente)");
+			$this.html($this.data("label") + " (desc)");
 		}
 
+		
+		
 		var result = $.ajax({
 			method: "GET",
 			url: "/JobAdvisorNew/api/ads",
-			data: {sorting: sorting, order: order},
+			data: {sorting: sorting, order: order, category: categorySearch},
 			dataType: "json"
 		});
 
@@ -79,7 +82,9 @@ $(document).ready(function() {
 		dataType: "json"
 	});
 
-	result.done(function(annuncio) {
+	result.done(function(annuncio) { 
+		var login = $("meta#login-user");
+		if(login.length > 0) {annuncio.loggedin = true}
 		$annuncio.append(template(annuncio));
 
 		var $map = $annuncio.find("#map");

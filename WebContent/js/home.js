@@ -51,7 +51,7 @@ $(document).ready(function () {
 		        		$("#fade-box").show("slow");
 		        		$("#logo-site-login").after("<p id=\"message\" style=\"color:red;\">Sorry but you cannot access!</p>");
 		        	}else{
-		        		document.location.href="index.jsp";
+		        		document.location.reload();
 		        	}
 		           }
 		         });

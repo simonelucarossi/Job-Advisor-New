@@ -34,9 +34,20 @@ public class DammiAdsApi extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		String category = request.getParameter("category");
-		System.out.println(category);
-		List<Annuncio> annunci = DAOFactory.getDAOFactory(DAOFactory.POSTGRESQL).getAnnuncioDAO().findAllByCategory(category);
+		String sorting = request.getParameter("sorting");
+		String order = request.getParameter("order");
+		List<Annuncio> annunci = null;
+		
+		
+		System.out.println("CATEGORY -> " + category);
+		if(sorting == null && order == null) {
+			annunci = DAOFactory.getDAOFactory(DAOFactory.POSTGRESQL).getAnnuncioDAO().findAllByCategory(category);
+		}
+		else {
+			annunci = DAOFactory.getDAOFactory(DAOFactory.POSTGRESQL).getAnnuncioDAO().findAllByCategoryWithSorting(category,sorting,order);
+		}
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");
 		response.getWriter().write(makeAnnunciJson(annunci)); 
@@ -61,6 +72,7 @@ public class DammiAdsApi extends HttpServlet {
 			obj.put("id", annuncio.getId());	
 			obj.put("categoria", annuncio.getCategoria());
 			obj.put("data", annuncio.getData().toString());
+			obj.put("prezzo", annuncio.getPrezzo());
 			JSONObject creatore = new JSONObject();
 			creatore.put("nomeCompleto", annuncio.getCreator().getNomeCompleto());
 			creatore.put("username", annuncio.getCreator().getUsername());

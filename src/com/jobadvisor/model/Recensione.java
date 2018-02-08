@@ -25,6 +25,7 @@ public class Recensione {
 		this.annuncio = idAds;
 		this.valutazione = valutazione;
 	}
+	
 
 	public Long getId() {
 		return id;

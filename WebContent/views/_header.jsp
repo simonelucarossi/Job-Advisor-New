@@ -7,7 +7,7 @@ prefix="c" %>
 	class="navbar navbar-expand-lg navbar-light fixed-top">
 	<div class="container">
 		<a id="brand-site" class="navbar-brand js-scroll-trigger"
-			href="/JobAdvisorNew"> <img id="logo-site" src="img/gps.png">
+			href="/JobAdvisorNew"> <img id="logo-site" src="/JobAdvisorNew/img/gps.png">
 			<strong id="site-title">JOB ADVISOR</strong>
 		</a>
 		<ul class="navbar-nav ml-auto">
@@ -29,7 +29,7 @@ prefix="c" %>
 				</c:if>
 			</li>
 			<li  class="nav-item"><c:if test="${utente != null }">
-					<a id="logout" class="nav-link js-scroll-trigger" href="logout">Logout</a>
+					<a id="logout" class="nav-link js-scroll-trigger" href="/JobAdvisorNew/logout">Logout</a>
 				</c:if></li>
 		</ul>
 	</div>

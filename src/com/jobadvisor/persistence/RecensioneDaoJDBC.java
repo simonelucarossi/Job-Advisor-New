@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -159,7 +160,14 @@ public class RecensioneDaoJDBC implements RecensioneDao {
 		System.out.println("Stast:" + stats);
 		System.out.println("Review:" + numberOfReview);
 		
-		return stats/numberOfReview;
+		
+		
+		if(stats != 0 && numberOfReview != 0) {
+			double value = stats/numberOfReview;
+			value = Double.parseDouble(new DecimalFormat("##.##").format(value));
+			return value;
+		}
+		return 0;
 	}
 	
 
@@ -202,7 +210,7 @@ public class RecensioneDaoJDBC implements RecensioneDao {
 	public void update(Recensione recensione) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			String update = "update annuncio SET data_creazione= ?,titolo = ?, testo = ?, creatore = ?,annuncio = ?, WHERE id=?";
+			String update = "update recensione SET data_creazione= ?,titolo = ?, testo = ?, creatore = ?,annuncio = ?,valutazione = ? WHERE id = ?";
 			PreparedStatement statement = connection.prepareStatement(update);
 			long secs= recensione.getData().getTime();
 			statement.setDate(1, new java.sql.Date(secs));
@@ -210,8 +218,8 @@ public class RecensioneDaoJDBC implements RecensioneDao {
 			statement.setString(3,recensione.getTesto());
 			statement.setString(4,recensione.getCreatore());
 			statement.setLong(5, recensione.getAnnuncio());
-			statement.setLong(6, recensione.getId());
-			statement.setString(7, recensione.getValutazione());
+			statement.setString(6, recensione.getValutazione());
+			statement.setLong(7, recensione.getId());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());

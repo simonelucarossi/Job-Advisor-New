@@ -8,23 +8,12 @@
 <body>
 
 	<div class="container-site">
-		
-		
-		
-		
 
-		<nav id="nav-bar-mobile"
-			class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-			<div class="container">
-				<a id="brand-site" class="navbar-brand js-scroll-trigger"
-					href="/JobAdvisorNew/index.jsp"> <img id="logo-site"
-					src="/JobAdvisorNew/img/gps.png"> <strong id="site-title">JOB
-						ADVISOR</strong>
-				</a> <span onclick="appearLogin()" id="login-img" class="fa fa-user">
-				</span>
-			</div>
-		</nav>
 
+
+
+	<jsp:include page="_header.jsp"></jsp:include>
+	
 		<main id="container-box"> <!-- Navigation -->
 
 
@@ -39,19 +28,21 @@
 			style="width: 100%; height: 100%; z-index: 9999; background-color: black; top: 0px; left: 0px; right: 0px; position: fixed; opacity: 0.8;">
 		</div>
 		<!-- FINE FADEBOX -->
-		
+
 		<!-- REVIEW HTML -->
-		
+
 		<div class="review-box" class="wrapper">
 			<div class="review-form">
 				<div class="row" id="post-review-box"">
 					<div class="col-md-12">
-						<form class="form-review" accept-charset="UTF-8" action="" method="post">
-							<input name="creator" value="${username}" type="hidden" id="creator">
+						<form class="form-review" accept-charset="UTF-8" action=""
+							method="post">
+							<input name="creator" value="${username}" type="hidden"
+								id="creator">
 							<h2 id="title-form-review">Leave a review</h2>
 
-							<input name="title" type="text" class="form-control" id="inputTitle"
-								placeholder="Enter title">
+							<input name="title" type="text" class="form-control"
+								id="inputTitle" placeholder="Enter title">
 
 
 							<textarea class="form-control animated" cols="50" id="new-review"
@@ -65,8 +56,10 @@
 							</div>
 
 							<div class="text-right">
-								<button id="cancel-review-button" class="btn btn-danger" type="button">Cancel</button>
-								<button id="send-review-button" class="btn btn-success btn-lg" type="submit">Send</button>
+								<button id="cancel-review-button" class="btn btn-danger"
+									type="button">Cancel</button>
+								<button id="send-review-button" class="btn btn-success btn-lg"
+									type="submit">Send</button>
 							</div>
 						</form>
 					</div>
@@ -74,9 +67,9 @@
 			</div>
 		</div>
 		<!-- END REVIEW BOX HTML -->
-		
+
 		<!-- REVIEW HTML -->
-		
+
 		<div class="contact-box" class="wrapper">
 			<div class="contact-info-box">
 				<div class="contact-info">
@@ -94,15 +87,44 @@
 			</div>
 		</div>
 		<!-- END REVIEW BOX HTML -->
-		
+
+
+
+
+
 
 		<script>
 			$("#input-id").rating();
 		</script>
-		
+
 		<script src="/JobAdvisorNew/js/annuncio.js"></script>
-		
+
 
 	</div>
+
+	<!-- LOGIN HTML -->
+	
+	<div id="login-box" class="wrapper">
+		<form id="login-form" class="form-signin" action="login" method="post">
+			<!-- LOGIN -->
+			<h2 id="login-title" class="form-signin-heading">LOGIN</h2>
+			<a><h2 id="exit-button">x</h2></a> <img id="logo-site-login"
+				src="/JobAdvisorNew/img/gps.png"> <input id="usernameL" type="text"
+				class="form-control" name="username" placeholder="Username"
+				required="" autofocus="" /> <input id="passwordL" type="password"
+				class="form-control" name="password" placeholder="Password"
+				required="" /> <label id="rememberL" class="checkbox"> <input
+				type="checkbox" value="remember-me" id="rememberMe"
+				name="rememberMe"> Remember me
+			</label>
+			<button id="login-button-submit"
+				class="btn btn-lg btn-primary btn-block" type="submit">Login
+			</button>
+			<div class="dropdown-divider"></div>
+			<a class="dropdown-item" href="/JobAdvisorNew/views/subscription.jsp">New
+				around here? Sign up</a>
+		</form>
+	</div>
+	<!-- END LOGIN HTML -->
 
 </body>

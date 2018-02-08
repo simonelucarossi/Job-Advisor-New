@@ -18,7 +18,7 @@
 <link rel="stylesheet" type="text/css" href="/JobAdvisorNew/css/panel.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="/JobAdvisorNew/js/AdsPanel.js"></script>
+<script src="/JobAdvisorNew/js/reviewPanel.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDe9jibJf963yX2fZCd6FLxYJzTljlhzhc&callback=initMap"></script>
 </head>
@@ -35,15 +35,11 @@
 					</div>
 					<div class="col-sm-4">
 							<form class="form-search form-inline">
-								<input type="text" id="searchInput" class="search-query" placeholder="Search for category..">
+								<input type="text" id="searchInput" class="search-query" placeholder="Search for title..">
 							</form>
 					</div>
 					<div class="col-sm-4">
-						<a id="newAdd" href="#addNewModal" class="btn btn-success"
-							data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add
-								New </span>
-						</a> 
-						<a href="#deleteAdModal"
+						<a href="#deleteReviewModal"
 							class="btn btn-danger" data-toggle="modal"><i
 							class="material-icons">&#xE15C;</i> <span>Delete</span>
 						</a>
@@ -57,104 +53,62 @@
 								type="checkbox" id="selectAll"> <label for="selectAll"></label>
 						</span></th>
 						<th>ID</th>
-						<th>Category</th>
-						<th>Price</th>
+						<th>Title</th>
+						<th>Text</th>
+						<th>Stars</th>
+						<th>Ads-ID</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${annunci}" var="annuncio">
+					<c:forEach items="${recensioni}" var="recensione">
 						<tr>
 							<td>
 							<span class="custom-checkbox">
-								<input type="checkbox" id="checkbox1" name="ids[]" value="${annuncio.getId()}">
+								<input type="checkbox" id="checkbox1" name="ids[]" value="${recensione.getId()}">
 								<label for="checkbox1"></label>
 							</span>
 							</td>
-							<td>${annuncio.getId()}</td>
-							<td>${annuncio.getCategoria()}</td>
-							<td>${annuncio.getPrezzo()}</td>
+							<td>${recensione.getId()}</td>
+							<td>${recensione.getTitolo()}</td>
+							<td>${recensione.getTesto()}</td>
+							<td>${recensione.getValutazione()}</td>
+							<td>${recensione.getAnnuncio()}</td>
 							<td>
-							<a href="#editAdModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a> 
-							<a id="showMyAd" href="#showAdModal" data-toggle="modal"><i style="color:black;" class="fa" data-toggle="tooltip" title="Show">&#xf06e;</i></a>
+							<a href="#editReviewModal" class="editReview" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a> 
+							<a id="showMyReview" href="#showReviewModal" data-toggle="modal"><i style="color:black;" class="fa" data-toggle="tooltip" title="Show">&#xf06e;</i></a>
 							</td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
-		<!--<div class="clearfix">
-				<div class="hint-text">
-					Showing <b>5</b> out of <b>25</b> entries
-				</div>
-				<ul class="pagination">
-					<li class="page-item disabled"><a href="#">Previous</a></li>
-					<li class="page-item active"><a href="#" class="page-link">1</a></li>
-					<li class="page-item"><a href="#" class="page-link">2</a></li>
-					<li class="page-item"><a href="#" class="page-link">Next</a></li>
-				</ul>
-			</div>	-->
 		</div>
 	</div>
-	<!-- Add Modal HTML -->
-	<div id="addNewModal" class="modal fade">
-		<div class="modal-dialog">
-			<div id="creationForm" class="modal-content">
-				<form action="views/createAd" method="post" onsubmit="return checkForm()">
-					<div class="modal-header">
-						<h4 class="modal-title">Add New</h4>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-hidden="true">&times;</button>
-					</div>
-					<div class="modal-body">
-						<div class="form-group">
-							<label>Category</label> 
-							<input name="category" type="text" class="form-control" id="inputCategory" placeholder="Category..." required>
-							<input name="creator" value="${username}" type="hidden" id="creator">
-						</div>
-						<div class="form-group">
-							<label id="descrip-label" for="inputDescription">Description</label>
-						<textarea rows="10" cols="30" name="description" class="form-control" id="inputDescription" required></textarea>
-						</div>
-						<div class="form-group">
-						<label id="priceLabel" for="inputPrice">Job-price</label> 
-						<input name="price" type="number" step="0.01" min="5" class="form-control" id="inputPrice" placeholder="Insert a price..." required>
-						</div>
-						<input name="lat" type="hidden" id="my-lat"> 
-						<input name="lon" type="hidden" id="my-lon">
-						<div class="form-group" id="map"></div>
-						<input id="date" name="date" type="hidden">
-					</div>
-					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal"value="Cancel"> 
-						<input type="submit" class="btn btn-success" value="Add">
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+	
 	<!-- Edit Modal HTML -->
-	<div id="editAdModal" class="modal fade">
+	<div id="editReviewModal" class="modal fade">
 		<div class="modal-dialog">
 			<div id="creationForm" class="modal-content">
-				<form id="editForm"  method="post" onsubmit="return checkPrice()">
+				<form id="editForm"  method="post">
 					<div class="modal-header">
-						<h4 class="modal-title">Edit Ad</h4>
+						<h4 class="modal-title">Edit Review</h4>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">
 						<div class="form-group">
-							<label>Category</label> 
+							<label>Title</label> 
 							<input type="hidden" name="id">
-							<input name="category" type="text" class="form-control" id="inputCategory" required>
+							<input name="title" type="text" class="form-control" id="inputTitle" required>
+							<input name="idAds" type="hidden">
 						</div>
 						<div class="form-group">
-							<label id="descrip-label" for="inputDescription">Description</label>
-						<textarea rows="10" cols="30" name="description" class="form-control" id="inputDescription" required></textarea>
+							<label id="text-label" for="inputText">Text</label>
+						<textarea rows="10" cols="30" name="text" class="form-control" id="inputText" required></textarea>
 						</div>
 						<div class="form-group">
-						<label id="priceLabel" for="inputPrice">Job-price</label> 
-						<input name="price" type="number" step="0.01" min="5" class="form-control" id="inputPrice" required>
+						<label id="starsLabel" for="inputPrice">Stars-Review</label> 
+						<input name="stars" type="number" step="1" min="1" class="form-control" id="inputStars" required>
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -171,7 +125,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 					<div class="modal-header">
-						<h4 class="modal-title">Edit Ad</h4>
+						<h4 class="modal-title">Edit Review</h4>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
 					</div>
@@ -179,7 +133,9 @@
 						<p>Are you sure you want to save these changes?</p>
 					</div>
 					<div class="modal-footer">
-						<input type="hidden" name="id"> 					
+						<input type="hidden" name="id"> 
+						<input name="idAds" type="hidden">
+											
 						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel"> 
 						<input id="saveButton" type="button" class="btn btn-success" value="Save Changes">
 					</div>
@@ -187,11 +143,11 @@
 		</div>
 	</div>
 	<!-- Delete Modal HTML -->
-	<div id="deleteAdModal" class="modal fade">
+	<div id="deleteReviewModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
 					<div class="modal-header">
-						<h4 class="modal-title">Delete Ad</h4>
+						<h4 class="modal-title">Delete Review</h4>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
 					</div>
@@ -202,7 +158,9 @@
 						</p>
 					</div>
 					<div class="modal-footer">
-						<input type="hidden" name="id"> 					
+						<input type="hidden" name="id"> 
+						<input name="idAds" type="hidden">
+											
 						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel"> 
 						<input id="deleteButton" type="button" class="btn btn-danger" value="Delete">
 					</div>
@@ -210,28 +168,29 @@
 		</div>
 	</div>
 	<!-- Show Modal HTML -->
-	<div id="showAdModal" class="modal fade">
+	<div id="showReviewModal" class="modal fade">
 		<div class="modal-dialog">
 			<div id="creationForm" class="modal-content">
 				<form id="showForm" method="post">
 					<div class="modal-header">
-						<h4 class="modal-title">Your Ad</h4>
+						<h4 class="modal-title">Your Review</h4>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">
 						<div class="form-group">
-							<label>Category</label> 
+							<label>Title</label> 
 							<input type="hidden" name="id">
-							<input name="category" type="text" class="form-control" id="inputCategory" readonly>
+							<input name="title" type="text" class="form-control" id="inputTitle" readonly>
 						</div>
 						<div class="form-group">
-							<label id="descrip-label" for="inputDescription">Description</label>
-						<textarea rows="10" cols="30" name="description" class="form-control" id="inputDescription" readonly></textarea>
+							<label id="text-label" for="inputText">Text</label>
+						<textarea rows="10" cols="30" name="text" class="form-control" id="inputText" readonly></textarea>
 						</div>
 						<div class="form-group">
-						<label id="priceLabel" for="inputPrice">Job-price</label> 
-						<input name="price" type="number" step="0.01" min="5" class="form-control" id="inputPrice" readonly>
+						<label id="starsLabel" for="inputStars">Stars-Review</label> 
+						<input name="stars" type="number" step="1" min="1" class="form-control" id="inputStars" readonly>
+						
 						</div>
 						<div class="form-group">
 							<label id="dateLabel" for="date">Date of creation:</label>

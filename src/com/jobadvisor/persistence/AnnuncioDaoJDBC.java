@@ -269,6 +269,56 @@ public class AnnuncioDaoJDBC implements AnnuncioDao {
 	}
 
 	@Override
+	public List<Annuncio> findAllByCategoryWithSorting(String categoria, String sorting, String order) {
+		Connection connection = this.dataSource.getConnection();
+		List<Annuncio> annunci = new LinkedList<>();
+		try {
+			Annuncio annuncio;
+			PreparedStatement statement;
+			String query = null;
+			if(sorting.equals("prezzo")) {
+				query = "select * from annuncio where categoria = ? order by prezzo " + order;
+			} else if (sorting.equals("valutazione")){
+				query = "WITH annunci_val as (select annuncio.id, avg(coalesce(recensione.valutazione::int,0)) as valutazione_avg "
+						+ "from annuncio left join recensione on recensione.annuncio = annuncio.id "
+						+ "where categoria = ? group by annuncio.id order by valutazione_avg " + order + ") " 
+						+ "select annuncio.*, annunci_val.valutazione_avg from annuncio inner join annunci_val on annuncio.id = annunci_val.id";
+			}
+			
+			statement = connection.prepareStatement(query);
+			statement.setString(1, categoria);
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				UtenteDao creatoreDAO = new UtenteDaoJDBC(dataSource);
+				Utente creatore = creatoreDAO.findByPrimaryKey(result.getString("creatore")); 
+				annuncio = new Annuncio();
+				annuncio.setId(result.getLong("id"));
+				annuncio.setCategoria(result.getString("categoria"));
+				long secs = result.getDate("data_pubblicazione").getTime();
+				annuncio.setData(new java.util.Date(secs));
+				annuncio.setDescrizione(result.getString("descrizione"));
+				annuncio.setPrezzo(result.getDouble("prezzo"));
+				annuncio.setLatitudine(result.getDouble("latitudine"));
+				annuncio.setLongitudine(result.getDouble("longitudine"));
+				annuncio.setCreator(creatore);
+				
+				annunci.add(annuncio);
+			}
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			}
+		}
+		return annunci;
+	}
+
+	
+	
+	@Override
 	public List<Annuncio> findAllByUtente(String user) {
 		Connection connection = this.dataSource.getConnection();
 		List<Annuncio> annunci = new LinkedList<>();

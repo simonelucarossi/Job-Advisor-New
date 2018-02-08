@@ -18,7 +18,7 @@
 
 					<div class="price-entries">
 						<img class="price-entry" src="img/euro.png" />
-						<p>Prezzo: 75</p>
+						<p>Prezzo: {{prezzo}}</p>
 			</div>
 		</div>
 	</div>
@@ -39,9 +39,11 @@
 					<button id="contatta-bottone" class="btn btn-default">
 						<a href="#">Contact</a>
 					</button>
+					{{#if loggedin}}
 					<button id="recensione-bottone" class="btn btn-default">
 						<a href="#">Leave a review</a>
 					</button>
+					{{/if}}
 				</div>
 			</div>
 		</div>

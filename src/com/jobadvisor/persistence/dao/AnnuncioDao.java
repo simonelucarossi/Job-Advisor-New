@@ -21,6 +21,8 @@ public interface AnnuncioDao {
 
 	public List<Annuncio> findAllByCategory(String category);
 	
+	public List<Annuncio> findAllByCategoryWithSorting(String category, String sorting, String order);
+	
 	public List<Annuncio> findAllByUtente(String user);
 
 

@@ -155,7 +155,7 @@ $(document).ready(function() {
 	            myCheckboxes.push($(this).val());
 	        }
 		});
-		myCheckboxes.shift();
+//		myCheckboxes.shift();
 	    $.ajax({
 	           type: "POST",
 	           url: "/JobAdvisorNew/deleteAd",

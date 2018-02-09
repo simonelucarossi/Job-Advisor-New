@@ -190,12 +190,13 @@ public class AnnuncioDaoJDBC implements AnnuncioDao {
 		Connection connection = this.dataSource.getConnection();
 		List<Annuncio> annunci = new LinkedList<>();
 		try {
+			System.out.println("LAT + LON = " + lat + " " + lon);
 			Annuncio annuncio;
 			PreparedStatement statement;
 			String query = "select * from (" + "SELECT * ,(  6371 * acos( cos( radians(" + lat
 					+ ") ) * cos( radians( latitudine ) ) * cos( radians( longitudine ) - radians(" + lon
 					+ ") ) + sin( radians(" + lat + ") ) * sin( radians( latitudine ) ) ) ) AS distance "
-					+ "FROM annuncio" + ") as distance " + "where distance < 20 and categoria = ? "
+					+ "FROM annuncio" + ") as distance " + "where distance < 100 and categoria = ? "
 					+ "ORDER BY distance ;";
 			statement = connection.prepareStatement(query);
 			statement.setString(1, categoria);
@@ -213,7 +214,7 @@ public class AnnuncioDaoJDBC implements AnnuncioDao {
 				annuncio.setLatitudine(result.getDouble("latitudine"));
 				annuncio.setLongitudine(result.getDouble("longitudine"));
 				annuncio.setCreator(creatore);
-				
+				System.out.println("STO CREANDO!");
 				annunci.add(annuncio);
 				
 			}

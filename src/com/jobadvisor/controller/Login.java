@@ -1,15 +1,8 @@
 package com.jobadvisor.controller;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,7 +30,6 @@ public class Login extends HttpServlet {
 		UtenteDao dao = DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
 		UtenteCredenziali utente = dao.findByPrimaryKeyCredential(username);
 		String text = "success_login";
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 		Date today = new Date();
 		if (utente != null && password.equals(utente.getPassword()) && utente.getTipo().equals("Amministratore")) {
 				session.setAttribute("username", username);

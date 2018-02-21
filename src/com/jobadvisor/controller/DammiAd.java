@@ -1,11 +1,7 @@
 package com.jobadvisor.controller;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,12 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jobadvisor.model.Annuncio;
 import com.jobadvisor.model.Recensione;
 import com.jobadvisor.model.Utente;
 import com.jobadvisor.persistence.DAOFactory;
 import com.jobadvisor.persistence.DatabaseManager;
-import com.jobadvisor.persistence.dao.AnnuncioDao;
 import com.jobadvisor.persistence.dao.RecensioneDao;
 import com.jobadvisor.persistence.dao.UtenteDao;
 
@@ -67,7 +61,6 @@ public class DammiAd extends HttpServlet {
 		String stars = request.getParameter("input-1");
 		String titolo = request.getParameter("title");
 		String testo = request.getParameter("testo");
-		DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ITALIAN);
 		Date date = new Date();
 		long idReview = 0;
 		RecensioneDao recensioneDao = DatabaseManager.getInstance().getDaoFactory().getRecensioneDAO();

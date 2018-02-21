@@ -5,10 +5,8 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Enumeration;
 import java.util.Locale;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,10 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jobadvisor.model.Annuncio;
 import com.jobadvisor.model.Utente;
-import com.jobadvisor.persistence.DAOFactory;
 import com.jobadvisor.persistence.DatabaseManager;
-import com.jobadvisor.persistence.UtenteDaoJDBC;
-import com.jobadvisor.persistence.UtilDao;
 import com.jobadvisor.persistence.dao.AnnuncioDao;
 import com.jobadvisor.persistence.dao.UtenteDao;
 

@@ -10,10 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jobadvisor.model.Annuncio;
 import com.jobadvisor.model.Recensione;
 import com.jobadvisor.persistence.DatabaseManager;
-import com.jobadvisor.persistence.dao.AnnuncioDao;
 import com.jobadvisor.persistence.dao.RecensioneDao;
 
 /**

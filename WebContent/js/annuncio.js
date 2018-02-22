@@ -7,15 +7,11 @@ $(document).ready(function () {
 		$(window).bind("load", function() {
 		
 			$("#contatta-bottone").on('click', function() {
-				/*$("#usernameL").val('');
-				$("#passwordL").val('');*/
 				$(".contact-box").slideDown();
 				$("#fade-box").slideDown();
 			});
 			
 			$("#recensione-bottone").on('click', function() {
-				/*$("#usernameL").val('');
-				$("#passwordL").val('');*/
 				$(".review-box").slideDown();
 				$("#fade-box").slideDown();
 			});

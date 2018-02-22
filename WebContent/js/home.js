@@ -1,7 +1,6 @@
 /**
  * 
  */
-
 $(document).ready(function () {
 		$("body").fadeIn(500);
 	
@@ -14,6 +13,31 @@ $(document).ready(function () {
 		$("#login-img").on('click', function() {
 			$("#usernameL").val('');
 			$("#passwordL").val('');
+			$(function() {
+			    if (localStorage.chkbx && localStorage.chkbx != '') {
+			        $('#rememberMe').attr('checked', 'checked');
+			        $('#usernameL').val(localStorage.usrname);
+			        $('#passwordL').val(localStorage.pass);
+			    } else {
+			        $('#rememberMe').removeAttr('checked');
+			        $('#usernameL').val('');
+			        $('#passwordL').val('');
+			    }
+
+			    $('#login-form').click(function() {
+			        if ($('#rememberMe').is(':checked')) {
+			            // save username and password
+			            localStorage.usrname = $('#usernameL').val();
+			            localStorage.pass = $('#passwordL').val();
+			            localStorage.chkbx = $('#rememberMe').val();
+			        } else {
+			            localStorage.usrname = '';
+			            localStorage.pass = '';
+			            localStorage.chkbx = '';
+			        }
+			    });
+			});
+
 			$("#login-box").slideDown();
 			$("#fade-box").slideDown();
 		});
@@ -61,14 +85,3 @@ $(document).ready(function () {
 	
 });
 
-window.addEventListener('load', function() {
-
-	  function updateOnlineStatus(event) {
-	    var condition = navigator.onLine ? "online" : "offline";
-
-	    alert('you are ${condition}');
-
-	  }
-	  window.addEventListener('online',  updateOnlineStatus);
-	  window.addEventListener('offline', updateOnlineStatus);
-});

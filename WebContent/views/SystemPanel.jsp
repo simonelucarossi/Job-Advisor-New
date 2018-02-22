@@ -9,8 +9,9 @@
     <meta name="author" content="">
 
     <title>JobAdvisor ~ SystemPanel</title>
-    <link href="/JobAdvisorNew/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/JobAdvisorNew/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="/JobAdvisorNew/css/systemPanel.css" rel="stylesheet">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>

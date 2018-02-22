@@ -14,7 +14,7 @@
 	href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link href="/JobAdvisorNew/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="/JobAdvisorNew/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="/JobAdvisorNew/css/usersPanel.css">        
+<link rel="stylesheet" type="text/css" href="/JobAdvisorNew/css/adminPanels.css">        
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="/JobAdvisorNew/js/usersPanel.js"></script>
@@ -24,52 +24,52 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
      <div class="container">
-				<a id="brand-site" class="navbar-brand js-scroll-trigger" href="/JobAdvisorNew"> 
-					<img id="logo-site" src="img/gps.png">
-					<strong id="site-title">JOB ADVISOR</strong>
-				</a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-		          <span class="navbar-toggler-icon"></span>
-		        </button>
-		        <div class="collapse navbar-collapse" id="navbarResponsive">
-		          <ul class="navbar-nav ml-auto">
-		            <li class="nav-item">
-			          	<form class="form-search form-inline">
-							<input type="text" id="searchInput" class="search-query" placeholder="Search for name..">
-						</form>
-		        	</li>
-		        	<li class="nav-item">
-			          	<a id="deleteUser" href="#deleteUserModal"
-						class="btn btn-default" data-toggle="modal"><i
-						class="fa fa-minus-circle"></i> <span>Delete</span>
-						</a>
-		        	</li>
-		        	 <li class="nav-item">
-			          	<a id="banUser" href="#banUserModal"
-						class="btn btn-default" data-toggle="modal"><i
-						class="fa">&#xf023;</i> <span>Ban</span>
-						</a>
-		        	</li>
-		        	 <li class="nav-item">
-						<a id="newUser" href="#addNewModal" class="btn btn-default"
-							data-toggle="modal"><i class="fa fa-plus-circle"></i> <span>Add
-								New </span>
-						</a> 
-		        	</li>
-		        	<li class="nav-item">
-			          	<a id="blackListButton" href="#blackListModal"
-						class="btn btn-default" data-toggle="modal"><i class="fa fa-user-times"></i>
-						 <span>Black list</span>
-						</a>
-		        	</li>
-		        	<li class="nav-item">
-			          	<a class="btn btn-default" data-toggle="modal"  href="#logoutModal">
-			            <i class="fa fa-fw fa-sign-out"></i>Logout</a>
-		        	</li>
-		          </ul>
-			</div>
-			</div>
-    </nav>
+			<a id="brand-site" class="navbar-brand js-scroll-trigger" href="/JobAdvisorNew"> 
+				<img id="logo-site" src="img/gps.png">
+				<strong id="site-title">JOB ADVISOR</strong>
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+	          <span class="navbar-toggler-icon"></span>
+	        </button>
+	        <div class="collapse navbar-collapse" id="navbarResponsive">
+	          <ul class="navbar-nav ml-auto">
+	            <li class="nav-item">
+		          	<form class="form-search form-inline">
+						<input type="text" id="searchInput" class="search-query" placeholder="Search for name..">
+					</form>
+	        	</li>
+	        	<li class="nav-item">
+		          	<a id="deleteUser" href="#deleteUserModal"
+					class="btn btn-default" data-toggle="modal"><i
+					class="fa fa-minus-circle"></i> <span>Delete</span>
+					</a>
+	        	</li>
+	        	 <li class="nav-item">
+		          	<a id="banUser" href="#banUserModal"
+					class="btn btn-default" data-toggle="modal"><i
+					class="fa">&#xf023;</i> <span>Ban</span>
+					</a>
+	        	</li>
+	        	 <li class="nav-item">
+					<a id="newUser" href="#addNewModal" class="btn btn-default"
+						data-toggle="modal"><i class="fa fa-plus-circle"></i> <span>Add
+							New </span>
+					</a> 
+	        	</li>
+	        	<li class="nav-item">
+		          	<a id="blackListButton" href="#blackListModal"
+					class="btn btn-default" data-toggle="modal"><i class="fa fa-user-times"></i>
+					 <span>Black list</span>
+					</a>
+	        	</li>
+	        	<li class="nav-item">
+		          	<a class="btn btn-default" data-toggle="modal"  href="#logoutModal">
+		            <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+	        	</li>
+	          </ul>
+		</div>
+	</div>
+</nav>
 			<table id="myTable" class="table table-striped table-hover">
 				<thead>
 					<tr>
@@ -455,6 +455,7 @@
 			</div>
 		</div>
 	</div>
+	<!-- Logout modal -->
 	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">

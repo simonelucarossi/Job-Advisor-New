@@ -49,19 +49,27 @@ $(document).ready(function() {
 	            myCheckboxes.push($(this).val());
 	        }
 		});
-	    $.ajax({
-	           type: "POST",
-	           url: "/JobAdvisorNew/deleteUser",
-	           dataType: 'json',
-	           data: {
-	        	   myCheckboxes: JSON.stringify(myCheckboxes)
-	           },
-	           error: function (data) {
-	        	   location.reload();
-	           }
-	         });
-
-	    e.preventDefault(); 
+		
+		if(myCheckboxes[0] === "on")
+			myCheckboxes.shift();
+		
+		if(myCheckboxes.length > 0){
+			$.ajax({
+				type: "POST",
+				url: "/JobAdvisorNew/deleteUser",
+				dataType: 'json',
+				data: {
+					myCheckboxes: JSON.stringify(myCheckboxes)
+				},
+				error: function (data) {
+					location.reload();
+				}
+			});
+			
+			e.preventDefault(); 
+		}else{
+			alert("No user selected,please select at least one user and retry!");	
+		}
 	});
 	
 	$("#banButton").click(function(e) {
@@ -72,6 +80,7 @@ $(document).ready(function() {
 	            myCheckboxes.push($(this).val());
 	        }
 		});
+		
 		var today = new Date();
 		var dd = today.getDate();
 		var mm = today.getMonth()+1; 
@@ -80,22 +89,25 @@ $(document).ready(function() {
 		if(dd<10){dd='0'+dd} 
 		if(mm<10){mm='0'+mm} 
 		today = yyyy+'-'+mm+'-'+dd; 
-		
-		$.ajax({
-	           type: "POST",
-	           url: "/JobAdvisorNew/banUser",
-	           dataType: 'json',
-	           data: {
-	        	   myCheckboxes: JSON.stringify(myCheckboxes),
-	        	   time : $('#banTime').val(),
-	        	   date : today
-	           },
-	           error: function (data) {
-	        	   location.reload();
-	           }
-	         });
-
-	    e.preventDefault(); 
+		if(myCheckboxes.length > 0){
+			$.ajax({
+				type: "POST",
+				url: "/JobAdvisorNew/banUser",
+				dataType: 'json',
+				data: {
+					myCheckboxes: JSON.stringify(myCheckboxes),
+					time : $('#banTime').val(),
+					date : today
+				},
+				error: function (data) {
+					location.reload();
+				}
+			});
+			
+			e.preventDefault(); 
+		}else{
+			alert("No user selected,please select at least one user and retry!");
+		}
 	});
 	
 	$('.edit').click(function(e) {
@@ -211,19 +223,27 @@ $(document).ready(function() {
 	            myCheckboxes.push($(this).val());
 	        }
 		});
-	    $.ajax({
-	           type: "POST",
-	           url: "/JobAdvisorNew/eraseBan",
-	           dataType: 'json',
-	           data: {
-	        	   myCheckboxes: JSON.stringify(myCheckboxes)
-	           },
-	           error: function (data) {
-	        	   location.reload();
-	           }
-	         });
-
-	    e.preventDefault(); 
+		
+		if(myCheckboxes[0] === "on")
+			myCheckboxes.shift();
+		
+		if(myCheckboxes.length > 0){
+			$.ajax({
+				type: "POST",
+				url: "/JobAdvisorNew/eraseBan",
+				dataType: 'json',
+				data: {
+					myCheckboxes: JSON.stringify(myCheckboxes)
+				},
+				error: function (data) {
+					location.reload();
+				}
+			});
+			
+			e.preventDefault(); 
+		}else{
+			alert("No user selected,please select at least one user and retry!");
+		}
 	});
 	
 });

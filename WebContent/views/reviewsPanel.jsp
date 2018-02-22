@@ -12,40 +12,46 @@
 	href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="/JobAdvisorNew/css/panel.css">
+<link href="/JobAdvisorNew/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="/JobAdvisorNew/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/JobAdvisorNew/css/adminPanels.css">        
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="/JobAdvisorNew/js/reviewPanel.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDe9jibJf963yX2fZCd6FLxYJzTljlhzhc&callback=initMap"></script>
+<script src="/JobAdvisorNew/js/usersPanel.js"></script>
+<script src="/JobAdvisorNew/vendor/jquery/jquery.min.js"></script>
+<script src="/JobAdvisorNew/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-	<div class="container">
-		<div class="table-wrapper">
-			<div class="table-title">
-				<div class="row">
-					<div class="col-sm-4">
-						<a id="brand-site" class="navbar-brand js-scroll-trigger" href="/JobAdvisorNew"> 
-							<img id="logo-site" src="img/gps.png">
-							<strong id="site-title">JOB ADVISOR</strong>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+     <div class="container">
+				<a id="brand-site" class="navbar-brand js-scroll-trigger" href="/JobAdvisorNew"> 
+					<img id="logo-site" src="img/gps.png">
+					<strong id="site-title">JOB ADVISOR</strong>
+				</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+		          <span class="navbar-toggler-icon"></span>
+		        </button>
+		        <div class="collapse navbar-collapse" id="navbarResponsive">
+		          <ul class="navbar-nav ml-auto">
+		            <li class="nav-item">
+			          	<form class="form-search form-inline">
+							<input type="text" id="searchInput" class="search-query" placeholder="Search for name..">
+						</form>
+		        	</li>
+		        	<li class="nav-item">
+			          	<a id="deleteUser" href="#deleteReviewModal"
+						class="btn btn-default" data-toggle="modal"><i
+						class="fa fa-minus-circle"></i> <span>Delete</span>
 						</a>
-					</div>
-					<div class="col-sm-4">
-							<form class="form-search form-inline">
-								<input type="text" id="searchInput" class="search-query" placeholder="Search for title..">
-							</form>
-					</div>
-					<div class="col-sm-4">
-						<a href="#deleteReviewModal"
-							class="btn btn-danger" data-toggle="modal"><i
-							class="material-icons">&#xE15C;</i> <span>Delete</span>
-						</a>
-					</div>
-				</div>
+		        	</li>
+		        	<li class="nav-item">
+			          	<a class="btn btn-default" data-toggle="modal"  href="#logoutModal">
+			            <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+		        	</li>
+		          </ul>
 			</div>
+			</div>
+    </nav>
 			<table id="myTable" class="table table-striped table-hover">
 				<thead>
 					<tr>
@@ -82,8 +88,6 @@
 					</c:forEach>
 				</tbody>
 			</table>
-		</div>
-	</div>
 	
 	<!-- Edit Modal HTML -->
 	<div id="editReviewModal" class="modal fade">
@@ -204,5 +208,23 @@
 			</div>
 		</div>
 	</div>
+	<!-- Logout modal -->
+	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" href="/JobAdvisorNew/logout">Logout</a>
+          </div>
+        </div>
+      </div>
+      </div>
 </body>
 </html>

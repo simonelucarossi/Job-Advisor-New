@@ -32,6 +32,10 @@ $(document).ready(function() {
 	            myCheckboxes.push($(this).val());
 	        }
 		});
+
+		if(myCheckboxes[0] === "on")
+			myCheckboxes.shift();
+		
 	    $.ajax({
 	           type: "POST",
 	           url: "/JobAdvisorNew/DeleteReview",

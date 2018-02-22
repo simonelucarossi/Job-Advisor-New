@@ -3,8 +3,7 @@
 	<%@taglib uri="http://java.sun.com/jsp/jstl/core"
 prefix="c" %>
 
-<nav id="nav-bar-mobile"
-	class="navbar navbar-expand-lg navbar-light fixed-top">
+<nav id="nav-bar-mobile" class="navbar navbar-expand-lg navbar-light fixed-top">
 	<div class="container">
 		<a id="brand-site" class="navbar-brand js-scroll-trigger"
 			href="/JobAdvisorNew"> <img id="logo-site" src="/JobAdvisorNew/img/gps.png">

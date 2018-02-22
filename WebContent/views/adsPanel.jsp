@@ -14,7 +14,7 @@
 	href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link href="/JobAdvisorNew/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="/JobAdvisorNew/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="/JobAdvisorNew/css/adsPanel.css">        
+<link rel="stylesheet" type="text/css" href="/JobAdvisorNew/css/adminPanels.css">        
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDe9jibJf963yX2fZCd6FLxYJzTljlhzhc&callback=initMap"></script>
@@ -40,16 +40,10 @@
 						</form>
 		        	</li>
 		        	<li class="nav-item">
-			          	<a style="color:red;" href="#deleteAdModal"
+			          	<a href="#deleteAdModal"
 						class="btn btn-default" data-toggle="modal"><i
 						class="fa fa-minus-circle"></i> <span>Delete</span>
 						</a>
-		        	</li>
-		        	 <li class="nav-item">
-						<a id="newAdd" style="color:#00ff00;" href="#addNewModal" class="btn btn-default"
-							data-toggle="modal"><i class="fa fa-plus-circle"></i> <span>Add
-								New </span>
-						</a> 
 		        	</li>
 		        	<li class="nav-item">
 			          	<a class="btn btn-default" data-toggle="modal"  href="#logoutModal">
@@ -93,43 +87,6 @@
 				</tbody>
 			</table>
     </div>
-	<!-- Add Modal HTML -->
-	<div id="addNewModal" class="modal fade">
-		<div class="modal-dialog">
-			<div id="creationForm" class="modal-content">
-				<form id="addForm">
-					<div class="modal-header">
-						<h4 class="modal-title">Add New</h4>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-hidden="true">&times;</button>
-					</div>
-					<div class="modal-body">
-						<div class="form-group">
-							<label>Category</label> 
-							<input name="category" type="text" class="form-control"  placeholder="Category..." required>
-							<input name="creator" value="${username}" type="hidden" id="creator">
-						</div>
-						<div class="form-group">
-							<label id="descrip-label" for="inputDescription">Description</label>
-						<textarea rows="10" cols="30" name="description" class="form-control" required></textarea>
-						</div>
-						<div class="form-group">
-						<label id="priceLabel" for="inputPrice">Job-price</label> 
-						<input id="inputPrice" name="price" type="number" step="0.01" min="5" class="form-control" placeholder="Insert a price..." required>
-						</div>
-						<input name="lat" type="hidden" id="my-lat"> 
-						<input name="lon" type="hidden" id="my-lon">
-						<div class="form-group" id="map"></div>
-						<input id="date" name="date" type="hidden">
-					</div>
-					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal"value="Cancel"> 
-						<input type="submit" class="btn btn-success" value="Add">
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
 	<!-- Edit Modal HTML -->
 	<div id="editAdModal" class="modal fade">
 		<div class="modal-dialog">

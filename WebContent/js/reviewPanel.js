@@ -1,4 +1,27 @@
 $(document).ready(function() {
+	
+	$('th.sort i').click(function(){
+		
+		if(this.className==="fa fa-sort-desc"){
+			$(this).toggleClass('fa fa-sort-desc fa fa-sort-asc');
+		}else{
+			$(this).toggleClass('fa fa-sort-asc fa fa-sort-desc');
+		}
+		
+	    var table = $(this).parents('table').eq(0)
+	    var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()))
+	    this.asc = !this.asc
+	    if (!this.asc){rows = rows.reverse()}
+	    for (var i = 0; i < rows.length; i++){table.append(rows[i])}
+	})
+	function comparer(index) {
+	    return function(a, b) {
+	        var valA = getCellValue(a, index), valB = getCellValue(b, index)
+	        return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.toString().localeCompare(valB)
+	    }
+	}
+	function getCellValue(row, index){ return $(row).children('td').eq(index).text() }
+	
 	// Activate tooltip
 	$('[data-toggle="tooltip"]').tooltip();
 
@@ -36,28 +59,31 @@ $(document).ready(function() {
 		if(myCheckboxes[0] === "on")
 			myCheckboxes.shift();
 		
-	    $.ajax({
-	           type: "POST",
-	           url: "/JobAdvisorNew/DeleteReview",
-	           data: {
-	        	   myCheckboxes: JSON.stringify(myCheckboxes)
-	           },
-	           success: function (result) {
+		if(myCheckboxes.length > 0){
+			$.ajax({
+				type: "POST",
+				url: "/JobAdvisorNew/DeleteReview",
+				data: {
+					myCheckboxes: JSON.stringify(myCheckboxes)
+				},
+				success: function (result) {
 					location.reload();
-	           },
-	           error: function (data) {
-	        	  alert("Addio");
-	           }
-	         });
+				},
+				error: function (data) {
+					alert("Error");
+				}
+			});
+		}else{
+			alert("No reviews selected,please select at least one review and retry!");
+		}
 
 	    e.preventDefault(); 
 	});
 	
 	
-	$('.editReview').click(function(e) {
+	$('.edit').click(function(e) {
 		 var idTmp = $(this).closest("tr").find("td").eq(1).text();
 		 var idAdsTmp = $(this).closest("tr").find("td").eq(5).text();
-		 alert(idTmp);
 		 $.ajax({
 			 method: "GET",
 				url: "/JobAdvisorNew/api/singleReview/" + idTmp,
@@ -71,7 +97,6 @@ $(document).ready(function() {
 	           }
 	         });
 		 $("#saveButton").click(function name() {
-			 alert($('#editForm input[name=idAds]').val());
 			
 			 $.ajax({
 				 method: "POST",

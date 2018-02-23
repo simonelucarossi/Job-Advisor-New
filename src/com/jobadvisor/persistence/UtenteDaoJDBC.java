@@ -115,7 +115,7 @@ public class UtenteDaoJDBC implements UtenteDao {
 				utente.setEmail(result.getString("email"));
 				utente.setTelefono(result.getString("telefono"));
 				utente.setPassword(result.getString("password"));
-				if (!utente.getTipo().equals("Amministratore")) {
+				if(!utente.getTipo().equals("Amministratore")) {
 					long end = result.getDate("fineBan").getTime();
 					utente.setFineBan(new java.util.Date(end));
 				}
@@ -204,6 +204,7 @@ public class UtenteDaoJDBC implements UtenteDao {
 
 			for (Annuncio annuncio : utente.getAnnunci()) {
 				annuncioDao.delete(annuncio);
+				System.out.println(annuncio);
 			}
 			for (Recensione recensione : utente.getRecensioniScritte()) {
 				recensioneDao.delete(recensione);

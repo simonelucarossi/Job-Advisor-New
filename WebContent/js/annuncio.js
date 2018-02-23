@@ -5,7 +5,6 @@ $(document).ready(function () {
 		$("#fade-box").hide();
 
 		$(window).bind("load", function() {
-		
 			$("#contatta-bottone").on('click', function() {
 				$(".contact-box").slideDown();
 				$("#fade-box").slideDown();
@@ -15,8 +14,6 @@ $(document).ready(function () {
 				$(".review-box").slideDown();
 				$("#fade-box").slideDown();
 			});
-		
-
 		
 			$("#contact-button").click(function() {
 				$(".contact-box").slideToggle("fast");

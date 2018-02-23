@@ -37,6 +37,8 @@ public class DammiAdsApi extends HttpServlet {
 		
 		String category = request.getParameter("category");
 		String sorting = request.getParameter("sorting");
+		String lat = request.getParameter("lat");
+		String lon = request.getParameter("lon");
 		String order = request.getParameter("order");
 		List<Annuncio> annunci = null;
 		
@@ -44,9 +46,15 @@ public class DammiAdsApi extends HttpServlet {
 		System.out.println("CATEGORY -> " + category);
 		if(sorting == null && order == null) {
 			annunci = DAOFactory.getDAOFactory(DAOFactory.POSTGRESQL).getAnnuncioDAO().findAllByCategory(category);
+			System.out.println(annunci.size());
+		}
+		else if(sorting != null && order == null) {
+			annunci = DAOFactory.getDAOFactory(DAOFactory.POSTGRESQL).getAnnuncioDAO().findAllByCategoryAndPosition(category, lat, lon);
+			System.out.println(annunci.size());
 		}
 		else {
 			annunci = DAOFactory.getDAOFactory(DAOFactory.POSTGRESQL).getAnnuncioDAO().findAllByCategoryWithSorting(category,sorting,order);
+			System.out.println(annunci.size());
 		}
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");

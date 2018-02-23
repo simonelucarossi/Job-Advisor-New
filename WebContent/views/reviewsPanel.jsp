@@ -12,12 +12,13 @@
 	href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link href="/JobAdvisorNew/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="/JobAdvisorNew/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="/JobAdvisorNew/css/adminPanels.css">        
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="/JobAdvisorNew/js/usersPanel.js"></script>
+<script src="/JobAdvisorNew/js/reviewPanel.js"></script>
 <script src="/JobAdvisorNew/vendor/jquery/jquery.min.js"></script>
 <script src="/JobAdvisorNew/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </head>
@@ -35,7 +36,7 @@
 		          <ul class="navbar-nav ml-auto">
 		            <li class="nav-item">
 			          	<form class="form-search form-inline">
-							<input type="text" id="searchInput" class="search-query" placeholder="Search for name..">
+							<input type="text" id="searchInput" class="search-query" placeholder="Filter...">
 						</form>
 		        	</li>
 		        	<li class="nav-item">
@@ -45,7 +46,7 @@
 						</a>
 		        	</li>
 		        	<li class="nav-item">
-			          	<a class="btn btn-default" data-toggle="modal"  href="#logoutModal">
+			          	<a id="logoutButton" class="btn btn-default" data-toggle="modal"  href="#logoutModal">
 			            <i class="fa fa-fw fa-sign-out"></i>Logout</a>
 		        	</li>
 		          </ul>
@@ -58,11 +59,11 @@
 						<th><span class="custom-checkbox"> <input
 								type="checkbox" id="selectAll"> <label for="selectAll"></label>
 						</span></th>
-						<th>ID</th>
-						<th>Title</th>
-						<th>Text</th>
-						<th>Stars</th>
-						<th>Ads-ID</th>
+						<th class="sort" >ID<i class="fa fa-sort-desc"></i></th>
+						<th class="sort" >Title<i class="fa fa-sort-desc"></i></th>
+						<th class="sort" >Text<i class="fa fa-sort-desc"></i></th>
+						<th class="sort" >Stars<i class="fa fa-sort-desc"></i></th>
+						<th class="sort" >Ads-ID<i class="fa fa-sort-desc"></i></th>
 						<th>Actions</th>
 					</tr>
 				</thead>
@@ -81,8 +82,8 @@
 							<td>${recensione.getValutazione()}</td>
 							<td>${recensione.getAnnuncio()}</td>
 							<td>
-							<a href="#editReviewModal" class="editReview" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a> 
-							<a id="showMyReview" href="#showReviewModal" data-toggle="modal"><i style="color:black;" class="fa" data-toggle="tooltip" title="Show">&#xf06e;</i></a>
+							<a href="#editReviewModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a> 
+							<a id="showMyReview" href="#showReviewModal" data-toggle="modal"><i class="fa" data-toggle="tooltip" title="Show">&#xf06e;</i></a>
 							</td>
 						</tr>
 					</c:forEach>

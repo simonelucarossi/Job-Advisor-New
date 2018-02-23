@@ -33,6 +33,25 @@ $(document).ready(function() {
 			});
 		});
 	}
+	
+	$("#bottone-distanza").click(function(){
+		var latTmp = getUrlParameter('lat');
+		var lonTmp = getUrlParameter('lon');
+		$(".js-annunci").empty();
+		var result = $.ajax({
+			method: "GET",
+			url: "/JobAdvisorNew/api/ads",
+			dataType: "json",
+			data: {category: categorySearch, sorting: "distance", lat: latTmp, lon: lonTmp }
+		});
+
+		result.done(function(annunci) {
+			annunci.forEach(function(annuncio) {
+				$annunci.append(template(annuncio));
+			});
+		});
+	});
+	
 
 	$(".js-sorting").click(function(ev) {
 		$(".js-annunci").empty();
@@ -70,6 +89,40 @@ $(document).ready(function() {
 
 
 $(document).ready(function() {
+	$("#searchInput").keyup(function () {
+	    //split the current value of searchInput
+	    var data = this.value.split(" ");
+	    //create a jquery object of the rows
+	    var jo = $(".entries").find(".entry");
+	    if (this.value == "") {
+	        jo.show();
+	        return;
+	    }
+	    //hide all the rows
+	    jo.hide();
+
+	    //Recusively filter the jquery object to get results.
+	    jo.filter(function (i, v) {
+	        var $t = $(this);
+	        for (var d = 0; d < data.length; ++d) {
+	            if ($t.is(":contains('" + data[d] + "')")) {
+	                return true;
+	            }
+	        }
+	        return false;
+	    }).show();
+	}).focus(function () {
+	    this.value = "";
+	    $(this).css({
+	        "color": "black"
+	    });
+	    $(this).unbind('focus');
+	}).css({
+	    "color": "#C0C0C0"
+	});
+	
+	
+	
 	var $annuncio = $(".js-oriva");
 	var source = $("#annuncio-details").html();
 	var template = Handlebars.compile(source);

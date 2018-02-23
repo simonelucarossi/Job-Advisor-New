@@ -12,8 +12,9 @@
 	href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link href="/JobAdvisorNew/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="/JobAdvisorNew/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="/JobAdvisorNew/css/adminPanels.css">        
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -36,17 +37,17 @@
 		          <ul class="navbar-nav ml-auto">
 		            <li class="nav-item">
 			          	<form class="form-search form-inline">
-							<input type="text" id="searchInput" class="search-query" placeholder="Search for name..">
+							<input type="text" id="searchInput" class="search-query" placeholder="Filter...">
 						</form>
 		        	</li>
 		        	<li class="nav-item">
-			          	<a href="#deleteAdModal"
+			          	<a id="deleteAd" href="#deleteAdModal"
 						class="btn btn-default" data-toggle="modal"><i
 						class="fa fa-minus-circle"></i> <span>Delete</span>
 						</a>
 		        	</li>
 		        	<li class="nav-item">
-			          	<a class="btn btn-default" data-toggle="modal"  href="#logoutModal">
+			          	<a id="logoutButton" class="btn btn-default" data-toggle="modal"  href="#logoutModal">
 			            <i class="fa fa-fw fa-sign-out"></i>Logout</a>
 		        	</li>
 		          </ul>
@@ -60,9 +61,9 @@
 						<th><span class="custom-checkbox"> <input
 								type="checkbox" id="selectAll"> <label for="selectAll"></label>
 						</span></th>
-						<th>ID</th>
-						<th>Author</th>
-						<th>Category</th>
+						<th class="sort">ID<i class="fa fa-sort-desc"></i></th>
+						<th class="sort">Author<i class="fa fa-sort-desc"></i></th>
+						<th class="sort">Category<i class="fa fa-sort-desc"></i></th>
 						<th>Actions</th>
 					</tr>
 				</thead>
@@ -80,7 +81,7 @@
 							<td>${annuncio.getCategoria()}</td>
 							<td>
 							<a href="#editAdModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a> 
-							<a id="showMyAd" href="#showAdModal" data-toggle="modal"><i style="color:black;" class="fa" data-toggle="tooltip" title="Show">&#xf06e;</i></a>
+							<a id="showMyAd" href="#showAdModal" data-toggle="modal"><i class="fa" data-toggle="tooltip" title="Show">&#xf06e;</i></a>
 							</td>
 						</tr>
 					</c:forEach>

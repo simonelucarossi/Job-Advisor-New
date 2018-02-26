@@ -11,13 +11,13 @@ prefix="c" %>
 			<strong id="site-title">JOB ADVISOR</strong>
 		</a>
 		<ul class="navbar-nav ml-auto">
-			<li class="nav-item" style="padding-right: 20px;">
+			<li class="nav-item" style="padding-left: 10px;">
 				<c:if test="${utente.tipo=='Professionista'}">
 					<a id="ads_panel" class="nav-link js-scroll-trigger"
 						href="adsPanel?username=${utente.username}">Ads Panel</a>
 				</c:if>
 			</li>
-			<li class="nav-item" style="padding-right: 20px;">
+			<li class="nav-item"">
 				<c:if test="${utente.tipo=='Amministratore'}">
 					<a id="system_panel" class="nav-link js-scroll-trigger"
 						href="/JobAdvisorNew/views/SystemPanel.jsp">System Panel</a>

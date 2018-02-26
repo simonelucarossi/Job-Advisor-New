@@ -843,6 +843,127 @@ input[type="password"] {
 	}
 }
 
+@media(max-width: 600px) {
+	#brand-site {
+		margin-top: 5px;
+    	color: white;
+	}
+	
+	#logo-site {
+		width: 40px;
+    	height: 38px;
+	}
+	
+	#site-title {
+		font-size: 16px;
+    	color: white;
+    	opacity: 0.7;
+	}
+	
+	.navbar-nav {
+		display: flex;
+    	flex-direction: row;
+	}
+	
+	.nav-item {
+	    padding-left: 10px;
+	    padding-right: 0px;
+	}
+	
+	#system_panel {
+		font-size: 1.0rem;
+	}
+	
+	#logout {
+		font-size: 1.0rem;
+	}
+}
+
+
+@media(max-width: 370px) {
+	
+	#site-title {
+		font-size: 16px;
+    	color: white;
+    	opacity: 0.7;
+    	padding-right: 10px;
+	}
+	
+	.navbar-nav {
+		display: flex;
+    	flex-direction: row;
+    	margin-top: -44px;
+	}
+	
+	.nav-item {
+	    padding-left: 10px;
+	    padding-right: 0px;
+	}
+	
+	#system_panel {
+		font-size: 0.8rem;
+	}
+	
+	#logout {
+		font-size: 0.8rem;
+	}
+}
+
+@media(max-width: 400px) {
+	
+	#site-title {
+		font-size: 16px;
+    	color: white;
+    	opacity: 0.7;
+    	padding-right: 10px;
+	}
+	
+	.navbar-nav {
+		display: flex;
+    	flex-direction: row;
+	}
+	
+	.nav-item {
+	    padding-left: 10px;
+	    padding-right: 0px;
+	}
+	
+	#system_panel {
+		font-size: 0.8rem;
+	}
+	
+	#logout {
+		font-size: 0.8rem;
+	}
+}
+
+@media(max-width: 768px) {
+	.navbar-nav {
+		display: flex;
+		flex-direction:row;
+	}	
+	
+	.nav-item {
+		padding-left: 10px;
+	}
+}
+
+@media(max-width: 325px) {
+	#system-panel {
+		font-size: 0.7rem;
+	}
+	#logout {
+		font-size: 0.7rem;
+	}
+	
+}
+
+@media(max-width: 365px) {
+	#login-img {
+		margin-top: 40px;
+	}
+}
+
 @media (max-width: 1102px) {
 	.form-signin {
     	width: 75% !important;

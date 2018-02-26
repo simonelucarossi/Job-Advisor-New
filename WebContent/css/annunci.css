@@ -813,6 +813,7 @@ input[type="password"] {
    		margin-bottom: 10px;
     	height: 40px;
     	background-color: #014d8b;
+    	margin-right: 0px;
 	}
 	
 	#recensione-bottone {
@@ -821,6 +822,25 @@ input[type="password"] {
     	background-color: #a01d22;
 	}
 	
+	.contact-info-box {
+    	width: 95%;
+    	height: 252px;
+    	background: white;
+    	border-radius: 10px;
+    	border: 5px solid #0003b9eb;
+	}
+	
+	.star-rating {
+    	line-height: 30px;
+    	font-size: 0.65em;
+    	text-align: center;
+    	padding-top: 11px;
+	}
+	
+	.text-right {
+    	text-align: center !important;
+    	margin-top: 18px;
+	}
 }
 
 @media (max-width: 1102px) {

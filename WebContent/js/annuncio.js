@@ -32,4 +32,5 @@ $(document).ready(function () {
 				$("#fade-box").slideToggle("slow");
 			});
 		});
+
 });

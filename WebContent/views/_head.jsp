@@ -53,11 +53,19 @@ prefix="c" %>
 
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+	
+	<!-- This is for stars of Reviews -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/css/star-rating.min.css" />
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/js/star-rating.min.js"></script>
+	<!-- End -->
 
 <script src="/JobAdvisorNew/js/annunci.js"></script>
 <script src="/JobAdvisorNew/js/gmaps.js"></script>
 
 <jsp:include page="_handlebarsTemplates.jsp"></jsp:include>
+
 
 <!-- Custom scripts for this template -->
 <script src="/JobAdvisorNew/js/creative.min.js"></script>
@@ -67,12 +75,7 @@ prefix="c" %>
 <script src="/JobAdvisorNew/vendor/scrollreveal/scrollreveal.min.js"></script>
 <script src="/JobAdvisorNew/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
 
-<!-- This is for stars of Reviews -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/css/star-rating.min.css" />
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/js/star-rating.min.js"></script>
-	
+
 <!-- Login Meta -->
 <c:if test="${utente != null}">
 <meta data-user-name="${utente.username}" id="login-user">

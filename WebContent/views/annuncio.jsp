@@ -45,7 +45,7 @@
 							<div class="star-rating">
 								<label for="input-1" class="control-label">Give a rating
 									for Skill:</label> <input id="input-1" name="input-1"
-									class="rating rating-loading" data-min="1" data-max="5"
+									class="rating rating-loading" data-min="0" data-max="5"
 									data-step="1.0" value="2">
 							</div>
 							<div class="text-right">
@@ -60,7 +60,7 @@
 			</div>
 		</div>
 		<!-- END REVIEW BOX HTML -->
-		<!-- REVIEW HTML -->
+		<!-- CONTACTS HTML -->
 		<div class="contact-box" class="wrapper">
 			<div class="contact-info-box">
 				<div class="contact-info">
@@ -77,7 +77,7 @@
 				</div>
 			</div>
 		</div>
-		<!-- END REVIEW BOX HTML -->
+		<!-- END CONTACTS BOX HTML -->
 		<script>
 			$("#input-id").rating();
 		</script>

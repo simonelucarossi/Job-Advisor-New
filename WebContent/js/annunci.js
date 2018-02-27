@@ -161,6 +161,7 @@ $(document).ready(function() {
 				recensioni.forEach(function(recensione) {
 					$recensioni.append(template2(recensione));
 				});
+				prova();
 			});
 	});
 	

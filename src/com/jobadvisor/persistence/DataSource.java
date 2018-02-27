@@ -3,9 +3,9 @@ package com.jobadvisor.persistence;
 import java.sql.*;
 
 class DataSource {
-	final private String dbURI;// = "jdbc:postgresql://localhost/test";
-	final private String userName;// = "postgres";
-	final private String password;// = "postgres";
+	final private String dbURI;
+	final private String userName;
+	final private String password;
 	
 	
 

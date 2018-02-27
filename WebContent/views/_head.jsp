@@ -63,6 +63,10 @@ prefix="c" %>
 
 <script src="/JobAdvisorNew/js/annunci.js"></script>
 <script src="/JobAdvisorNew/js/gmaps.js"></script>
+<!-- Plugin JavaScript -->
+<script src="/JobAdvisorNew/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="/JobAdvisorNew/vendor/scrollreveal/scrollreveal.min.js"></script>
+<script src="/JobAdvisorNew/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
 
 <jsp:include page="_handlebarsTemplates.jsp"></jsp:include>
 
@@ -70,10 +74,7 @@ prefix="c" %>
 <!-- Custom scripts for this template -->
 <script src="/JobAdvisorNew/js/creative.min.js"></script>
 <script type='text/javascript' src="/JobAdvisorNew/js/home.js"></script>
-<!-- Plugin JavaScript -->
-<script src="/JobAdvisorNew/vendor/jquery-easing/jquery.easing.min.js"></script>
-<script src="/JobAdvisorNew/vendor/scrollreveal/scrollreveal.min.js"></script>
-<script src="/JobAdvisorNew/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
 
 
 <!-- Login Meta -->

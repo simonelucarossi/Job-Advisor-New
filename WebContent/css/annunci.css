@@ -874,6 +874,10 @@ input[type="password"] {
 		font-size: 1.0rem;
 	}
 	
+	#ads_panel {
+		font-size: 1.0rem;
+	}
+	
 	#logout {
 		font-size: 1.0rem;
 	}
@@ -901,6 +905,10 @@ input[type="password"] {
 	}
 	
 	#system_panel {
+		font-size: 0.8rem;
+	}
+	
+	#ads_panel {
 		font-size: 0.8rem;
 	}
 	
@@ -932,6 +940,10 @@ input[type="password"] {
 		font-size: 0.8rem;
 	}
 	
+	#ads_panel {
+		font-size: 0.8rem;
+	}
+	
 	#logout {
 		font-size: 0.8rem;
 	}
@@ -949,16 +961,40 @@ input[type="password"] {
 }
 
 @media(max-width: 325px) {
-	#system-panel {
+	#system_panel {
+		font-size: 0.7rem;
+	}
+	#ads_panel {
 		font-size: 0.7rem;
 	}
 	#logout {
 		font-size: 0.7rem;
 	}
 	
+	.navbar-nav {
+		margin-top: 5px;
+	}
+	
+	#login-img {
+		margin-top: 0px;
+	}
+	
 }
 
 @media(max-width: 365px) {
+	#login-img {
+		margin-top: 0px;
+	}
+	.navbar-nav {
+		margin-top: 5px;
+	}
+}
+
+@media(max-width: 320px) {
+	.navbar-nav {
+		margin-top: -44px;
+	}
+	
 	#login-img {
 		margin-top: 40px;
 	}

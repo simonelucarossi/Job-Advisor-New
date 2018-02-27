@@ -268,5 +268,10 @@ $(document).ready(function() {
 		}
 	});
 	
+    $("#sidebar-wrapper").hover(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+	
 });
 

@@ -72,6 +72,34 @@
 	</div>
 </nav>
 
+<div id="wrapper">
+<!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="/JobAdvisorNew">
+                        Main navigation
+                    </a>
+                </li>
+                <li>
+                    <a href="/JobAdvisorNew">Home</a>
+                </li>
+                <li>
+                    <a href="/JobAdvisorNew/allReviews">Reviews panel</a>
+                </li>
+                <li>
+                    <a href="/JobAdvisorNew/allAds">Ads panel</a>
+                </li>
+                <li>
+                    <a href="/JobAdvisorNew/views/SystemPanel.jsp">System panel</a>
+                </li>
+            </ul>
+  		</div>
+         <!-- end of Sidebar -->
+</div>	
+	
+	<div class="table-responsive">		
+        <!-- Data Table -->
 			<table id="myTable" class="table table-striped table-hover">
 				<thead>
 					<tr>
@@ -109,7 +137,9 @@
 					</c:forEach>
 				</tbody>
 			</table>
-		
+			<!-- End of data table -->
+</div>
+
 	<!-- Add Modal HTML -->
 	<div id="addNewModal" class="modal fade">
 		<div class="modal-dialog">

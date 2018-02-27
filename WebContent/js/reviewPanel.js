@@ -159,5 +159,10 @@ $(document).ready(function() {
 	}).css({
 	    "color": "#C0C0C0"
 	});
+
+	$("#sidebar-wrapper").hover(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
 	
 });

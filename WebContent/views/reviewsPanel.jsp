@@ -53,6 +53,34 @@
 			</div>
 			</div>
     </nav>
+    
+<div id="wrapper">
+<!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="/JobAdvisorNew">
+                        Main navigation
+                    </a>
+                </li>
+                <li>
+                    <a href="/JobAdvisorNew">Home</a>
+                </li>
+                <li>
+                    <a href="/JobAdvisorNew/allUsers">Users panel</a>
+                </li>
+                <li>
+                    <a href="/JobAdvisorNew/allAds">Ads panel</a>
+                </li>
+                <li>
+                    <a href="/JobAdvisorNew/views/SystemPanel.jsp">System panel</a>
+                </li>
+            </ul>
+		</div>
+</div>
+ <!-- end of Sidebar -->  
+ 
+    <div class="table-responsive">
 			<table id="myTable" class="table table-striped table-hover">
 				<thead>
 					<tr>
@@ -89,6 +117,7 @@
 					</c:forEach>
 				</tbody>
 			</table>
+	</div>
 	
 	<!-- Edit Modal HTML -->
 	<div id="editReviewModal" class="modal fade">

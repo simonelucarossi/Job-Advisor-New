@@ -8,7 +8,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.jobadvisor.model.Annuncio;
+import com.jobadvisor.model.Recensione;
 import com.jobadvisor.persistence.dao.AnnuncioDao;
+import com.jobadvisor.persistence.dao.RecensioneDao;
 import com.jobadvisor.persistence.dao.UtenteDao;
 import com.jobadvisor.model.Annuncio;
 import com.jobadvisor.model.Utente;
@@ -27,8 +29,21 @@ public class AnnuncioDaoJDBC implements AnnuncioDao {
 		try {
 			String insert = "insert into annuncio(id, categoria, data_pubblicazione, descrizione, prezzo, latitudine, longitudine, creatore) values (?,?,?,?,?,?,?,?)";
 			PreparedStatement statement = connection.prepareStatement(insert);
-			Long id = IdBroker.getId(connection);
-			annuncio.setId(id); 
+
+			/* SEARCH ID */
+			long idAnnuncio = 0;
+			AnnuncioDao annuncioDao = DatabaseManager.getInstance().getDaoFactory().getAnnuncioDAO();
+			Annuncio tmp = annuncioDao.findByPrimaryKey(idAnnuncio);
+			while(tmp != null) {
+				idAnnuncio++;
+				tmp = null;
+				tmp = annuncioDao.findByPrimaryKey(idAnnuncio);
+			}
+			
+//			END SEARCH ID
+			
+			
+			annuncio.setId(idAnnuncio); 
 			statement.setLong(1, annuncio.getId());
 			statement.setString(2, annuncio.getCategoria());
 			long secs = annuncio.getData().getTime();
@@ -214,7 +229,6 @@ public class AnnuncioDaoJDBC implements AnnuncioDao {
 				annuncio.setLatitudine(result.getDouble("latitudine"));
 				annuncio.setLongitudine(result.getDouble("longitudine"));
 				annuncio.setCreator(creatore);
-				System.out.println("STO CREANDO!");
 				annunci.add(annuncio);
 				
 			}

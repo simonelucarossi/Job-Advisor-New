@@ -25,8 +25,6 @@ public class RecensioneDaoJDBC implements RecensioneDao {
 	public void save(Recensione recensione) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			Long id = IdBroker.getId(connection);
-			recensione.setId(id); 
 			String insert = "insert into recensione(id , data_creazione , titolo, testo, creatore , annuncio, valutazione) values (?,?,?,?,?,?,?)";
 			PreparedStatement statement = connection.prepareStatement(insert);
 			statement.setLong(1, recensione.getId());

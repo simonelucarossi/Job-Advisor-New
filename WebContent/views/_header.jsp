@@ -14,7 +14,7 @@ prefix="c" %>
 			<li class="nav-item" style="padding-left: 10px;">
 				<c:if test="${utente.tipo=='Professionista'}">
 					<a id="ads_panel" class="nav-link js-scroll-trigger"
-						href="adsPanel?username=${utente.username}">Ads Panel</a>
+						href="/JobAdvisorNew/adsPanel?username=${utente.username}">Ads Panel</a>
 				</c:if>
 			</li>
 			<li class="nav-item"">

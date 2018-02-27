@@ -310,9 +310,7 @@ footer {
 
 .price-entry {
 	opacity: 0.8;
-	margin-left: -24px;
 	height: 27px;
-	padding-right: 5px;
 }
 
 .review-entries {
@@ -333,7 +331,6 @@ footer {
 .help-entry {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
 	justify-content: center;
 }
 
@@ -757,6 +754,7 @@ input[type="password"] {
 	margin-top: -67px;
 	margin-left: 120px;
 	height: 50px;
+	margin-bottom: 18px;
 }
 
 #logout,#ads_panel,#system_panel{
@@ -779,3 +777,195 @@ input[type="password"] {
     font-size: 20px;
 }
 
+
+@media(max-width: 610px) {
+	#image-entry {
+   		width: 102px;
+    	height: 100%;
+	}
+	
+	#title-entry {
+    	margin-top: -77px;
+    	margin-left: 107px;
+    	font-size: 1.45rem;
+    	text-decoration: none;
+    	color: black;
+    	font-family: Helvetica;
+	}
+	
+	#position-entry {
+    	margin-left: 109px;
+    	text-decoration: none;
+    	color: black;
+    	margin-top: 10px;
+	}
+	
+	#annuncio-bottoni {
+    	display: flex;
+    	flex-direction: column;
+    	align-items: center;
+    	margin-top: 13px;
+    	justify-content: center;
+	}
+	
+	#contatta-bottone {
+	    width: 90%;
+   		margin-bottom: 10px;
+    	height: 40px;
+    	background-color: #014d8b;
+    	margin-right: 0px;
+	}
+	
+	#recensione-bottone {
+    	width: 90%;
+    	height: 40px;
+    	background-color: #a01d22;
+	}
+	
+	.contact-info-box {
+    	width: 95%;
+    	height: 252px;
+    	background: white;
+    	border-radius: 10px;
+    	border: 5px solid #0003b9eb;
+	}
+	
+	.star-rating {
+    	line-height: 30px;
+    	font-size: 0.65em;
+    	text-align: center;
+    	padding-top: 11px;
+	}
+	
+	.text-right {
+    	text-align: center !important;
+    	margin-top: 18px;
+	}
+}
+
+@media(max-width: 600px) {
+	#brand-site {
+		margin-top: 5px;
+    	color: white;
+	}
+	
+	#logo-site {
+		width: 40px;
+    	height: 38px;
+	}
+	
+	#site-title {
+		font-size: 16px;
+    	color: white;
+    	opacity: 0.7;
+	}
+	
+	.navbar-nav {
+		display: flex;
+    	flex-direction: row;
+	}
+	
+	.nav-item {
+	    padding-left: 10px;
+	    padding-right: 0px;
+	}
+	
+	#system_panel {
+		font-size: 1.0rem;
+	}
+	
+	#logout {
+		font-size: 1.0rem;
+	}
+}
+
+
+@media(max-width: 370px) {
+	
+	#site-title {
+		font-size: 16px;
+    	color: white;
+    	opacity: 0.7;
+    	padding-right: 10px;
+	}
+	
+	.navbar-nav {
+		display: flex;
+    	flex-direction: row;
+    	margin-top: -44px;
+	}
+	
+	.nav-item {
+	    padding-left: 10px;
+	    padding-right: 0px;
+	}
+	
+	#system_panel {
+		font-size: 0.8rem;
+	}
+	
+	#logout {
+		font-size: 0.8rem;
+	}
+}
+
+@media(max-width: 400px) {
+	
+	#site-title {
+		font-size: 16px;
+    	color: white;
+    	opacity: 0.7;
+    	padding-right: 10px;
+	}
+	
+	.navbar-nav {
+		display: flex;
+    	flex-direction: row;
+	}
+	
+	.nav-item {
+	    padding-left: 10px;
+	    padding-right: 0px;
+	}
+	
+	#system_panel {
+		font-size: 0.8rem;
+	}
+	
+	#logout {
+		font-size: 0.8rem;
+	}
+}
+
+@media(max-width: 768px) {
+	.navbar-nav {
+		display: flex;
+		flex-direction:row;
+	}	
+	
+	.nav-item {
+		padding-left: 10px;
+	}
+}
+
+@media(max-width: 325px) {
+	#system-panel {
+		font-size: 0.7rem;
+	}
+	#logout {
+		font-size: 0.7rem;
+	}
+	
+}
+
+@media(max-width: 365px) {
+	#login-img {
+		margin-top: 40px;
+	}
+}
+
+@media (max-width: 1102px) {
+	.form-signin {
+    	width: 75% !important;
+	}
+}

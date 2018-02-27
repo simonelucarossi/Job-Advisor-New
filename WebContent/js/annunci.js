@@ -163,12 +163,17 @@ $(document).ready(function() {
 				});
 			});
 	});
+	
+	/* REVIEW BOX OF ANNUNCIO */
+	$('#input-1').rating('refresh',{
+		  clearable: true,
+		  showClear: false,
+	});
+	
+	
+	
 });
 
 
 
 
-/* REVIEW BOX OF ANNUNCIO */
-$('input.my_class').rating({
-	  clearable: true
-	});

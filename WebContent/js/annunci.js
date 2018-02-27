@@ -90,18 +90,18 @@ $(document).ready(function() {
 
 $(document).ready(function() {
 	$("#searchInput").keyup(function () {
-	    //split the current value of searchInput
+	    //split del valore dell'input
 	    var data = this.value.split(" ");
-	    //create a jquery object of the rows
+	    //crea un oggetto jquery per ogni riga
 	    var jo = $(".entries").find(".entry");
 	    if (this.value == "") {
 	        jo.show();
 	        return;
 	    }
-	    //hide all the rows
+	    //nasconde tutte le righe
 	    jo.hide();
 
-	    //Recusively filter the jquery object to get results.
+	    //Filtra ricorsivamente gli oggetti jquery trovati per ottenere risultati
 	    jo.filter(function (i, v) {
 	        var $t = $(this);
 	        for (var d = 0; d < data.length; ++d) {

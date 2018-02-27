@@ -40,7 +40,7 @@
 						</form>
 		        	</li>
 		        	<li class="nav-item">
-			          	<a href="#deleteAdModal"
+			          	<a id="deleteAd" href="#deleteAdModal"
 						class="btn btn-default" data-toggle="modal"><i
 						class="fa fa-minus-circle"></i> <span>Delete</span>
 						</a>
@@ -52,7 +52,7 @@
 						</a> 
 		        	</li>
 		        	<li class="nav-item">
-			          	<a class="btn btn-default" data-toggle="modal"  href="#logoutModal">
+			          	<a id="logoutButton" class="btn btn-default" data-toggle="modal"  href="#logoutModal">
 			            <i class="fa fa-fw fa-sign-out"></i>Logout</a>
 		        	</li>
 		          </ul>
@@ -91,16 +91,7 @@
 					</c:forEach>
 				</tbody>
 			</table>
-		<!--<div class="clearfix">
-				<div class="hint-text">
-					Showing <b>5</b> out of <b>25</b> entries
-				</div>
-				<ul class="pagination">
-					<li class="page-item disabled"><a href="#">Previous</a></li>
-					<li class="page-item active"><a href="#" class="page-link">1</a></li>
-					<li class="page-item"><a href="#" class="page-link">2</a></li>
-					<li class="page-item"><a href="#" class="page-link">Next</a></li>
-				</ul>
+		
 	<!-- Add Modal HTML -->
 	<div id="addNewModal" class="modal fade">
 		<div class="modal-dialog">
@@ -251,5 +242,24 @@
 			</div>
 		</div>
 	</div>
+	
+	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" href="/JobAdvisorNew/logout">Logout</a>
+          </div>
+        </div>
+      </div>
+      </div>
+	
 </body>
 </html>

@@ -362,7 +362,7 @@ body {
 	color:yellow;
 }
 
-#newUser:hover{
+#newUser:hover,#newAdd:hover{
 	color:#00fd00;
 }
 

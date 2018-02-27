@@ -17,8 +17,6 @@ function prova() {
 		$("#fade-box").slideDown();
 	});
 
-
-
 	$("#contact-button").click(function() {
 		$(".contact-box").slideToggle("fast");
 		$("#fade-box").slideToggle("fast");

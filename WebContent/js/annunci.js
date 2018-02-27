@@ -18,7 +18,6 @@ $(document).ready(function() {
 		var source = $("#annuncio-template").html();
 		var template = Handlebars.compile(source);
 		var categorySearch = getUrlParameter('category');
-		console.log(categorySearch);
 
 		var result = $.ajax({
 			method: "GET",

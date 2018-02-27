@@ -53,6 +53,7 @@ public class DammiSingleReviewApi extends HttpServlet {
 		obj.put("testo", recensione.getTesto());
 		obj.put("reviewer", recensione.getCreatore());
 		obj.put("valutazione", recensione.getValutazione());
+		obj.put("data", recensione.getData().toString());
 		return obj.toString();
 	}
 

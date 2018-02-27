@@ -166,10 +166,6 @@ $(document).ready(function() {
 		}
 	});
 	
-	$("#newAdd").click(function name() {
-		setTimeout(loadWithDelay,2000 );
-	});
-	
 	$("#deleteButton").click(function(e) {
 		var myCheckboxes = [];
 		$(":checkbox").each(function() {
@@ -286,6 +282,3 @@ $(document).ready(function() {
 
 });
 
-function loadWithDelay() {
-	google.maps.event.trigger(map, 'resize');
-}

@@ -988,6 +988,18 @@ input[type="password"] {
 	.navbar-nav {
 		margin-top: 5px;
 	}
+	
+	#review-title h2 {
+		font-size: 1.25rem !important; 
+	}
+	
+	#review-text p {
+		font-size: 10px;
+	}
+	
+	#review-creator p {
+		font-size: 10px;
+	}
 }
 
 @media(max-width: 320px) {
@@ -997,6 +1009,13 @@ input[type="password"] {
 	
 	#login-img {
 		margin-top: 40px;
+	}
+	
+	#img-annuncio {
+    	height: 100px;
+    	margin-right: 15px;
+    	margin-top: 40px;
+    	margin-left: 22px;
 	}
 }
 

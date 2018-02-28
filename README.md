@@ -32,6 +32,6 @@ Inoltre il progetto è stato sviluppato usufruendo di Tomcat 9.0, nella cartella
 3. Il DB è presente online su Elephant, è stato scelto un DB di Londra, dunque potrebbe essere leggermente lento nel caricamento della lista degli annunci o nel caricamento di un singolo annuncio, dunque, per favore, attendere qualche secondo.
 4. All'interno di un annuncio è presente un tasto per contattare il professionista e un secondo tasto per lasciare una recensione, mentre il primo è sempre visibile, il secondo è visibile soltanto una volta effettuato l'accesso con il proprio account.
 5. La home page è stata quasi del tutto fatta a mano, le pagine della lista degli annunci e di un singolo annuncio sono fatte completamente a mano (anche responsive) mentre i pannelli sono stati fatti utilizzando Bootstrap.
-6. L'amministratore all'interno del proprio pannello può usufruire di una barra laterale che appare quando si avvicina il mouse alla parte sinistra dello schermo (come si nota nello screen riportato qui sotto), funzione che è disponibie solo nella versione Desktop. 
+6. L'amministratore all'interno del proprio pannello può usufruire di una barra laterale che appare quando si avvicina il mouse alla parte sinistra dello schermo (come si nota nello screen riportato qui sotto), funzione che nella versione mobile cambia, poichè bisogna cliccare sul bordo. 
 
 ![Job-Advisor-New](/screen/screen2.png)

@@ -205,7 +205,6 @@ public class AnnuncioDaoJDBC implements AnnuncioDao {
 		Connection connection = this.dataSource.getConnection();
 		List<Annuncio> annunci = new LinkedList<>();
 		try {
-			System.out.println("LAT + LON = " + lat + " " + lon);
 			Annuncio annuncio;
 			PreparedStatement statement;
 			String query = "select * from (" + "SELECT * ,(  6371 * acos( cos( radians(" + lat

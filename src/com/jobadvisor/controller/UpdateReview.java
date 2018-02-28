@@ -40,7 +40,6 @@ public class UpdateReview extends HttpServlet {
 		Long annuncio = Long.parseLong(request.getParameter("idAds"));
 		Date data = new Date();
 		
-		System.out.println("TITOLOOOOO -> " + titolo);
 		
 		Recensione recensione = new Recensione(id, data, titolo, testo,creatore,annuncio, stars);
 		recensione.setId(id);

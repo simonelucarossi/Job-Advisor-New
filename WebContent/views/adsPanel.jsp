@@ -40,6 +40,7 @@
 							<input type="text" id="searchInput" class="search-query" placeholder="Filter...">
 						</form>
 		        	</li>
+		        	
 		        	<li class="nav-item">
 			          	<a id="deleteAd" href="#deleteAdModal"
 						class="btn btn-default" data-toggle="modal"><i

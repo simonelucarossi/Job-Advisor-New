@@ -778,6 +778,64 @@ input[type="password"] {
 }
 
 
+/* CSS ANNUNCIO */
+#review {
+	width: 100%;
+    border-bottom: 2px solid #333333f7;
+    padding-bottom: 2px;
+	display: flex;
+}
+
+#img-review {
+	height:  100%;
+    width: 120px;
+    margin-bottom: -3px;
+}
+
+.review-details-box {
+	height: 100%;
+    padding-left: 12px;
+    padding-right:  12px;
+    padding-top:  12px;
+    width: 100%;
+    margin-bottom: 3px;
+}
+
+#review-title {
+	display: flex;
+    justify-content: space-between;
+}
+
+#title-review {
+	font-size:  1.75rem;
+    padding-bottom: 10px;
+    font-family:  Helvetica;
+    color: #077ce2;
+}
+
+#review-star {
+	display:  flex;
+}
+
+#img-review-star {
+	height:  30px;
+    margin-top: -2px;
+    padding-right: 10px;
+}
+
+#p-review-star {
+	font-size:  26px;
+    margin-top: -3px;
+}
+
+#review-creator {
+	padding-top: 18px;
+}
+
+/* END CSS ANNUNCIO */
+
+
+
 @media(max-width: 610px) {
 	#image-entry {
    		width: 102px;
@@ -1014,7 +1072,7 @@ input[type="password"] {
 	#img-annuncio {
     	height: 100px;
     	margin-right: 15px;
-    	margin-top: 40px;
+    	margin-top: 30px;
     	margin-left: 22px;
 	}
 }
@@ -1024,3 +1082,5 @@ input[type="password"] {
     	width: 75% !important;
 	}
 }
+
+

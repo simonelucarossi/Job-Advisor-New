@@ -46,7 +46,6 @@ public class DeleteReview extends HttpServlet {
 
 					JSONArray jsonArray = new JSONArray(selectedBoxes);
 					
-					System.out.println(jsonArray);
 
 				    for (int i = 0; i < jsonArray.length(); i++) {
 				        Long id = Long.parseLong(jsonArray.getString(i));

@@ -43,18 +43,14 @@ public class DammiAdsApi extends HttpServlet {
 		List<Annuncio> annunci = null;
 		
 		
-		System.out.println("CATEGORY -> " + category);
 		if(sorting == null && order == null) {
 			annunci = DAOFactory.getDAOFactory(DAOFactory.POSTGRESQL).getAnnuncioDAO().findAllByCategory(category);
-			System.out.println(annunci.size());
 		}
 		else if(sorting != null && order == null) {
 			annunci = DAOFactory.getDAOFactory(DAOFactory.POSTGRESQL).getAnnuncioDAO().findAllByCategoryAndPosition(category, lat, lon);
-			System.out.println(annunci.size());
 		}
 		else {
 			annunci = DAOFactory.getDAOFactory(DAOFactory.POSTGRESQL).getAnnuncioDAO().findAllByCategoryWithSorting(category,sorting,order);
-			System.out.println(annunci.size());
 		}
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");

@@ -204,7 +204,6 @@ public class UtenteDaoJDBC implements UtenteDao {
 
 			for (Annuncio annuncio : utente.getAnnunci()) {
 				annuncioDao.delete(annuncio);
-				System.out.println(annuncio);
 			}
 			for (Recensione recensione : utente.getRecensioniScritte()) {
 				recensioneDao.delete(recensione);

@@ -68,53 +68,20 @@
 </script>
 
 <script id="review-details" type="text/x-handlebars-template">
-				<div id="review" style="
-    				width: 100%;
-    				border-bottom: 2px solid #333333f7;
-    				padding-bottom: 2px;
-					display: flex;
-				">
-					<img src="/JobAdvisorNew/img/user-icon.png" style="
-    height:  100%;
-    width: 120px;
-    margin-bottom: -3px;
-">
-    		<div class="review-details-box" style="
-    height: 100%;
-    padding-left: 12px;
-    padding-right:  12px;
-    padding-top:  12px;
-    width: 100%;
-    margin-bottom: 3px;
-">
-    			<div id="review-title" style="
-    display: flex;
-    justify-content: space-between;
-">
-    				<h2 style="
-    font-size:  1.75rem;
-    padding-bottom: 10px;
-    font-family:  Helvetica;
-    color: #077ce2;
-">{{title}} </h2>
-                    <div id="review-star" style="
-    display:  flex;
-">
-                    	<img src="/JobAdvisorNew/img/star.png" style="
-    height:  30px;
-    margin-top: -2px;
-    padding-right: 10px;
-">
-                        <p style="
-    font-size:  26px;
-    margin-top: -3px;
-">{{valutazione}}</p>
+				<div id="review">
+					<img id="img-review" src="/JobAdvisorNew/img/user-icon.png">
+    		<div class="review-details-box">
+    			<div id="review-title">
+    				<h2 id="title-review">{{title}} </h2>
+                    <div id="review-star">
+                    	<img id="img-review-star" src="/JobAdvisorNew/img/star.png">
+                        <p id="p-review-star">{{valutazione}}</p>
                     </div>
     			</div>
     			<div id="review-text">
     				<p> {{testo}} </p> 
     			</div>
-				<div id="review-creator" style="padding-top: 18px;">
+				<div id="review-creator">
     				<p>Review written by: {{reviewer}} </p> 
     			</div>
     </div>

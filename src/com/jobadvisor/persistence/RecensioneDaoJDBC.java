@@ -154,9 +154,6 @@ public class RecensioneDaoJDBC implements RecensioneDao {
 			numberOfReview++;
 		}
 		
-		System.out.println(stats/numberOfReview);
-		System.out.println("Stast:" + stats);
-		System.out.println("Review:" + numberOfReview);
 		
 		
 		

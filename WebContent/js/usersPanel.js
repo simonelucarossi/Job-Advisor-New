@@ -2,29 +2,74 @@
  * 
  */
 
+window.setInterval(function(){
+	var today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth()+1; 
+	var yyyy = today.getFullYear();
+
+	if(dd<10){dd='0'+dd} 
+	if(mm<10){mm='0'+mm} 
+	today = yyyy+'-'+mm+'-'+dd; 
+	$("#blackList tbody tr").each(function() {
+		  $this = $(this);
+		  banDate=$this.find('td:last').text();
+		  if(banDate <= today){
+			  $this.find(":checkbox").prop('checked',true);
+		  }
+	});
+	
+	var toDelete=[];
+	$("#modalContent").find(":checkbox").each(function() {
+		var ischecked = $(this).is(":checked");
+        if (ischecked) {
+        	toDelete.push($(this).val());
+        	$(this).closest('tr').remove();
+        }
+	});
+	
+	$.ajax({
+		type: "POST",
+		url: "/JobAdvisorNew/eraseBan",
+		dataType: 'json',
+		data: {
+			toDelete: JSON.stringify(toDelete)
+		},
+		error: function (data) {
+			alert("Some users ban time is expired, so they were removed from list!")
+		}
+	});
+	
+}, 60000);
+
+
 $(document).ready(function() {
 
-	$('th.sort i').click(function(){
+	$('#myTable').on( 'click', 'thead th', function () {
+	  var col = $(this).index();
+	  var rows = $('#myTable tbody tr').get();
+	  rows.sort(function(a, b) {
+
+		  var A = $(a).children('td').eq(col).text().toUpperCase();
+		  var B = $(b).children('td').eq(col).text().toUpperCase();
+
+		  if(A < B) {
+		    return -1;
+		  }
+
+		  if(A > B) {
+		    return 1;
+		  }
+
+		  return 0;
+
+	  });
+
+	  $.each(rows, function(index, row) {
+	    $('#myTable').children('tbody').append(row);
+	  });
 		
-		if(this.className==="fa fa-sort-desc"){
-			$(this).toggleClass('fa fa-sort-desc fa fa-sort-asc');
-		}else{
-			$(this).toggleClass('fa fa-sort-asc fa fa-sort-desc');
-		}
-		
-	    var table = $(this).parents('table').eq(0)
-	    var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()))
-	    this.asc = !this.asc
-	    if (!this.asc){rows = rows.reverse()}
-	    for (var i = 0; i < rows.length; i++){table.append(rows[i])}
-	})
-	function comparer(index) {
-	    return function(a, b) {
-	        var valA = getCellValue(a, index), valB = getCellValue(b, index)
-	        return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.toString().localeCompare(valB)
-	    }
-	}
-	function getCellValue(row, index){ return $(row).children('td').eq(index).text() }
+	});
 	
 	$('[data-toggle="tooltip"]').tooltip();
 
@@ -106,11 +151,12 @@ $(document).ready(function() {
 		var today = new Date();
 		var dd = today.getDate();
 		var mm = today.getMonth()+1; 
-		
 		var yyyy = today.getFullYear();
+
 		if(dd<10){dd='0'+dd} 
 		if(mm<10){mm='0'+mm} 
 		today = yyyy+'-'+mm+'-'+dd; 
+		
 		if(myCheckboxes.length > 0){
 			$.ajax({
 				type: "POST",

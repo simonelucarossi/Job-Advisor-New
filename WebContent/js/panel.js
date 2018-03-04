@@ -107,27 +107,31 @@ function geolocate() {
 
 $(document).ready(function() {
 
-	$('th.sort i').click(function(){
-		
-		if(this.className==="fa fa-sort-desc"){
-			$(this).toggleClass('fa fa-sort-desc fa fa-sort-asc');
-		}else{
-			$(this).toggleClass('fa fa-sort-asc fa fa-sort-desc');
-		}
-		
-	    var table = $(this).parents('table').eq(0)
-	    var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()))
-	    this.asc = !this.asc
-	    if (!this.asc){rows = rows.reverse()}
-	    for (var i = 0; i < rows.length; i++){table.append(rows[i])}
-	})
-	function comparer(index) {
-	    return function(a, b) {
-	        var valA = getCellValue(a, index), valB = getCellValue(b, index)
-	        return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.toString().localeCompare(valB)
-	    }
-	}
-	function getCellValue(row, index){ return $(row).children('td').eq(index).text() }
+	$('#myTable').on( 'click', 'thead th', function () {
+		  var col = $(this).index();
+		  var rows = $('#myTable tbody  tr').get();
+		  rows.sort(function(a, b) {
+
+			  var A = $(a).children('td').eq(col).text().toUpperCase();
+			  var B = $(b).children('td').eq(col).text().toUpperCase();
+
+			  if(A < B) {
+			    return -1;
+			  }
+
+			  if(A > B) {
+			    return 1;
+			  }
+
+			  return 0;
+
+		  });
+
+		  $.each(rows, function(index, row) {
+		    $('#myTable').children('tbody').append(row);
+		  });
+			
+	});
 	
 	// Activate tooltip
 	$('[data-toggle="tooltip"]').tooltip();
